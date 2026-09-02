@@ -12,6 +12,13 @@
     --series-1: #38bdf8; --series-3: #34d399; --series-6: #10b981; --good: #10b981;
     --warning: #fbbf24; --serious: #f97316; --critical: #f87171; --card-bg: #0f172a;
     --cyan: #06b6d4; --purple: #a855f7; --pink: #ec4899;
+    --accent: #5ee6c4;   /* signal teal  — 法規/成本最優 */
+    --accent-2: #ffb454; /* warn amber   — 離職/實例 */
+    --accent-3: #ff6b6b; /* risk red     — 資遣/痛點 */
+    --accent-4: #6aa0ff; /* link blue    — 跨部門協作 */
+    --mono: 'IBM Plex Mono','SF Mono',Consolas,monospace;
+    --serif: 'Source Serif Pro',Georgia,serif;
+    --sans: 'IBM Plex Sans','Noto Sans TC','Noto Sans SC',-apple-system,sans-serif;
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{background:var(--page-plane); color:var(--text-primary); font-family: system-ui,-apple-system,"Segoe UI",sans-serif; font-size:14px; line-height:1.5; padding:24px 24px 80px;}
@@ -61,7 +68,7 @@
   .num-green{color:#34d399; font-weight:700; font-size:14px;}
   .num-sub{font-size:11px; color:var(--text-muted);}
 
-  /* ================= 03 專屬頂部 Dashboard 視覺樣式 ================= -->
+  /* ================= 03 專屬頂部 Dashboard 視覺樣式 ================= */
   .top-dashboard-card{
     background: #0d1322;
     border: 1px solid var(--border);
@@ -110,7 +117,6 @@
   }
   .top-dashboard-notes b{color: #ffffff;}
 
-  /* 03 控制列 */
   .calc-top-bar{display:flex; justify-content:space-between; align-items:center; background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:20px; gap:20px; flex-wrap:wrap;}
   .dept-ctrl{display:flex; align-items:center; gap:10px;}
   .dept-ctrl input{background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:7px 12px; border-radius:6px; font-size:13.5px; font-weight:600; width:180px;}
@@ -121,7 +127,6 @@
   .matrix-calc-table input.hc-input{width:50px; background:#090d16; border:1px solid var(--border); color:#fff; text-align:center; padding:5px 0; border-radius:5px; font-weight:700;}
   .matrix-calc-table input.hc-input:focus{border-color:var(--cyan); outline:none; background:#131c31;}
 
-  /* 組織樹視覺樣式 */
   .org-chart-wrapper{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto;}
   .org-tree{display:flex; flex-direction:column; align-items:center; gap:24px; min-width:850px;}
   .org-level-row{display:flex; justify-content:center; gap:16px; position:relative; width:100%; flex-wrap:wrap;}
@@ -131,7 +136,6 @@
   .org-node .role{font-size:12.5px; font-weight:700; color:var(--text-primary); margin:2px 0;}
   .org-node .loc-tag{font-size:11px; color:var(--series-1); background:rgba(56,189,248,0.12); padding:1px 6px; border-radius:4px; display:inline-block; font-weight:600; margin-top:2px;}
 
-  /* 02 雙軌階梯視覺佈局 */
   .layout-grid { display: grid; grid-template-columns: 460px 1fr; gap: 28px; align-items: start; }
   .ladder-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; position: sticky; top: 24px; }
   .ladder-row { display: flex; align-items: center; margin-bottom: 16px; position: relative; gap: 14px; }
@@ -158,22 +162,106 @@
   .card.l8-track .card-bullets li::before { color: var(--green); }
   .card-bullets li b { color: var(--text-primary); }
 
+  /* ================= 05 Global ER Compliance Matrix 專屬樣式 ================= */
+  .er-wrap { color: var(--ink, #e7ecf3); font-family: var(--sans, sans-serif); line-height: 1.6; }
+  .er-legend{ display:flex; gap:14px; flex-wrap:wrap; font-family:var(--mono, monospace); font-size:10.5px; color:var(--ink-dim, #8993a4); letter-spacing:.04em; margin-bottom: 20px; background: var(--card-bg); padding: 12px 16px; border-radius: 8px; border: 1px solid var(--border); }
+  .er-legend span{ display:inline-flex; align-items:center; gap:5px; }
+  .er-legend i{ width:8px; height:8px; border-radius:50%; display:inline-block; }
+
+  .er-tabs{ display:flex; gap:2px; overflow-x:auto; padding:0 0 16px; border-bottom:1px solid var(--border); margin-bottom: 24px; scrollbar-width:none; }
+  .er-tabs::-webkit-scrollbar{display:none;}
+  .er-tab{ flex:0 0 auto; padding:10px 18px; font-family:var(--mono, monospace); font-size:12.5px; letter-spacing:0.04em; color:var(--ink-dim, #8993a4); background:var(--card-bg); border:1px solid var(--border); border-radius:6px; cursor:pointer; white-space:nowrap; display:flex; align-items:center; gap:8px; transition:all .15s ease; }
+  .er-tab .flag{font-size:14px; opacity:0.85;}
+  .er-tab .code{ font-size:9.5px; color:var(--accent, #5ee6c4); background:rgba(94,230,196,0.08); padding:1px 5px; border-radius:2px; letter-spacing:0.1em; }
+  .er-tab:hover{ color:var(--text-primary); }
+  .er-tab.active{ color:var(--text-primary); background:color-mix(in srgb, var(--accent, #5ee6c4) 15%, var(--card-bg)); border-color:var(--accent, #5ee6c4); }
+
+  .er-panel{ display:none; animation:fade .25s ease; }
+  .er-panel.active{ display:block; }
+
+  .er-panel-head{ display:flex; justify-content:space-between; align-items:flex-end; flex-wrap:wrap; gap:12px; margin-bottom:22px; padding-bottom:16px; border-bottom:1px solid var(--border); }
+  .er-panel-head h3{ font-family:var(--serif, serif); font-size:24px; margin:0; display:flex; align-items:center; gap:12px; }
+  .er-panel-head .arch{ font-family:var(--mono, monospace); font-size:11.5px; color:var(--accent, #5ee6c4); text-align:right; line-height:1.5; max-width:380px; }
+  .er-panel-head .arch .label{ color:var(--text-muted, #64748b); display:block; margin-bottom:2px; font-size:10px; letter-spacing:0.12em; }
+
+  .er-stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:var(--border); border:1px solid var(--border); margin-bottom:26px; border-radius:6px; overflow:hidden; }
+  .er-stat{ background:var(--card-bg); padding:16px; }
+  .er-stat .v{ font-family:var(--mono, monospace); font-size:16px; color:var(--accent, #5ee6c4); font-weight:600; line-height:1.2; }
+  .er-stat .l{ font-size:11px; color:var(--text-muted, #64748b); margin-top:4px; letter-spacing:0.02em; }
+
+  .er-scenario-tabs{ display:flex; gap:8px; margin:0 0 22px; flex-wrap:wrap; }
+  .er-scenario-tab{ font-family:var(--mono, monospace); font-size:12px; letter-spacing:.05em; padding:8px 16px; border-radius:6px; border:1px solid var(--border); background:var(--card-bg); color:var(--text-secondary, #94a3b8); cursor:pointer; display:flex; align-items:center; gap:8px; transition:all .15s; }
+  .er-scenario-tab .dot{ width:8px; height:8px; border-radius:50%; flex:0 0 auto; }
+  .er-scenario-tab[data-sc="onboard"] .dot{ background:var(--accent, #5ee6c4); }
+  .er-scenario-tab[data-sc="layoff"]  .dot{ background:var(--accent-3, #ff6b6b); }
+  .er-scenario-tab[data-sc="resign"]  .dot{ background:var(--accent-2, #ffb454); }
+  .er-scenario-tab .en{ font-size:9.5px; color:var(--text-muted, #64748b); }
+  .er-scenario-tab:hover{ color:var(--text-primary); }
+  .er-scenario-tab.active{ color:var(--text-primary); background:#161b24; }
+  .er-scenario-tab.active[data-sc="onboard"]{ border-color:var(--accent, #5ee6c4); }
+  .er-scenario-tab.active[data-sc="layoff"]{ border-color:var(--accent-3, #ff6b6b); }
+  .er-scenario-tab.active[data-sc="resign"]{ border-color:var(--accent-2, #ffb454); }
+
+  .er-scenario-body{ display:none; }
+  .er-scenario-body.active{ display:block; animation:fade .2s ease; }
+  .er-sc-head{ font-family:var(--mono, monospace); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--text-muted, #64748b); margin:0 0 16px; padding-left:12px; border-left:3px solid var(--border); }
+  .er-scenario-body[data-sc="onboard"] .er-sc-head{ border-color:var(--accent, #5ee6c4); }
+  .er-scenario-body[data-sc="layoff"]  .er-sc-head{ border-color:var(--accent-3, #ff6b6b); }
+  .er-scenario-body[data-sc="resign"]  .er-sc-head{ border-color:var(--accent-2, #ffb454); }
+
+  .er-elements{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .er-el{ background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:18px 20px; }
+  .er-el.law{ border-top:2px solid var(--text-muted, #64748b); }
+  .er-el.crypto{ border-top:2px solid var(--accent-3, #ff6b6b); }
+  .er-el.cost{ border-top:2px solid var(--accent, #5ee6c4); }
+  .er-el.collab{ border-top:2px solid var(--accent-4, #6aa0ff); }
+  .er-el h4{ font-family:var(--mono, monospace); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--text-muted, #64748b); margin:0 0 12px; display:flex; align-items:center; gap:9px; }
+  .er-el .el-num{ font-family:var(--mono, monospace); font-size:10px; font-weight:700; color:var(--page-plane, #090d16); width:20px; height:20px; border-radius:5px; display:inline-flex; align-items:center; justify-content:center; flex:0 0 auto; }
+  .er-el.law    .el-num{ background:var(--text-muted, #64748b); }
+  .er-el.crypto .el-num{ background:var(--accent-3, #ff6b6b); }
+  .er-el.cost   .el-num{ background:var(--accent, #5ee6c4); }
+  .er-el.collab .el-num{ background:var(--accent-4, #6aa0ff); }
+  .er-el p{ margin:0 0 9px; font-size:13px; color:var(--text-secondary, #94a3b8); }
+  .er-el p:last-child{ margin-bottom:0; }
+  .er-el ul{ margin:0; padding-left:17px; font-size:13px; color:var(--text-secondary, #94a3b8); }
+  .er-el li{ margin-bottom:6px; }
+  .er-el li:last-child{ margin-bottom:0; }
+  .er-el strong{ color:#fff; font-weight:600; }
+  .er-el .law-cite{ font-family:var(--mono, monospace); font-size:10px; color:var(--accent, #5ee6c4); margin-top:10px; padding-top:9px; border-top:1px dashed var(--border); letter-spacing:.02em; display:block; }
+
+  .er-example{ margin-top:12px; padding:11px 14px; background:rgba(255,180,84,0.07); border-left:3px solid var(--accent-2, #ffb454); border-radius:0 4px 4px 0; font-size:12px; color:var(--text-secondary, #94a3b8); }
+  .er-example .tag{ font-family:var(--mono, monospace); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent-2, #ffb454); display:block; margin-bottom:4px; }
+  .er-example b{ color:var(--text-primary, #ffffff); }
+
+  .er-best{ background:linear-gradient(135deg, rgba(94,230,196,0.07), rgba(94,230,196,0.01)); border:1px solid rgba(94,230,196,0.22); border-radius:5px; padding:11px 13px; margin:4px 0 0; font-size:12.5px; color:var(--text-secondary, #94a3b8); }
+  .er-best .tag{ font-family:var(--mono, monospace); font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--accent, #5ee6c4); display:block; margin-bottom:4px; }
+
+  .er-chips{ display:flex; flex-wrap:wrap; gap:6px; margin-bottom:11px; }
+  .er-chip{ font-family:var(--mono, monospace); font-size:10px; padding:3px 9px; border-radius:999px; border:1px solid var(--border); color:var(--text-secondary, #94a3b8); letter-spacing:.04em; }
+  .er-chip.hr{ color:var(--accent, #5ee6c4); border-color:rgba(94,230,196,.35); }
+  .er-chip.it{ color:var(--accent-4, #6aa0ff); border-color:rgba(106,160,255,.35); }
+  .er-chip.fin{ color:var(--accent-2, #ffb454); border-color:rgba(255,180,84,.35); }
+  .er-chip.risk{ color:var(--accent-3, #ff6b6b); border-color:rgba(255,107,107,.35); }
+
+  .er-source{ font-family:var(--mono, monospace); font-size:10px; color:var(--text-muted, #64748b); margin-top:26px; padding-top:14px; border-top:1px dashed var(--border); letter-spacing:0.03em; line-height:1.7; }
+
   @media (max-width: 1080px){
     .top-dashboard-kpis{grid-template-columns:1fr;}
-    .tier-cards-grid, .layout-grid{grid-template-columns:1fr;}
+    .tier-cards-grid, .layout-grid, .er-elements{grid-template-columns:1fr;}
     .ladder-box{position:static;}
+    .er-stats{grid-template-columns:repeat(2,1fr);}
   }
 </style>
 </head>
 <body>
 <div class="wrap">
 
-  <!-- 頂部主導航 -->
   <div class="main-nav">
     <div class="main-nav-item active" id="nav_01" onclick="switchTab('tab01')">01 全球雙軌薪酬對標</div>
     <div class="main-nav-item" id="nav_02" onclick="switchTab('tab02')">02 雙軌晉升示意圖</div>
     <div class="main-nav-item" id="nav_03" onclick="switchTab('tab03')">03 LIVE O-CHART 對照 年度預算預測</div>
     <div class="main-nav-item" id="nav_04" onclick="switchTab('tab04')">04 初創團隊破局方案</div>
+    <div class="main-nav-item" id="nav_05" onclick="switchTab('tab05')">05 Global ER Compliance Matrix</div>
   </div>
 
   <header class="top">
@@ -186,7 +274,7 @@
     </div>
   </header>
 
-  <!-- ================= 01 全球雙軌薪酬對標 ================= -->
+  <!-- 01 全球雙軌薪酬對標 -->
   <div id="pane_tab01" class="pane active">
     <div class="comp-region-selector" id="regBar"></div>
     <div class="comp-function-selector" id="fnBar"></div>
@@ -208,7 +296,7 @@
     </table>
   </div>
 
-  <!-- ================= 02 雙軌晉升示意圖 ================= -->
+  <!-- 02 雙軌晉升示意圖 -->
   <div id="pane_tab02" class="pane">
     <div class="comp-function-selector" id="ladderFnBar"></div>
     <div class="layout-grid">
@@ -217,10 +305,9 @@
     </div>
   </div>
 
-  <!-- ================= 03 LIVE O-CHART 對照 年度預算預測 ================= -->
+  <!-- 03 LIVE O-CHART 對照 年度預算預測 -->
   <div id="pane_tab03" class="pane">
     
-    <!-- DASHBOARD 頂部橫幅卡片 -->
     <div class="top-dashboard-card">
       <div class="top-dashboard-title" id="budget_card_title">研發部門 人事成本與預算預測</div>
       <div class="top-dashboard-kpis">
@@ -234,12 +321,11 @@
         </div>
       </div>
       <div class="top-dashboard-notes">
-        <div id="runway_desc_line">• 資本跑道 (Runway)：依據 <b>T2</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。</div>
-        <div id="span_hc_structure">• 職級比例結構：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈。</div>
+        <div id="runway_desc_line">• 資本跑道 (Runway)：依據 <b>T2</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)[cite: 2]。</div>
+        <div id="span_hc_structure">• 職級比例結構：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈[cite: 2]。</div>
       </div>
     </div>
 
-    <!-- 上方控制列：部門名稱與市場梯隊 -->
     <div class="calc-top-bar">
       <div class="dept-ctrl">
         <label style="font-weight:700; color:var(--cyan);" id="lbl_dept_name">部門名稱：</label>
@@ -255,7 +341,6 @@
       </div>
     </div>
 
-    <!-- 職階 × 7 大法域矩陣配置表 -->
     <table class="matrix-calc-table">
       <thead>
         <tr>
@@ -275,16 +360,35 @@
       <tbody id="matrixTableBody"></tbody>
     </table>
 
-    <!-- 即時連動組織架構圖 -->
     <div class="org-chart-wrapper">
       <h3 id="org_chart_title" style="font-size:15px; margin-bottom:18px; color:var(--cyan);">研發部門 動態組織架構圖 (Live Org Chart)</h3>
       <div class="org-tree" id="orgTreeContainer"></div>
     </div>
   </div>
 
-  <!-- ================= 04 初創團隊破局方案 ================= -->
+  <!-- 04 初創團隊破局方案 -->
   <div id="pane_tab04" class="pane">
     <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;" id="startupCardsGrid"></div>
+  </div>
+
+  <!-- 05 Global ER Compliance Matrix -->
+  <div id="pane_tab05" class="pane er-wrap">
+    <div class="er-legend">
+      <span><i style="background:var(--text-muted)"></i><span id="lgLaw">最新法規</span></span>
+      <span><i style="background:var(--accent-3)"></i><span id="lgCrypto">Crypto 痛點</span></span>
+      <span><i style="background:var(--accent)"></i><span id="lgCost">成本最優解</span></span>
+      <span><i style="background:var(--accent-4)"></i><span id="lgCollab">跨部門協作</span></span>
+    </div>
+
+    <div class="er-tabs" id="erCountryTabs">
+      <button class="er-tab active" data-erc="cn"><span class="flag">🇨🇳</span><span>中國大陸</span><span class="code">CN</span></button>
+      <button class="er-tab" data-erc="us"><span class="flag">🇺🇸</span><span>美國</span><span class="code">US</span></button>
+      <button class="er-tab" data-erc="tw"><span class="flag">🇹🇼</span><span>台灣</span><span class="code">TW</span></button>
+      <button class="er-tab" data-erc="my"><span class="flag">🇲🇾</span><span>馬來西亞</span><span class="code">MY</span></button>
+      <button class="er-tab" data-erc="in"><span class="flag">🇮🇳</span><span>印度</span><span class="code">IN</span></button>
+    </div>
+
+    <div id="erPanelsContainer"></div>
   </div>
 
 </div>
@@ -295,6 +399,8 @@ let currentTab = 'tab01';
 let currentRegionCode = 'SG';
 let currentFnCode = 'eng';
 let currentLadderFn = 'eng';
+let erCountry = 'cn';
+let erScenario = 'onboard';
 
 const COMP_REGIONS = [
   { code: 'US', labelZh: '美國', labelEn: 'United States', flag: '🇺🇸', factor: 1.10 },
@@ -385,9 +491,684 @@ const COMP_FUNCTIONS = {
   }
 };
 
+const ER_DATA = {
+  'zh': [
+    {
+      code: 'cn', flag: '🇨🇳', name: '中國大陸',
+      arch: '境外主體 + 獨立承包商（Contractor）/ 境內技術諮詢殼公司',
+      stats: [['N 制度', '每滿1年 = 1個月平均工資'], ['上限 12 年', 'N 計算年限上限'], ['違法解除 = 2N', '違法解除賠償標準'], ['3 倍社平', '補償計算基數封頂']],
+      scenarios: {
+        onboard: {
+          head: '入職 ONBOARDING — 架構合規 + 資產前置',
+          law: `<p><strong>《勞動合同法》</strong>。境內直接用工須於 <strong>1 個月內簽書面勞動合同</strong>，逾期次月起付 2 倍工資；滿 1 年未簽視為無固定期限合同。</p>
+            <ul><li>試用期上限依合同期限（3 年以上最長 6 個月），試用期薪資不低於正式 80% 且不低於當地最低工資。</li>
+            <li>五險一金（社保 + 公積金）為<strong>強制提繳</strong>，不得以協議放棄。</li></ul>
+            <span class="law-cite">法源：《中華人民共和國勞動合同法》§10、§19、§82</span>`,
+          crypto: `<p>政策紅線：<strong>無法以 Crypto 合法發薪</strong>；個人年購匯上限 5 萬美元，外匯管制嚴。</p>
+            <ul><li><strong>解法：</strong>基本薪以人民幣經境內實體 / 合規 PEO 發放並足額繳社保。</li>
+            <li>Token 報酬另由<strong>境外主體</strong>簽 Token / 期權協議（SAFT、RSU 形式），與境內勞動報酬脫鉤，定性為境外獎勵性權益。</li></ul>`,
+          cost: `<p>老闆想省成本 = 想全用 Contractor 規避社保。</p>
+            <div class="er-best"><span class="tag">最優解</span>核心技術崗用<strong>境內合規實體 + 足額社保</strong>；唯有純遠端、可獨立交付的崗位才用真正的獨立承包商，並落實「獨立性」要件（自備工具、不打卡、按項目結算）。省社保的小錢，遠不及日後被認定事實勞動關係而補繳 + 2N 的大錢。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某智能合約工程師以 Contractor 身分<b>全職坐班兩年</b>，離職時主張事實勞動關係，仲裁要求補繳社保 + 2N，公司賠付遠超當初省下的社保費。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：確認雇傭架構合規、簽書面合約、留存記錄。</li>
+            <li><b>Legal/風控</b>：審 IP 轉讓（Work-for-Hire）、競業、保密；覆核外匯與發薪通道合規。</li>
+            <li><b>IT Security</b>：依最小權限預建 GitHub / AWS / 多簽帳號（Read-only 起始）。</li>
+            <li><b>Finance</b>：確認 Token Vesting 起算日與發放主體，書面留檔。</li></ul>`
+        },
+        layoff: {
+          head: '資遣 EMPLOYER-INITIATED — 風控優先的合意終止',
+          law: `<p>合法解除須有<strong>法定事由</strong>（不勝任經培訓 / 調崗仍不勝任、客觀情況重大變化等）。補償標準：</p>
+            <ul><li><strong>N</strong>：每滿 1 年發 1 個月平均工資（滿 6 月不滿 1 年算 1 年，不滿 6 月發 0.5 月）。</li>
+            <li>月薪高於當地社平工資 3 倍者，<strong>基數按 3 倍封頂、年限最高 12 年</strong>。</li>
+            <li>代通知金 = +1 月（即 <strong>N+1</strong>）；<strong>違法解除 = 2N</strong>。第 42 條保護期（孕期 / 醫療期等）不得解除。</li></ul>
+            <span class="law-cite">法源：《勞動合同法》§40、§41、§42、§47、§87</span>`,
+          crypto: `<p>大陸員工極熟悉勞動法、仲裁成本低，<strong>易主張 2N</strong>；Token 鎖倉 / 私鑰外流風險高。</p>
+            <ul><li><strong>解法：</strong>走「協商解除」（§36）而非單方解除，以略高於法定的補償換自願簽字 + 全面和解 + 競業 / 保密重申。</li>
+            <li>面談同一時間同步回收代碼庫與多簽權限。</li></ul>`,
+          cost: `<p>老闆只想付最少、最好別賠。</p>
+            <div class="er-best"><span class="tag">最優解</span><strong>N + 小幅溢價的協商解除</strong>，總成本可控且封住 2N 與仲裁風險，遠優於賭單方解除被判違法（2N + 恢復勞動關係 + 補欠薪）。善用稅務：一次性補償在當地上年職工平均工資 <strong>3 倍以內免個稅</strong>，補償結構盡量落在免稅區間，員工實拿更多、公司支出更低。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某後端工程師 3 年、月薪 3 萬，單方解除有爭議。改以 <b>N+1.5 協商解除 + 3 倍社平內免稅安排</b>，員工到手金額比照判賠更高，公司現金支出卻低於敗訴 2N。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：主持協商面談、出具解除證明、對表斷點時間。</li>
+            <li><b>Legal/風控</b>：擬協商解除協議（Waiver / 競業 / Non-Disparagement / Clawback）、覆核仲裁與輿情風險。</li>
+            <li><b>IT Security</b>：面談同一秒凍結 SSO、撤 GitHub / 雲端、調多簽簽署權重。</li>
+            <li><b>Finance</b>：計算 N、Token 加速 / 取消、做 3 倍社平免稅結構、結算薪資。</li></ul>`
+        },
+        resign: {
+          head: '離職 VOLUNTARY — 交接、留才與資產回收',
+          law: `<p>員工主動辭職須<strong>提前 30 天書面通知</strong>（試用期 3 天）。原則上<strong>無經濟補償</strong>。</p>
+            <ul><li>例外：因公司過錯被迫離職（§38，如未足額付薪 / 未繳社保），員工可主張經濟補償。</li>
+            <li>須辦理工作交接、檔案與社保轉移。</li></ul>
+            <span class="law-cite">法源：《勞動合同法》§37、§38、§50</span>`,
+          crypto: `<p>自願離職者仍握私鑰 / 多簽 / 核心代碼，且 Token 未解鎖部分歸屬易生爭議。</p>
+            <ul><li><strong>解法：</strong>入職即在 Token 協議寫明「主動離職的 Vesting 處置」與 <strong>Good Leaver / Bad Leaver</strong> 條款（未解鎖作廢或按比例）。</li>
+            <li>離職同步權限回收。</li></ul>`,
+          cost: `<p>老闆想留住關鍵人、避免帶走鏈上資產。</p>
+            <div class="er-best"><span class="tag">最優解</span>以 <strong>Vesting 未解鎖部分</strong>作為留任誘因（離職即失未解鎖），合法且<strong>零現金成本</strong>；關鍵簽署人離職前先備妥多簽換人方案。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某協議離職的智能合約 lead 仍是 <b>3/5 多簽簽署人</b>，若不及時換簽署人金庫恐卡死。HR 在收到辭呈當下即啟動換簽署人預案，避免資金動彈不得。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Treasury</span><span class="er-chip risk">風控</span></div>
+            <ul><li><b>HRBP</b>：確認交接清單、競業 / 保密生效。</li>
+            <li><b>IT Security</b>：收到辭呈即排程「最後工作日斷點」。</li>
+            <li><b>Finance/Treasury</b>：處理 Vesting 歸屬與最終薪資結算。</li>
+            <li><b>風控</b>：評估競業 / 商業機密外流與多簽治理斷層。</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'us', flag: '🇺🇸', name: '美國',
+      arch: '美國實體 W2 雇員 / 1099 獨立承包商',
+      stats: [['At-Will', '任意雇傭（蒙大拿州除外）'], ['無強制資遣費', '聯邦無法定資遣費'], ['WARN 60 天', '大量裁員通知'], ['83(b) · 30 天', '代幣稅務選擇窗口']],
+      scenarios: {
+        onboard: {
+          head: '入職 ONBOARDING — 架構合規 + 資產前置',
+          law: `<p><strong>At-Will</strong> 任意雇傭（蒙大拿州除外）。聯邦 FLSA（最低工資 / 加班）、I-9 工作資格查核，加上各州法。</p>
+            <ul><li>W2 與 1099 分類嚴格（IRS / DOL 與加州 AB5 的 ABC test）。</li>
+            <li>無強制書面合約，但應給 offer letter + at-will 聲明 + IP 轉讓 / NDA。</li></ul>
+            <span class="law-cite">法源：FLSA、IRC §83、各州勞動法（CA Labor Code 等）</span>`,
+          crypto: `<p>Token / 股權報酬的<strong>課稅時點</strong>是關鍵：RSU / 限制性代幣於 vesting 時課稅，創始期低估值可用 <strong>83(b) 選擇</strong>在授予時就以低價課稅。</p>
+            <ul><li>錯過 83(b)（授予後 <strong>30 天內</strong>申報）將來高估值 vesting 時稅負爆增。</li>
+            <li><strong>解法：</strong>入職即由 Finance / Legal 提示 83(b) 窗口並協助申報。</li></ul>`,
+          cost: `<p>老闆想用 1099 省雇主稅與福利。</p>
+            <div class="er-best"><span class="tag">最優解</span>真獨立、短期、可交付的才用 <strong>1099</strong>；長期核心崗用 <strong>W2</strong>。誤分類被 IRS / DOL 追補工資稅 + 罰款 + 員工集體訴訟，成本遠高於省下的雇主稅。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某全職 designer 以 1099 工作 18 個月，離職後向 DOL 申訴誤分類，公司被追繳工資稅、加班費與罰款。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：確認 W2/1099 分類、完成 I-9。</li>
+            <li><b>Legal/風控</b>：出具含 at-will / IP / NDA 的 offer；覆核州別合規（加州、紐約最嚴）。</li>
+            <li><b>IT Security</b>：最小權限建號。</li>
+            <li><b>Finance</b>：設定 83(b) 提醒與稅務代扣。</li></ul>`
+        },
+        layoff: {
+          head: '資遣 EMPLOYER-INITIATED — 風控優先的合意終止',
+          law: `<p>At-Will 可隨時無因解僱，但<strong>不得</strong>基於受保護特徵（年齡 / 性別 / 種族 / 宗教 / 殘疾）或報復解僱。</p>
+            <ul><li>聯邦無強制資遣費；多數企業實務給 1–3 個月 Separation Pay。</li>
+            <li><strong>WARN Act</strong>：百人以上企業大量裁員須提前 <strong>60 天</strong>通知或對應補償。</li></ul>
+            <span class="law-cite">法源：Title VII、ADEA、ADA、WARN Act</span>`,
+          crypto: `<p>解僱門檻低，但<strong>歧視 / 報復集體訴訟</strong>風險＝天價；Token 條款不一致引發爭議。</p>
+            <ul><li><strong>解法：</strong>以 Separation Agreement + <strong>General Release</strong> 買斷所有潛在訴訟權（ADEA 須給 21 天考慮 / 7 天撤回期）。</li>
+            <li>Token 依授予文件 Good / Bad Leaver 處置。</li></ul>`,
+          cost: `<p>老闆覺得 At-Will 不必付錢。</p>
+            <div class="er-best"><span class="tag">最優解</span>給 <strong>1–3 個月 Separation Pay 換 General Release</strong>——小額補償買斷訴訟風險，CP 值最高；大量裁員前務必做 disparate impact 分析，避免被控年齡 / 族裔歧視。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某 45 歲工程師被裁後主張年齡歧視（ADEA），但公司事前已用<b>含 ADEA waiver 的 release + 2 個月補償</b>，成功免於訴訟。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：主持面談、備妥 release。</li>
+            <li><b>Legal/風控</b>：確認 release 合法性與 WARN 適用；做歧視風險與輿情分析。</li>
+            <li><b>IT Security</b>：面談同步斷點。</li>
+            <li><b>Finance</b>：結算薪資 / Token / COBRA 醫保銜接。</li></ul>`
+        },
+        resign: {
+          head: '離職 VOLUNTARY — 交接、留才與資產回收',
+          law: `<p>員工可隨時離職（At-Will 雙向），<strong>無法定預告期</strong>（業界慣例 2 週）。</p>
+            <ul><li>最終工資發放時點依州法（加州當日結清、多數州下個發薪日）。</li></ul>
+            <span class="law-cite">法源：各州 Final Pay 規定（CA Labor Code §201 等）</span>`,
+          crypto: `<p>自願離職者帶走私鑰 / 權限；競業在多數州（尤其加州）難執行。</p>
+            <ul><li><strong>解法：</strong>靠 NDA、商業機密法（<strong>DTSA</strong>）與 IP 轉讓，而非競業條款。</li>
+            <li>Token 未解鎖部分依協議作廢。</li></ul>`,
+          cost: `<p>老闆想防人才與資產流失。</p>
+            <div class="er-best"><span class="tag">最優解</span>用 <strong>Vesting cliff / 未解鎖作廢</strong>作為留任經濟誘因（零現金）；加州下別依賴競業條款（基本無效），改以商業機密與 IP 保護。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某加州工程師離職跳槽對手，公司競業條款無效，最終靠 <b>DTSA 商業機密訴訟 + Vesting 作廢</b>處理。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控</span></div>
+            <ul><li><b>HRBP</b>：交接與離職面談。</li>
+            <li><b>IT Security</b>：最後工作日斷點。</li>
+            <li><b>Finance</b>：依州法結算最終薪資與 Token。</li>
+            <li><b>風控</b>：評估商業機密與競業可執行性。</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'tw', flag: '🇹🇼', name: '台灣',
+      arch: '境外主體 + EoR（名義雇主）/ 本地 VASP 登記實體',
+      stats: [['NT$29,500', '2026 基本工資（月薪）'], ['0.5N 制度', '勞退新制每滿1年0.5月'], ['上限 6 個月', '新制資遣費上限'], ['§11 + 最後手段', '非違紀解僱門檻']],
+      scenarios: {
+        onboard: {
+          head: '入職 ONBOARDING — 架構合規 + 資產前置',
+          law: `<p><strong>《勞動基準法》《勞工退休金條例》</strong>。自 <strong>2026/1/1</strong> 起基本工資月薪 <strong>NT$29,500</strong>、時薪 NT$196（《最低工資法》）。</p>
+            <ul><li>雇主須提繳<strong>勞退 6%</strong>、投保勞保 / 健保。</li>
+            <li>試用期法無明文，實務可約定，但仍適用資遣費與預告期。</li></ul>
+            <span class="law-cite">法源：勞動基準法、勞工退休金條例、最低工資法（勞動部 114 年公告）</span>`,
+          crypto: `<p>Crypto 不能作為法定薪資或勞退提繳；台灣已要求 <strong>VASP 登記</strong>（洗錢防制）。</p>
+            <ul><li><strong>解法：</strong>本薪以法幣經 EoR / 本地實體發放並足額提繳勞退勞保。</li>
+            <li>Token 另立 Vesting 獎勵協議，與本薪脫鉤。</li></ul>`,
+          cost: `<p>老闆想壓低本薪、用 Token 補。</p>
+            <div class="er-best"><span class="tag">最優解</span>本薪至少達<strong>基本工資且足額投保</strong>（高薪低報被裁罰 + 補繳），Token 作績效獎勵；用 <strong>EoR</strong> 省下設立本地實體的固定成本，同時維持合規。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某行銷以「低本薪 + 高 Token」入職，公司按低本薪投保，後遭申訴<b>高薪低報</b>，補繳勞健保差額並挨罰。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：確認 EoR 合規與勞退勞保投保。</li>
+            <li><b>Legal/風控</b>：審 IP / 競業（台灣競業須有補償始有效，§9-1）；確認 VASP / AML。</li>
+            <li><b>IT Security</b>：最小權限建號。</li>
+            <li><b>Finance</b>：確認 Token 起算日與留檔。</li></ul>`
+        },
+        layoff: {
+          head: '資遣 EMPLOYER-INITIATED — 風控優先的合意終止',
+          law: `<p>非違紀解僱須符合《勞基法》<strong>§11 法定事由</strong> + 「<strong>解僱最後手段性</strong>」（如完整 PIP）。</p>
+            <ul><li>資遣費（勞退新制）：每滿 1 年發 <strong>0.5 個月</strong>平均工資，最高 6 個月。</li>
+            <li>預告期依年資 <strong>10 / 20 / 30 天</strong>（未預告須付預告工資）。</li>
+            <li>須於 <strong>10 日前</strong>向地方主管機關辦理資遣通報。</li></ul>
+            <span class="law-cite">法源：勞動基準法 §11、§16、§17、就業服務法 §33</span>`,
+          crypto: `<p>Web3 社群圈小，<strong>不當解僱易發酵成 PR 危機</strong>，衝擊招募與 Token 形象。</p>
+            <ul><li><strong>解法：</strong>走合意終止 + 優於法定的優遣包，<strong>開立非自願離職證明</strong>（讓員工領 6 個月失業給付）。</li>
+            <li>協議加 Non-Disparagement + Clawback。</li></ul>`,
+          cost: `<p>老闆只想付 0.5N。</p>
+            <div class="er-best"><span class="tag">最優解</span><strong>0.5N + 1–2 個月底薪 + 非自願離職證明</strong>。公司現金小幅加碼，但員工因能領政府失業給付而樂意簽和解，避開勞檢、訴訟與社群發酵——花小錢買確定性。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某員工被資遣，公司加開<b>非自願離職證明</b>，員工得以申請約 6 個月失業給付，遂簽和解、放棄爭訟，雙方乾淨了結。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：主持面談、10 日前資遣通報、開立非自願離職證明。</li>
+            <li><b>Legal/風控</b>：擬和解（Waiver / Non-Disparagement / Clawback）、評估勞檢與輿情。</li>
+            <li><b>IT Security</b>：面談同步斷點。</li>
+            <li><b>Finance</b>：算 0.5N + 預告工資 + Token。</li></ul>`
+        },
+        resign: {
+          head: '離職 VOLUNTARY — 交接、留才與資產回收',
+          law: `<p>員工自請離職須預告（同年資 10 / 20 / 30 天），<strong>無資遣費</strong>。</p>
+            <ul><li>雇主須結清工資、並依請求<strong>開立服務證明</strong>（§19，不得拒絕）。</li></ul>
+            <span class="law-cite">法源：勞動基準法 §15、§16、§19</span>`,
+          crypto: `<p>自願離職者帶走權限 / 資產；競業須有補償（§9-1：補償未達標則<strong>競業無效</strong>）。</p>
+            <ul><li><strong>解法：</strong>入職即簽合規（有補償）競業 + NDA；Token 未解鎖依協議處置。</li></ul>`,
+          cost: `<p>老闆想綁住關鍵人，又不想付競業補償。</p>
+            <div class="er-best"><span class="tag">最優解</span>與其付競業補償，不如用 <strong>Token Vesting</strong>（離職即失未解鎖、零現金）綁人；真要競業則確保補償達標，否則條款無效。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某工程師離職，公司競業條款因<b>未給補償被判無效</b>，改靠 Vesting 未解鎖作廢與 NDA 控管。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控</span></div>
+            <ul><li><b>HRBP</b>：交接、開立服務證明。</li>
+            <li><b>IT Security</b>：最後工作日斷點。</li>
+            <li><b>Finance</b>：結清薪資 + Token。</li>
+            <li><b>風控</b>：評估競業效力與機密外流。</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'my', flag: '🇲🇾', name: '馬來西亞',
+      arch: '境外主體 + EoR（如 Deel）/ Labuan 實體',
+      stats: [['10–20 天/年', '法定資遣費（依年資）'], ['4–8 週', '法定預告期'], ['Just Cause', '解僱核心法理門檻'], ['Industrial Court', '不當解僱救濟管道']],
+      scenarios: {
+        onboard: {
+          head: '入職 ONBOARDING — 架構合規 + 資產前置',
+          law: `<p><strong>《1955 年僱傭法令》</strong>（2022 修正、2023/1 生效，擴大適用至全體受僱者，並納入彈性工作申請、產假延長等）。</p>
+            <ul><li>強制提繳 <strong>EPF（公積金）、SOCSO、EIS</strong>。</li>
+            <li>須書面僱傭合約。</li></ul>
+            <span class="law-cite">法源：Employment Act 1955（含 2022 修正）</span>`,
+          crypto: `<p>EPF 不接受 Crypto 提繳；稅務局（LHDN）對數位資產課稅嚴格。</p>
+            <ul><li><strong>解法：</strong>本薪以法幣經 EoR / Labuan 實體發放並繳 EPF / SOCSO；Token 另立協議。</li></ul>`,
+          cost: `<p>老闆想省 EPF。</p>
+            <div class="er-best"><span class="tag">最優解</span>受僱者身分<strong>必繳 EPF</strong>（漏繳重罰），可用 <strong>Labuan 低稅實體</strong>合法優化整體稅負；Token 作為獎勵。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某員工以「顧問」名義規避 EPF，後被認定為<b>僱傭關係</b>，公司須補繳 EPF 並挨罰。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：確認合約與 EPF / SOCSO 提繳。</li>
+            <li><b>Legal/風控</b>：審 IP、建立 Just Cause 的證據基礎；確認 AML。</li>
+            <li><b>IT Security</b>：最小權限建號。</li>
+            <li><b>Finance</b>：Token 起算日留檔。</li></ul>`
+        },
+        layoff: {
+          head: '資遣 EMPLOYER-INITIATED — 風控優先的合意終止',
+          law: `<p>終止須具<strong>「正當理由（Just Cause / Just Excuse）」</strong>，否則員工可向<strong>工業法庭</strong>提不當解僱（救濟成熟，可復職 + 追溯薪資）。</p>
+            <ul><li>資遣費（Employment Act 涵蓋者）：&lt;2 年每年 10 天、2–5 年每年 15 天、&gt;5 年每年 20 天薪資。</li>
+            <li>預告期 4–8 週。</li></ul>
+            <span class="law-cite">法源：Employment Act 1955、Industrial Relations Act 1967</span>`,
+          crypto: `<p>工業法院救濟成熟，員工<strong>易勝訴復職 + 追欠薪</strong>。</p>
+            <ul><li><strong>解法：</strong>以法幣補償溢價 + Token 加速，換取簽署「<strong>放棄向工業法庭提請救濟</strong>」之 Waiver。</li></ul>`,
+          cost: `<p>老闆想最少付。</p>
+            <div class="er-best"><span class="tag">最優解</span><strong>法定資遣費 + Token 加速 + 明確的 Waiver of Industrial Court Claim</strong>，封住復職 / 追欠薪風險，遠優於敗訴成本。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某員工被解僱後赴工業法院，因公司<b>無 Just Cause</b>，面臨復職 + 追溯薪資；後續案件改以含 Waiver 的優遣方案處理。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：主持面談、備妥 Just Cause 證據鏈。</li>
+            <li><b>Legal/風控</b>：擬含 Waiver 協議、評估工業法院風險。</li>
+            <li><b>IT Security</b>：同步斷點。</li>
+            <li><b>Finance</b>：算資遣費 + Token。</li></ul>`
+        },
+        resign: {
+          head: '離職 VOLUNTARY — 交接、留才與資產回收',
+          law: `<p>員工辭職依合約預告（通常等同預告期），<strong>無資遣費</strong>。</p>
+            <ul><li>須結清 EPF / SOCSO 與最終薪資。</li></ul>
+            <span class="law-cite">法源：Employment Act 1955、EPF Act 1991</span>`,
+          crypto: `<p>權限 / 資產帶走；競業在馬來西亞執行力有限。</p>
+            <ul><li><strong>解法：</strong>NDA + IP 轉讓 + Token 未解鎖作廢。</li></ul>`,
+          cost: `<p>留才、防資產流失。</p>
+            <div class="er-best"><span class="tag">最優解</span>用 <strong>Vesting 綁人</strong>（零現金）；競業效力弱，故主要靠 NDA / IP 轉讓保護。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某工程師離職，競業條款難執行，公司靠 <b>NDA 與 Vesting 作廢</b>控管核心資產。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控</span></div>
+            <ul><li><b>HRBP</b>：交接。</li>
+            <li><b>IT Security</b>：斷點。</li>
+            <li><b>Finance</b>：EPF 結算 + Token。</li>
+            <li><b>風控</b>：機密與多簽治理。</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'in', flag: '🇮🇳', name: '印度',
+      arch: '境外主體 + 獨立承包商 / 本地子公司（Subsidiary）',
+      stats: [['四大新法典', '2025/11/21 生效'], ['100 → 300 人', '裁員許可門檻提高'], ['工資 ≥ 50%', '基本+DA 占總報酬下限'], ['30% + 1% TDS', 'VDA 稅 + 源頭扣繳']],
+      scenarios: {
+        onboard: {
+          head: '入職 ONBOARDING — 架構合規 + 資產前置',
+          law: `<p><strong>四大《勞動法典》已於 2025/11/21 生效</strong>，整併 29 部舊法——《工資法典 2019》《勞資關係法典 2020》《社會保障法典 2020》《職安健法典 2020》，舊《工業爭議法 1947》等廢止；中央規則 2026/5/8 公告，各邦進度不一。</p>
+            <ul><li>統一「工資」定義：基本 + DA + 留任津貼須 <strong>≥ 總報酬 50%</strong>，直接影響 PF / Gratuity / Bonus 計算。</li>
+            <li>零工 / 平台工作者<strong>首次納入社會保障</strong>。</li></ul>
+            <span class="law-cite">法源：Code on Wages 2019、Industrial Relations Code 2020、Social Security Code 2020、OSH Code 2020（2025/11/21 生效）</span>`,
+          crypto: `<p>VDA（虛擬數位資產）課 <strong>30% 資本利得稅 + 1% TDS</strong>；新「50% 工資」定義使 Token 難以壓低 PF 基數。</p>
+            <ul><li><strong>解法：</strong>本薪以法幣經子公司 / EoR 並依新定義足額提繳 PF；Token 另立協議，入職即<strong>書面定性稅務</strong>（薪資所得 vs VDA）。</li></ul>`,
+          cost: `<p>老闆想壓 PF 基數、用 Contractor 省成本。</p>
+            <div class="er-best"><span class="tag">最優解</span>新法 <strong>50% 規則</strong>下，已無法靠拆分津貼壓低 PF——應主動重構薪資結構合規；核心崗用子公司，純獨立交付才用 Contractor。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某工程師薪資結構中基本薪僅佔 30% 以壓低 PF，新法生效後須<b>重算並補提 PF / Gratuity 差額</b>。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：依新法典重構薪資結構與 PF / ESI 登記。</li>
+            <li><b>Legal/風控</b>：審 IP 與標準僱用條款（Standing Orders）；追蹤各邦規則進度。</li>
+            <li><b>IT Security</b>：最小權限建號。</li>
+            <li><b>Finance</b>：確認 Token 稅務定性與 TDS。</li></ul>`
+        },
+        layoff: {
+          head: '資遣 EMPLOYER-INITIATED — 風控優先的合意終止',
+          law: `<p><strong>《勞資關係法典 2020》</strong>取代舊《工業爭議法 1947》，仍採雙軌（Worker / 非 Worker）。</p>
+            <ul><li>須事前政府許可的裁員門檻由 <strong>100 人提高到 300 人</strong>（中型企業彈性提高）。</li>
+            <li>Worker 裁員須提前通知 + 補償（沿續每滿 1 年約 15 天薪資的精神）；非 Worker（經理級）依合約，通常 1–3 個月通知。</li></ul>
+            <span class="law-cite">法源：Industrial Relations Code 2020（取代 Industrial Disputes Act 1947）</span>`,
+          crypto: `<p>Worker 解僱程序繁雜、易爭議；Token 稅務爭議。</p>
+            <ul><li><strong>解法：</strong>優先<strong>合意離職（Ex-gratia）</strong> + Token 處置；明確分類 Worker / 非 Worker。</li></ul>`,
+          cost: `<p>老闆想最省。</p>
+            <div class="er-best"><span class="tag">最優解</span>300 人以下裁員<strong>無需政府許可</strong>，彈性提高——但仍以 <strong>1–2 個月薪資溢價的 Ex-gratia 合意離職</strong>封住爭議，CP 值最佳；Token 依協議處置。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某 Worker 級員工裁員生爭議，改以 <b>Ex-gratia 合意金 + 離職證明</b>化解，避開工會與勞動法院。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控/Legal</span></div>
+            <ul><li><b>HRBP</b>：主持面談、確認 Worker 分類、PF 結算。</li>
+            <li><b>Legal/風控</b>：擬 Ex-gratia 與 Waiver、評估各邦 / 工會風險。</li>
+            <li><b>IT Security</b>：主持面談同步斷點。</li>
+            <li><b>Finance</b>：算補償 + Token + VDA 稅。</li></ul>`
+        },
+        resign: {
+          head: '離職 VOLUNTARY — 交接、留才與資產回收',
+          law: `<p>員工辭職依合約預告（通常 1–3 個月）。</p>
+            <ul><li>須完成 PF 結算 / 轉移；連續服務滿 5 年者享 Gratuity（新法 50% 定義下計算<strong>基數可能上升</strong>）。</li></ul>
+            <span class="law-cite">法源：Code on Social Security 2020（含 Gratuity / PF）</span>`,
+          crypto: `<p>權限 / 資產帶走；競業在印度法院多被認定限制貿易而難執行。</p>
+            <ul><li><strong>解法：</strong>NDA + IP 轉讓 + Token 未解鎖依協議。</li></ul>`,
+          cost: `<p>留才，同時留意新法成本變化。</p>
+            <div class="er-best"><span class="tag">最優解</span>用 <strong>Vesting 綁人</strong>（零現金）；競業效力弱，靠 NDA / IP；並留意新法下 <strong>Gratuity 基數上升</strong>的離職成本。</div>
+            <div class="er-example"><span class="tag">員工實例</span>某滿 5 年員工離職，新法 50% 工資定義使其 <b>Gratuity 計算基數提高</b>，Finance 須按新基數結算。</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">風控</span></div>
+            <ul><li><b>HRBP</b>：交接、PF / Gratuity 結算。</li>
+            <li><b>IT Security</b>：斷點。</li>
+            <li><b>Finance</b>：依新基數算 Gratuity + Token。</li>
+            <li><b>風控</b>：機密與多簽治理。</li></ul>`
+        }
+      }
+    }
+  ],
+  'en': [
+    {
+      code: 'cn', flag: '🇨🇳', name: 'China',
+      arch: 'Offshore entity + independent contractors / onshore tech-consulting shell',
+      stats: [['N formula', '1 month avg salary per year'], ['12-year cap', 'Max years counted for N'], ['Unlawful = 2N', 'Damages for unlawful termination'], ['3× local avg', 'Cap on the compensation base']],
+      scenarios: {
+        onboard: {
+          head: 'ONBOARDING — structural compliance + asset front-loading',
+          law: `<p><strong>Labor Contract Law.</strong> Onshore hires need a <strong>written contract within 1 month</strong>; miss it and you owe double salary from month 2; no contract after 1 year = deemed open-ended.</p>
+            <ul><li>Probation cap scales with contract length (max 6 months for 3-year+ contracts); probation pay ≥ 80% of regular and ≥ local minimum wage.</li>
+            <li>Social insurance + housing fund are <strong>mandatory</strong> and cannot be waived by agreement.</li></ul>
+            <span class="law-cite">Source: PRC Labor Contract Law §10, §19, §82</span>`,
+          crypto: `<p>Policy red line: <strong>paying salary in crypto is not legal</strong>; FX controls cap individual purchases at USD 50k/year.</p>
+            <ul><li><strong>Fix:</strong> pay base salary in RMB via an onshore entity / compliant PEO with full social insurance.</li>
+            <li>Grant tokens separately through the <strong>offshore entity</strong> (SAFT/RSU), decoupled from onshore pay and framed as offshore incentive equity.</li></ul>`,
+          cost: `<p>The founder wants to save cost = wants all-contractor to dodge social insurance.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Put core technical roles on an <strong>onshore compliant entity with full social insurance</strong>; use true independent contractors only for remote, independently-deliverable work, and enforce "independence" (own tools, no fixed hours, paid per deliverable). The social-insurance savings are dwarfed by later back-pay + 2N if a de facto employment relationship is found.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A smart-contract engineer worked <b>full-time on-site as a "contractor" for 2 years</b>; on exit he claimed de facto employment, and arbitration ordered back-paid social insurance + 2N — far more than the premiums saved.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> confirm structure compliance, sign written contracts, keep records.</li>
+            <li><b>Legal/Risk:</b> review IP assignment (work-for-hire), non-compete, NDA; check FX and payroll channels.</li>
+            <li><b>IT Security:</b> pre-provision GitHub / AWS / multisig on least-privilege (read-only to start).</li>
+            <li><b>Finance:</b> fix the token vesting start date and granting entity in writing.</li></ul>`
+        },
+        layoff: {
+          head: 'EMPLOYER-INITIATED — risk-first mutual separation',
+          law: `<p>Lawful termination needs a <strong>statutory ground</strong> (incapability after training/transfer, material change of circumstances, etc.). Compensation:</p>
+            <ul><li><strong>N</strong>: 1 month's avg salary per full year (6–12 months counts as 1 year; under 6 months = 0.5 month).</li>
+            <li>If monthly pay exceeds 3× the local average wage, the <strong>base is capped at 3× and years capped at 12</strong>.</li>
+            <li>Pay-in-lieu of notice = +1 month (<strong>N+1</strong>); <strong>unlawful termination = 2N</strong>. Article 42 protected groups (pregnancy, medical leave, etc.) cannot be dismissed.</li></ul>
+            <span class="law-cite">Source: Labor Contract Law §40, §41, §42, §47, §87</span>`,
+          crypto: `<p>Employees know the law well and arbitration is cheap — <strong>2N claims are easy</strong>; high risk of token lock-up / private-key leakage.</p>
+            <ul><li><strong>Fix:</strong> use a "mutual termination" (§36) rather than unilateral dismissal — pay slightly above statutory to buy a voluntary signature + full release + reaffirmed non-compete/confidentiality.</li>
+            <li>Revoke repo and multisig access at the exact moment of the meeting.</li></ul>`,
+          cost: `<p>The founder wants to pay the least and avoid any damages.</p>
+            <div class="er-best"><span class="tag">Optimal play</span><strong>N + a modest premium via mutual termination</strong> keeps total cost predictable and closes off 2N and arbitration risk — far better than gambling on a unilateral dismissal ruled unlawful (2N + reinstatement + back pay). Tax tip: a lump-sum payout is <strong>income-tax-exempt up to 3× the local prior-year average wage</strong>; structure within that band so the employee nets more and the company pays less.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A backend engineer, 3 years, RMB 30k/month, faced a contestable unilateral dismissal. Switching to <b>N+1.5 mutual termination + a within-3× tax-exempt structure</b>, the employee took home more than a court award while the company's cash outlay fell below a losing 2N.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> run the settlement meeting, issue the termination certificate, sync the cut-off time.</li>
+            <li><b>Legal/Risk:</b> draft the mutual-termination agreement (waiver / non-compete / non-disparagement / clawback); assess arbitration and PR risk.</li>
+            <li><b>IT Security:</b> at the same second as the meeting, freeze SSO, revoke GitHub/cloud, rebalance multisig weights.</li>
+            <li><b>Finance:</b> compute N, accelerate/cancel tokens, build the within-3× tax-exempt structure, settle pay.</li></ul>`
+        },
+        resign: {
+          head: 'VOLUNTARY EXIT — handover, retention & asset recovery',
+          law: `<p>A resigning employee must give <strong>30 days' written notice</strong> (3 days in probation). In principle <strong>no severance</strong> is owed.</p>
+            <ul><li>Exception: constructive dismissal due to employer fault (§38, e.g. underpayment / unpaid social insurance) can trigger compensation.</li>
+            <li>Handover, personnel file, and social-insurance transfer must be processed.</li></ul>
+            <span class="law-cite">Source: PRC Labor Contract Law §37, §38, §50</span>`,
+          crypto: `<p>A voluntary leaver still holds private keys / multisig / core code, and unvested-token ownership is easily disputed.</p>
+            <ul><li><strong>Fix:</strong> at onboarding, write "vesting treatment on voluntary exit" and <strong>Good Leaver / Bad Leaver</strong> clauses into the token agreement (unvested forfeited or pro-rated).</li>
+            <li>Revoke access in sync with the exit.</li></ul>`,
+          cost: `<p>The founder wants to retain key people and stop on-chain assets walking out.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Use the <strong>unvested token portion</strong> as a retention hook (leave = forfeit unvested) — lawful and <strong>zero cash cost</strong>; for key signers, prep a multisig replacement plan before exit.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A departing smart-contract lead was still a <b>3-of-5 multisig signer</b>; without a prompt signer swap the treasury could freeze. HR triggered the signer-replacement plan the moment the resignation landed.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Treasury</span><span class="er-chip risk">Risk</span></div>
+            <ul><li><b>HRBP:</b> confirm handover checklist, activate non-compete/confidentiality.</li>
+            <li><b>IT Security:</b> schedule the "last-day cut-off" upon resignation.</li>
+            <li><b>Finance/Treasury:</b> resolve vesting ownership and final pay.</li>
+            <li><b>Risk:</b> assess non-compete / trade-secret leakage and multisig-governance gaps.</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'us', flag: '🇺🇸', name: 'USA',
+      arch: 'US entity W2 employees / 1099 independent contractors',
+      stats: [['At-Will', 'Except Montana'], ['No statutory severance', 'None at federal level'], ['WARN 60 days', 'Mass-layoff notice'], ['83(b) · 30 days', 'Token tax-election window']],
+      scenarios: {
+        onboard: {
+          head: 'ONBOARDING — structural compliance + asset front-loading',
+          law: `<p><strong>At-Will</strong> employment (except Montana). Federal FLSA (minimum wage / overtime), I-9 work authorization, plus state law.</p>
+            <ul><li>W2 vs 1099 classification is strict (IRS / DOL and California AB5 ABC test).</li>
+            <li>No mandatory written contract, but issue an offer letter + at-will statement + IP assignment / NDA.</li></ul>
+            <span class="law-cite">Source: FLSA, IRC §83, state labor codes (e.g. CA Labor Code)</span>`,
+          crypto: `<p>The <strong>tax timing</strong> of token/equity comp is key: RSUs / restricted tokens are taxed at vesting, but at low early-stage valuations an <strong>83(b) election</strong> taxes them cheaply at grant.</p>
+            <ul><li>Miss the 83(b) (file <strong>within 30 days</strong> of grant) and tax balloons at high-valuation vesting.</li>
+            <li><strong>Fix:</strong> at onboarding, Finance/Legal flag the 83(b) window and help file.</li></ul>`,
+          cost: `<p>The founder wants 1099s to save employer tax and benefits.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Use <strong>1099</strong> only for genuinely independent, short-term deliverable work; put long-term core roles on <strong>W2</strong>. Misclassification means IRS/DOL back taxes + penalties + class actions — far above the employer tax saved.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A full-time designer worked 18 months as a 1099; after leaving she filed a DOL misclassification complaint, and the company owed back payroll taxes, overtime and penalties.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> confirm W2/1099 classification, complete I-9.</li>
+            <li><b>Legal/Risk:</b> issue an offer with at-will / IP / NDA; check state compliance (CA, NY strictest).</li>
+            <li><b>IT Security:</b> provision on least privilege.</li>
+            <li><b>Finance:</b> set 83(b) reminders and tax withholding.</li></ul>`
+        },
+        layoff: {
+          head: 'EMPLOYER-INITIATED — risk-first mutual separation',
+          law: `<p>At-Will allows termination anytime for any lawful reason, but <strong>not</strong> on protected characteristics (age / sex / race / religion / disability) or retaliation.</p>
+            <ul><li>No federal statutory severance; most firms give 1–3 months' separation pay by practice.</li>
+            <li><strong>WARN Act</strong>: 100+ employee firms must give <strong>60 days'</strong> notice for mass layoffs, or pay in lieu.</li></ul>
+            <span class="law-cite">Source: Title VII, ADEA, ADA, WARN Act</span>`,
+          crypto: `<p>Dismissal is easy, but <strong>discrimination / retaliation class actions</strong> are the costly risk; inconsistent token terms cause disputes.</p>
+            <ul><li><strong>Fix:</strong> a Separation Agreement + <strong>General Release</strong> buys out all potential claims (ADEA requires a 21-day consideration / 7-day revocation period).</li>
+            <li>Treat tokens per the grant docs (Good / Bad Leaver).</li></ul>`,
+          cost: `<p>The founder thinks At-Will means paying nothing.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Pay <strong>1–3 months' separation in exchange for a General Release</strong> — a small sum that buys out litigation risk, the best value of all; before mass layoffs, run a disparate-impact analysis to avoid age/ethnicity claims.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A 45-year-old engineer alleged age discrimination (ADEA) after a layoff, but the company had used a <b>release with an ADEA waiver + 2 months' pay</b> and avoided the suit.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> run the meeting, have the release ready.</li>
+            <li><b>Legal/Risk:</b> confirm release validity and WARN applicability; do discrimination-risk and PR analysis.</li>
+            <li><b>IT Security:</b> cut access in sync with the meeting.</li>
+            <li><b>Finance:</b> settle pay / tokens / COBRA continuation.</li></ul>`
+        },
+        resign: {
+          head: 'VOLUNTARY EXIT — handover, retention & asset recovery',
+          law: `<p>Employees may leave anytime (At-Will is mutual); <strong>no statutory notice</strong> (2 weeks by custom).</p>
+            <ul><li>Timing of final pay is set by state law (same day in CA; next payday in most states).</li></ul>
+            <span class="law-cite">Source: state final-pay rules (e.g. CA Labor Code §201)</span>`,
+          crypto: `<p>A voluntary leaver takes keys / access; non-competes are hard to enforce in most states (especially California).</p>
+            <ul><li><strong>Fix:</strong> rely on NDA, trade-secret law (<strong>DTSA</strong>) and IP assignment rather than non-competes.</li>
+            <li>Forfeit unvested tokens per the agreement.</li></ul>`,
+          cost: `<p>The founder wants to stop talent and asset flight.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Use a <strong>vesting cliff / unvested forfeiture</strong> as the economic retention hook (zero cash); in California don't rely on non-competes (largely void) — protect via trade secrets and IP.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A California engineer left for a competitor; the non-compete was void, so the company relied on a <b>DTSA trade-secret action + unvested forfeiture</b>.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk</span></div>
+            <ul><li><b>HRBP:</b> handover and exit interview.</li>
+            <li><b>IT Security:</b> last-day cut-off.</li>
+            <li><b>Finance:</b> settle final pay and tokens per state law.</li>
+            <li><b>Risk:</b> assess trade-secret exposure and non-compete enforceability.</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'tw', flag: '🇹🇼', name: 'Taiwan',
+      arch: 'Offshore entity + EoR (employer of record) / local VASP-registered entity',
+      stats: [['NT$29,500', '2026 minimum wage (monthly)'], ['0.5N formula', '0.5 month/yr (new pension scheme)'], ['6-month cap', 'New-scheme severance cap'], ['§11 + last resort', 'Non-misconduct dismissal bar']],
+      scenarios: {
+        onboard: {
+          head: 'ONBOARDING — structural compliance + asset front-loading',
+          law: `<p><strong>Labor Standards Act + Labor Pension Act.</strong> From <strong>1 Jan 2026</strong> the minimum wage is <strong>NT$29,500/month</strong>, NT$196/hour (Minimum Wage Act).</p>
+            <ul><li>Employer must contribute <strong>6% pension</strong> and enroll in labor + health insurance.</li>
+            <li>Probation is not codified but can be agreed; severance and notice still apply.</li></ul>
+            <span class="law-cite">Source: Labor Standards Act, Labor Pension Act, Minimum Wage Act (MOL 2025 notice)</span>`,
+          crypto: `<p>Crypto can't be statutory salary or pension contributions; Taiwan now requires <strong>VASP registration</strong> (AML).</p>
+            <ul><li><strong>Fix:</strong> pay base salary in fiat via EoR / local entity with full pension and insurance.</li>
+            <li>Grant tokens via a separate vesting agreement, decoupled from base pay.</li></ul>`,
+          cost: `<p>The founder wants a low base salary topped up with tokens.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Keep base salary at <strong>at least minimum wage and fully insured</strong> (under-reporting draws fines + back contributions), tokens as performance incentive; use an <strong>EoR</strong> to avoid the fixed cost of a local entity while staying compliant.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A marketer joined on "low base + high token"; the company insured on the low base and was reported for <b>under-declaring insured salary</b>, owing back labor/health insurance plus a fine.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> confirm EoR compliance and pension/insurance enrollment.</li>
+            <li><b>Legal/Risk:</b> review IP / non-compete (valid only with compensation, §9-1); confirm VASP / AML.</li>
+            <li><b>IT Security:</b> provision on least privilege.</li>
+            <li><b>Finance:</b> confirm token start date and records.</li></ul>`
+        },
+        layoff: {
+          head: 'EMPLOYER-INITIATED — risk-first mutual separation',
+          law: `<p>Non-misconduct dismissal must meet a <strong>§11 statutory ground</strong> plus the <strong>"dismissal as last resort"</strong> principle (e.g. a full PIP).</p>
+            <ul><li>Severance (new pension scheme): <strong>0.5 month</strong> avg salary per full year, capped at 6 months.</li>
+            <li>Notice by tenure: <strong>10 / 20 / 30 days</strong> (pay in lieu if not given).</li>
+            <li>Must file a layoff report with the local authority <strong>10 days in advance</strong>.</li></ul>
+            <span class="law-cite">Source: Labor Standards Act §11, §16, §17; Employment Services Act §33</span>`,
+          crypto: `<p>The Web3 community is small, so <strong>unfair dismissal easily becomes a PR crisis</strong>, hurting hiring and token image.</p>
+            <ul><li><strong>Fix:</strong> use a mutual termination + an above-statutory package, and <strong>issue an involuntary-separation certificate</strong> (lets the employee claim ~6 months of unemployment benefit).</li>
+            <li>Add non-disparagement + clawback.</li></ul>`,
+          cost: `<p>The founder only wants to pay 0.5N.</p>
+            <div class="er-best"><span class="tag">Optimal play</span><strong>0.5N + 1–2 months' base + an involuntary-separation certificate.</strong> The company adds a little cash, but because the employee can claim government unemployment benefit they happily settle — avoiding inspections, litigation and community fallout. A small spend buys certainty.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A laid-off employee was given an <b>involuntary-separation certificate</b>, qualifying for ~6 months of unemployment benefit; they signed the settlement and dropped any claim, ending things cleanly.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> run the meeting, file the 10-day layoff report, issue the involuntary-separation certificate.</li>
+            <li><b>Legal/Risk:</b> draft the settlement (waiver / non-disparagement / clawback); assess inspection and PR risk.</li>
+            <li><b>IT Security:</b> cut access in sync.</li>
+            <li><b>Finance:</b> compute 0.5N + pay-in-lieu + tokens.</li></ul>`
+        },
+        resign: {
+          head: 'VOLUNTARY EXIT — handover, retention & asset recovery',
+          law: `<p>A resigning employee must give notice (same 10 / 20 / 30 days by tenure); <strong>no severance</strong>.</p>
+            <ul><li>Employer must settle pay and, on request, <strong>issue a service certificate</strong> (§19, cannot refuse).</li></ul>
+            <span class="law-cite">Source: Labor Standards Act §15, §16, §19</span>`,
+          crypto: `<p>A voluntary leaver takes access / assets; a non-compete needs compensation (§9-1: without it the <strong>non-compete is void</strong>).</p>
+            <ul><li><strong>Fix:</strong> sign a compliant (compensated) non-compete + NDA at onboarding; treat unvested tokens per the agreement.</li></ul>`,
+          cost: `<p>The founder wants to lock in key people without paying non-compete compensation.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Rather than pay non-compete compensation, lock people in with <strong>token vesting</strong> (leave = forfeit unvested, zero cash); if a non-compete is truly needed, ensure compensation meets the bar or the clause is void.</div>
+            <div class="er-example"><span class="tag">Employee example</span>An engineer resigned; the company's non-compete was <b>ruled void for lack of compensation</b>, so it fell back on unvested-token forfeiture and the NDA.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk</span></div>
+            <ul><li><b>HRBP:</b> handover, issue the service certificate.</li>
+            <li><b>IT Security:</b> last-day cut-off.</li>
+            <li><b>Finance:</b> settle pay + tokens.</li>
+            <li><b>Risk:</b> assess non-compete validity and confidentiality leakage.</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'my', flag: '🇲🇾', name: 'Malaysia',
+      arch: 'Offshore entity + EoR (e.g. Deel) / Labuan entity',
+      stats: [['10–20 days/yr', 'Statutory severance by tenure'], ['4–8 weeks', 'Statutory notice'], ['Just Cause', 'Core dismissal threshold'], ['Industrial Court', 'Unfair-dismissal remedy']],
+      scenarios: {
+        onboard: {
+          head: 'ONBOARDING — structural compliance + asset front-loading',
+          law: `<p><strong>Employment Act 1955</strong> (amended 2022, effective Jan 2023 — extended to all employees, adding flexible-work requests, longer maternity leave, etc.).</p>
+            <ul><li>Mandatory <strong>EPF (provident fund), SOCSO, EIS</strong> contributions.</li>
+            <li>Written employment contract required.</li></ul>
+            <span class="law-cite">Source: Employment Act 1955 (incl. 2022 amendments)</span>`,
+          crypto: `<p>EPF won't accept crypto contributions; the tax authority (LHDN) taxes digital assets strictly.</p>
+            <ul><li><strong>Fix:</strong> pay base in fiat via EoR / Labuan entity with EPF / SOCSO; grant tokens separately.</li></ul>`,
+          cost: `<p>The founder wants to save on EPF.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Employee status means EPF is <strong>mandatory</strong> (heavy penalties for evasion); use a <strong>low-tax Labuan entity</strong> to optimize overall tax lawfully; tokens as incentive.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A worker engaged as a "consultant" to dodge EPF was later deemed an <b>employee</b>, and the company had to back-pay EPF plus a penalty.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> confirm contract and EPF / SOCSO.</li>
+            <li><b>Legal/Risk:</b> review IP, build a Just Cause evidence base; confirm AML.</li>
+            <li><b>IT Security:</b> provision on least privilege.</li>
+            <li><b>Finance:</b> record token start date.</li></ul>`
+        },
+        layoff: {
+          head: 'EMPLOYER-INITIATED — risk-first mutual separation',
+          law: `<p>Termination needs <strong>"Just Cause or Excuse"</strong>, or the employee can bring an unfair-dismissal claim at the <strong>Industrial Court</strong> (a mature remedy — reinstatement + back wages).</p>
+            <ul><li>Severance (for covered employees): &lt;2 yrs 10 days/yr, 2–5 yrs 15 days/yr, &gt;5 yrs 20 days/yr.</li>
+            <li>Notice 4–8 weeks.</li></ul>
+            <span class="law-cite">Source: Employment Act 1955, Industrial Relations Act 1967</span>`,
+          crypto: `<p>The Industrial Court remedy is strong; employees <strong>often win reinstatement + back wages</strong>.</p>
+            <ul><li><strong>Fix:</strong> a fiat premium + token acceleration in exchange for signing a <strong>waiver of Industrial Court claims</strong>.</li></ul>`,
+          cost: `<p>The founder wants to pay the minimum.</p>
+            <div class="er-best"><span class="tag">Optimal play</span><strong>Statutory severance + token acceleration + an explicit Waiver of Industrial Court Claim</strong> closes off reinstatement / back-wage risk — far cheaper than losing.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A dismissed employee went to the Industrial Court; with <b>no Just Cause</b> the company faced reinstatement + back wages, so later cases used a waiver-backed separation package instead.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> run the meeting, prepare the Just Cause evidence chain.</li>
+            <li><b>Legal/Risk:</b> draft the waiver agreement, assess Industrial Court risk.</li>
+            <li><b>IT Security:</b> cut access in sync.</li>
+            <li><b>Finance:</b> compute severance + tokens.</li></ul>`
+        },
+        resign: {
+          head: 'VOLUNTARY EXIT — handover, retention & asset recovery',
+          law: `<p>Resignation follows the contractual notice (usually equal to the notice period); <strong>no severance</strong>.</p>
+            <ul><li>Settle EPF / SOCSO and final pay.</li></ul>
+            <span class="law-cite">Source: Employment Act 1955, EPF Act 1991</span>`,
+          crypto: `<p>Access / assets walk out; non-competes have limited enforceability in Malaysia.</p>
+            <ul><li><strong>Fix:</strong> NDA + IP assignment + unvested-token forfeiture.</li></ul>`,
+          cost: `<p>Retain talent, prevent asset flight.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Lock people in with <strong>vesting</strong> (zero cash); since non-competes are weak, rely mainly on NDA / IP assignment.</div>
+            <div class="er-example"><span class="tag">Employee example</span>An engineer resigned; with the non-compete hard to enforce, the company controlled core assets via the <b>NDA and unvested-token forfeiture</b>.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk</span></div>
+            <ul><li><b>HRBP:</b> handover.</li>
+            <li><b>IT Security:</b> cut-off.</li>
+            <li><b>Finance:</b> EPF settlement + tokens.</li>
+            <li><b>Risk:</b> confidentiality and multisig governance.</li></ul>`
+        }
+      }
+    },
+    {
+      code: 'in', flag: '🇮🇳', name: 'India',
+      arch: 'Offshore entity + independent contractors / local subsidiary',
+      stats: [['4 new Codes', 'Effective 21 Nov 2025'], ['100 → 300', 'Retrenchment-permission threshold'], ['Wages ≥ 50%', 'Basic+DA floor of total pay'], ['30% + 1% TDS', 'VDA tax + withholding']],
+      scenarios: {
+        onboard: {
+          head: 'ONBOARDING — structural compliance + asset front-loading',
+          law: `<p><strong>The four Labour Codes took effect on 21 Nov 2025</strong>, consolidating 29 old laws — the Code on Wages 2019, Industrial Relations Code 2020, Social Security Code 2020, OSH Code 2020 — repealing the old Industrial Disputes Act 1947 and others; Central Rules notified 8 May 2026, with states at varying stages.</p>
+            <ul><li>Unified "wages" definition: basic + DA + retaining allowance must be <strong>≥ 50% of total</strong>, directly affecting PF / gratuity / bonus.</li>
+            <li>Gig / platform workers are <strong>covered by social security for the first time</strong>.</li></ul>
+            <span class="law-cite">Source: Code on Wages 2019, Industrial Relations Code 2020, Social Security Code 2020, OSH Code 2020 (effective 21 Nov 2025)</span>`,
+          crypto: `<p>VDAs (virtual digital assets) are taxed at <strong>30% capital gains + 1% TDS</strong>; the new 50% wage definition makes it hard to shrink the PF base with tokens.</p>
+            <ul><li><strong>Fix:</strong> pay base in fiat via the subsidiary / EoR with full PF under the new definition; grant tokens separately and <strong>fix the tax character in writing</strong> at onboarding (salary income vs VDA).</li></ul>`,
+          cost: `<p>The founder wants to shrink the PF base and use contractors to save cost.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Under the new <strong>50% rule</strong> you can no longer split allowances to suppress PF — restructure pay to comply; put core roles on the subsidiary and use contractors only for genuinely independent delivery.</div>
+            <div class="er-example"><span class="tag">Employee example</span>An engineer's pay had basic at only 30% to suppress PF; once the new law took effect it had to be <b>recomputed with PF / gratuity back-paid</b>.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> restructure pay under the new Codes and handle PF / ESI registration.</li>
+            <li><b>Legal/Risk:</b> review IP and standing orders; track state-rule progress.</li>
+            <li><b>IT Security:</b> provision on least privilege.</li>
+            <li><b>Finance:</b> confirm token tax character and TDS.</li></ul>`
+        },
+        layoff: {
+          head: 'EMPLOYER-INITIATED — risk-first mutual separation',
+          law: `<p>The <strong>Industrial Relations Code 2020</strong> replaces the old Industrial Disputes Act 1947, keeping the two-track split (Worker / non-Worker).</p>
+            <ul><li>The threshold for prior government permission to retrench rises from <strong>100 to 300 workers</strong> (more flexibility for mid-size firms).</li>
+            <li>Worker retrenchment needs notice + compensation (continuing the ~15 days' pay per year principle); non-Workers (managers) follow contract, usually 1–3 months' notice.</li></ul>
+            <span class="law-cite">Source: Industrial Relations Code 2020 (replacing the Industrial Disputes Act 1947)</span>`,
+          crypto: `<p>Worker dismissal is procedurally heavy and dispute-prone; token tax disputes arise.</p>
+            <ul><li><strong>Fix:</strong> prefer a mutual exit (<strong>ex-gratia</strong>) + token treatment; classify Worker / non-Worker clearly.</li></ul>`,
+          cost: `<p>The founder wants the cheapest route.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Below 300 workers, retrenchment <strong>needs no government permission</strong> — more flexibility — but still close disputes with a <strong>1–2 month ex-gratia mutual exit</strong>, the best value; treat tokens per the agreement.</div>
+            <div class="er-example"><span class="tag">Employee example</span>A Worker-grade retrenchment turned contentious; switching to an <b>ex-gratia payment + relieving letter</b> resolved it and avoided unions and the labour court.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk/Legal</span></div>
+            <ul><li><b>HRBP:</b> run the meeting, confirm Worker classification, settle PF.</li>
+            <li><b>Legal/Risk:</b> draft the ex-gratia and waiver; assess state / union risk.</li>
+            <li><b>IT Security:</b> cut access in sync.</li>
+            <li><b>Finance:</b> compute compensation + tokens + VDA tax.</li></ul>`
+        },
+        resign: {
+          head: 'VOLUNTARY EXIT — handover, retention & asset recovery',
+          law: `<p>Resignation follows contractual notice (usually 1–3 months).</p>
+            <ul><li>Complete PF settlement / transfer; employees with 5+ years' continuous service get gratuity (the new 50% definition may <strong>raise the calculation base</strong>).</li></ul>
+            <span class="law-cite">Source: Code on Social Security 2020 (gratuity / PF)</span>`,
+          crypto: `<p>Access / assets walk out; Indian courts often treat non-competes as restraint of trade and won't enforce them.</p>
+            <ul><li><strong>Fix:</strong> NDA + IP assignment + unvested tokens per the agreement.</li></ul>`,
+          cost: `<p>Retain talent, while watching new-law cost shifts.</p>
+            <div class="er-best"><span class="tag">Optimal play</span>Lock people in with <strong>vesting</strong> (zero cash); non-competes are weak, so rely on NDA / IP; and watch the <strong>higher gratuity base</strong> under the new law.</div>
+            <div class="er-example"><span class="tag">Employee example</span>An 5-year employee resigned; the new 50% wage definition <b>raised the gratuity base</b>, so Finance settled on the new figure.</div>`,
+          collab: `<div class="er-chips"><span class="er-chip hr">HRBP</span><span class="er-chip it">IT Security</span><span class="er-chip fin">Finance</span><span class="er-chip risk">Risk</span></div>
+            <ul><li><b>HRBP:</b> handover, PF / gratuity settlement.</li>
+            <li><b>IT Security:</b> cut-off.</li>
+            <li><b>Finance:</b> compute gratuity on the new base + tokens.</li>
+            <li><b>Risk:</b> confidentiality and multisig governance.</li></ul>`
+        }
+      }
+    }
+  ]
+};
+
+function renderERMatrix() {
+  const container = document.getElementById('erPanelsContainer');
+  if(!container) return;
+
+  const langKey = currentLang === 'zh' ? 'zh' : 'en';
+  const countries = ER_DATA[langKey];
+
+  container.innerHTML = countries.map(c => {
+    const statsHtml = c.stats.map(s => `<div class="er-stat"><div class="v">${s[0]}</div><div class="l">${s[1]}</div></div>`).join('');
+    
+    const scKeys = ['onboard', 'layoff', 'resign'];
+    const scLabels = currentLang === 'zh' ? ['入職', '資遣', '離職'] : ['Onboarding', 'Termination', 'Resignation'];
+    const scEnLabels = ['ONBOARDING', 'EMPLOYER-INITIATED', 'VOLUNTARY EXIT'];
+
+    const scenarioTabsHtml = scKeys.map((sc, idx) => `
+      <button class="er-scenario-tab ${erScenario === sc ? 'active' : ''}" data-ercode="${c.code}" data-sc="${sc}" onclick="setERScenario('${sc}')">
+        <span class="dot"></span>${scLabels[idx]}<span class="en">${scEnLabels[idx]}</span>
+      </button>
+    `).join('');
+
+    const scenarioBodiesHtml = scKeys.map(sc => {
+      const dataObj = c.scenarios[sc];
+      return `
+        <div class="er-scenario-body ${erScenario === sc ? 'active' : ''}" data-sc="${sc}">
+          <div class="er-sc-head">${dataObj.head}</div>
+          <div class="er-elements">
+            <div class="er-el law">
+              <h4><span class="el-num">1</span>${currentLang === 'zh' ? '目前最新勞動法規' : 'Current Labor Law'}</h4>
+              ${dataObj.law}
+            </div>
+            <div class="er-el crypto">
+              <h4><span class="el-num">2</span>${currentLang === 'zh' ? 'Crypto 痛點 × 解法' : 'Crypto Pain Points × Solutions'}</h4>
+              ${dataObj.crypto}
+            </div>
+            <div class="er-el cost">
+              <h4><span class="el-num">3</span>${currentLang === 'zh' ? '成本最優解 × 員工實例' : 'Cost-Optimal Play × Example'}</h4>
+              ${dataObj.cost}
+            </div>
+            <div class="er-el collab">
+              <h4><span class="el-num">4</span>${currentLang === 'zh' ? '跨部門協作（風控/財務/安全）' : 'Cross-Functional (Risk/Fin/Sec)'}</h4>
+              ${dataObj.collab}
+            </div>
+          </div>
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="er-panel ${erCountry === c.code ? 'active' : ''}" id="er-panel-${c.code}">
+        <div class="er-panel-head">
+          <h3>${c.flag} ${c.name}</h3>
+          <div class="arch"><span class="label">${currentLang === 'zh' ? '雇傭架構' : 'Employment Structure'}</span>${c.arch}</div>
+        </div>
+        <div class="er-stats">${statsHtml}</div>
+        <div class="er-scenario-tabs">${scenarioTabsHtml}</div>
+        ${scenarioBodiesHtml}
+        <div class="er-source">${currentLang === 'zh' ? '內容為跨國 HRBP × IT Security × Finance/Treasury × Legal 通用實務框架；法規以 2026 年 6 月可得資訊整理，實際適用須依各轄區最新法令與公司治理結構，並洽當地勞動法律顧問確認。' : 'A general cross-functional framework (HRBP × IT Security × Finance/Treasury × Legal). Laws compiled from info available as of June 2026; actual application depends on each jurisdiction\u2019s current statutes and governance structure — confirm with local employment counsel.'}</div>
+      </div>
+    `;
+  }).join('');
+
+  // Bind tabs event
+  document.querySelectorAll('.er-tab').forEach(tab => {
+    tab.classList.toggle('active', tab.dataset.ercode === erCountry);
+    tab.onclick = () => {
+      erCountry = tab.dataset.ercode;
+      renderERMatrix();
+    };
+  });
+}
+
+function setERScenario(sc) {
+  erScenario = sc;
+  renderERMatrix();
+}
+
 function switchTab(tabId) {
   currentTab = tabId;
-  const navTabs = ['tab01', 'tab02', 'tab03', 'tab04'];
+  const navTabs = ['tab01', 'tab02', 'tab03', 'tab04', 'tab05'];
   navTabs.forEach(id => {
     const navEl = document.getElementById('nav_' + id.replace('tab', ''));
     if(navEl) navEl.classList.toggle('active', id === tabId);
@@ -399,6 +1180,7 @@ function switchTab(tabId) {
   else if(tabId === 'tab02') renderLadderTab();
   else if(tabId === 'tab03') { renderMatrixTable(); runBudgetCalc(); }
   else if(tabId === 'tab04') renderStartupTab();
+  else if(tabId === 'tab05') renderERMatrix();
 }
 
 function renderCompTab() {
@@ -712,8 +1494,8 @@ function runBudgetCalc() {
     : `${deptName} Personnel Budget Forecast`;
 
   if(runwayDesc) runwayDesc.innerHTML = currentLang==='zh'
-    ? `• 資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。`
-    : `• Runway Benchmark: Blended based on <b>${tierText}</b> with regional multipliers & statutory reserve (~12%).`;
+    ? `• 資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算[cite: 2]，已自動折算跨國雇主法定成本準備金 (約 12%)[cite: 2]。`
+    : `• Runway Benchmark: Blended based on <b>${tierText}</b>[cite: 2] with regional multipliers & statutory reserve (~12%)[cite: 2].`;
 
   const titleOrg = document.getElementById('org_chart_title');
   if(titleOrg) titleOrg.innerText = currentLang === 'zh' 
@@ -849,13 +1631,19 @@ function setLanguage(lang) {
     document.getElementById('nav_02').innerText = "02 雙軌晉升示意圖";
     document.getElementById('nav_03').innerText = "03 LIVE O-CHART 對照 年度預算預測";
     document.getElementById('nav_04').innerText = "04 初創團隊破局方案";
+    document.getElementById('nav_05').innerText = "05 Global ER Compliance Matrix";
 
     document.getElementById('lbl_top_hc').innerText = "總編制總人數";
     document.getElementById('lbl_top_budget').innerText = "年度總薪酬預算 (USD)";
     document.getElementById('lbl_dept_name').innerText = "部門名稱：";
     document.getElementById('lbl_tier_select').innerText = "企業市場梯隊：";
-    document.getElementById('span_hc_structure').innerHTML = "• 職級比例結構：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈。";
+    document.getElementById('span_hc_structure').innerHTML = "• 職級比例結構：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈[cite: 2]。";
     
+    document.getElementById('lgLaw').innerText = "最新法規";
+    document.getElementById('lgCrypto').innerText = "Crypto 痛點";
+    document.getElementById('lgCost').innerText = "成本最優解";
+    document.getElementById('lgCollab').innerText = "跨部門協作";
+
     const deptInp = document.getElementById('dept_name_input');
     if (deptInp && deptInp.value === 'Engineering Dept') {
       deptInp.value = '研發部門';
@@ -865,12 +1653,18 @@ function setLanguage(lang) {
     document.getElementById('nav_02').innerText = "02 Dual-Track Career Ladder";
     document.getElementById('nav_03').innerText = "03 Live Org Chart & Annual Budget";
     document.getElementById('nav_04').innerText = "04 Startup Compensation Strategy";
+    document.getElementById('nav_05').innerText = "05 Global ER Compliance Matrix";
 
     document.getElementById('lbl_top_hc').innerText = "Total Headcount";
     document.getElementById('lbl_top_budget').innerText = "Annual Payroll Budget (USD)";
     document.getElementById('lbl_dept_name').innerText = "Department Name:";
     document.getElementById('lbl_tier_select').innerText = "Market Tier:";
-    document.getElementById('span_hc_structure').innerHTML = "• Staffing Structure: Aligned with 40% Mid (L4) + 25% Junior (L3) + 25% Senior (L5) + 10% Leadership pyramid.";
+    document.getElementById('span_hc_structure').innerHTML = "• Staffing Structure: Aligned with 40% Mid (L4) + 25% Junior (L3) + 25% Senior (L5) + 10% Leadership pyramid[cite: 2].";
+
+    document.getElementById('lgLaw').innerText = "Latest law";
+    document.getElementById('lgCrypto').innerText = "Crypto pain points";
+    document.getElementById('lgCost').innerText = "Cost-optimal play";
+    document.getElementById('lgCollab').innerText = "Cross-functional";
 
     const deptInp = document.getElementById('dept_name_input');
     if (deptInp && deptInp.value === '研發部門') {
@@ -902,6 +1696,7 @@ function setLanguage(lang) {
   renderMatrixTable();
   runBudgetCalc();
   renderStartupTab();
+  if (currentTab === 'tab05') renderERMatrix();
 }
 
 window.onload = () => {
