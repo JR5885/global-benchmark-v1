@@ -65,13 +65,12 @@
   .top-dashboard-card{background:#0d1322; border:1px solid var(--border); border-radius:12px; padding:24px 28px; margin-bottom:24px; box-shadow:0 8px 24px rgba(0,0,0,0.3);}
   .top-dashboard-title{font-size:18px; font-weight:700; color:#ffffff; margin-bottom:20px; letter-spacing:-0.01em;}
   .top-dashboard-kpis{display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;}
-  .top-kpi-box{background:#080d18; border:1px solid rgba(255,255,255,0.05); border-radius:10px; padding:18px 22px;}
+  .top-kpi-box{background:#080d18; border:1px solid rgba(255, 255, 255, 0.05); border-radius:10px; padding:18px 22px;}
   .top-kpi-label{font-size:11.5px; color:var(--text-muted); margin-bottom:6px; letter-spacing:.02em;}
   .top-kpi-val{font-size:34px; font-weight:800; line-height:1.1; letter-spacing:-0.02em;}
-  .top-dashboard-notes{font-size:12.5px; color:#cbd5e1; line-height:1.7; border-top:1px solid rgba(255,255,255,0.06); padding-top:16px;}
+  .top-dashboard-notes{font-size:12.5px; color:#cbd5e1; line-height:1.7; border-top:1px solid rgba(255, 255, 255, 0.06); padding-top:16px;}
   .top-dashboard-notes b{color:#ffffff;}
 
-  /* 03 控制列與矩陣表 */
   .calc-top-bar{display:flex; justify-content:space-between; align-items:center; background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:16px 20px; margin-bottom:20px; gap:20px; flex-wrap:wrap;}
   .dept-ctrl{display:flex; align-items:center; gap:10px;}
   .dept-ctrl input{background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:7px 12px; border-radius:6px; font-size:13.5px; font-weight:600; width:180px;}
@@ -82,7 +81,6 @@
   .matrix-calc-table input.hc-input{width:50px; background:#090d16; border:1px solid var(--border); color:#fff; text-align:center; padding:5px 0; border-radius:5px; font-weight:700;}
   .matrix-calc-table input.hc-input:focus{border-color:var(--cyan); outline:none; background:#131c31;}
 
-  /* 組織樹視覺樣式 */
   .org-chart-wrapper{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto;}
   .org-tree{display:flex; flex-direction:column; align-items:center; gap:24px; min-width:850px;}
   .org-level-row{display:flex; justify-content:center; gap:16px; position:relative; width:100%; flex-wrap:wrap;}
@@ -119,7 +117,56 @@
   .card.l8-track .card-bullets li::before { color: var(--green); }
   .card-bullets li b { color: var(--text-primary); }
 
+  /* ================= 04 初創破局方案專屬樣式 (按截圖像素級設計) ================= */
+  .startup-pillars{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:32px;}
+  .pillar-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px; display:flex; flex-direction:column; justify-content:flex-start; min-height:220px;}
+  .pillar-icon{width:32px; height:32px; border-radius:6px; display:flex; align-items:center; justify-content:center; margin-bottom:14px; font-size:14px;}
+  .pillar-title{font-size:15px; font-weight:700; margin-bottom:10px;}
+  .pillar-desc{font-size:12.5px; color:var(--text-secondary); line-height:1.6;}
+  .pillar-desc b{color:var(--text-primary);}
+  .pillar-desc ul{margin:8px 0 0 16px; padding:0;}
+  .pillar-desc li{margin-bottom:4px;}
+
+  /* 試算 Dashboard 區塊 */
+  .calc-dash-title{font-size:18px; font-weight:700; margin-bottom:4px;}
+  .calc-dash-sub{font-size:12.5px; color:var(--text-muted); margin-bottom:20px;}
+  .startup-calc-grid{display:grid; grid-template-columns:1fr 1.15fr; gap:24px; margin-bottom:28px;}
+  .startup-left-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:20px;}
+  .startup-right-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:24px; display:flex; flex-direction:column; justify-content:space-between;}
+
+  .calc-field-label{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); font-weight:700; margin-bottom:8px;}
+  .startup-select{width:100%; background:#090d16; border:1px solid var(--border); color:#fff; padding:10px 14px; border-radius:8px; font-size:13.5px; font-weight:600; cursor:pointer;}
+  .startup-select:focus{border-color:var(--cyan); outline:none;}
+
+  .tier-btn-group{display:grid; grid-template-columns:repeat(3,1fr); gap:10px;}
+  .tier-pill-btn{background:#090d16; border:1px solid var(--border); color:var(--text-muted); padding:10px; border-radius:8px; font-size:13px; font-weight:700; cursor:pointer; text-align:center; transition:all .2s;}
+  .tier-pill-btn:hover{color:#fff; border-color:rgba(255,255,255,0.2);}
+  .tier-pill-btn.active{background:color-mix(in srgb, var(--purple) 18%, #090d16); border-color:var(--purple); color:#fff; box-shadow:0 0 14px rgba(168,85,247,0.25);}
+
+  .ratio-slider{width:100%; accent-color:var(--purple); cursor:pointer; margin:8px 0;}
+  .ratio-labels{display:flex; justify-content:space-between; font-size:12px; font-weight:700;}
+
+  /* 試算右側大字與雙模態框 */
+  .target-pkg-label{font-size:11px; text-transform:uppercase; letter-spacing:.05em; color:var(--text-muted); font-weight:700;}
+  .target-pkg-val{font-size:42px; font-weight:800; color:var(--cyan); line-height:1.1; margin:4px 0 2px;}
+  .target-pkg-sub{font-size:12px; color:var(--text-muted); margin-bottom:20px;}
+
+  .split-kpi-row{display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;}
+  .split-box{background:#090d16; border:1px solid var(--border); border-radius:10px; padding:14px 18px;}
+  .split-lbl{font-size:10.5px; text-transform:uppercase; color:var(--text-muted); font-weight:700;}
+  .split-val{font-size:24px; font-weight:800; margin-top:2px;}
+
+  .vesting-pills-row{display:flex; gap:10px; flex-wrap:wrap;}
+  .vesting-pill{background:#090d16; border:1px solid var(--border); border-radius:20px; font-size:11.5px; font-weight:600; padding:6px 14px; color:var(--text-secondary);}
+
+  /* 下方 Pitch 話術橫幅 */
+  .pitch-banner{background:#0d1322; border:1px solid var(--border); border-radius:12px; padding:20px 24px; position:relative; border-left:4px solid var(--purple);}
+  .pitch-quote{font-size:18px; font-weight:700; color:#ffffff; margin-bottom:6px; line-height:1.4;}
+  .pitch-author{font-size:12px; color:var(--text-muted);}
+
   @media (max-width: 1080px){
+    .startup-pillars{grid-template-columns:repeat(2,1fr);}
+    .startup-calc-grid{grid-template-columns:1fr;}
     .top-dashboard-kpis{grid-template-columns:1fr;}
     .tier-cards-grid, .layout-grid{grid-template-columns:1fr;}
     .ladder-box{position:static;}
@@ -181,8 +228,6 @@
 
   <!-- ================= 03 LIVE O-CHART 對照 年度預算預測 ================= -->
   <div id="pane_tab03" class="pane">
-    
-    <!-- DASHBOARD 頂部橫幅卡片 -->
     <div class="top-dashboard-card">
       <div class="top-dashboard-title" id="budget_card_title">研發部門 人事成本與預算預測</div>
       <div class="top-dashboard-kpis">
@@ -201,7 +246,6 @@
       </div>
     </div>
 
-    <!-- 上方控制列：部門名稱與市場梯隊 -->
     <div class="calc-top-bar">
       <div class="dept-ctrl">
         <label style="font-weight:700; color:var(--cyan);" id="lbl_dept_name">部門名稱：</label>
@@ -217,7 +261,6 @@
       </div>
     </div>
 
-    <!-- 職階 × 7 大法域矩陣配置表 -->
     <table class="matrix-calc-table">
       <thead>
         <tr>
@@ -237,16 +280,89 @@
       <tbody id="matrixTableBody"></tbody>
     </table>
 
-    <!-- 即時連動組織架構圖 -->
     <div class="org-chart-wrapper">
       <h3 id="org_chart_title" style="font-size:15px; margin-bottom:18px; color:var(--cyan);">研發部門 動態組織架構圖 (Live Org Chart)</h3>
       <div class="org-tree" id="orgTreeContainer"></div>
     </div>
   </div>
 
-  <!-- ================= 04 初創團隊破局方案 ================= -->
+  <!-- ================= 04 初創團隊破局方案 (完全比照截圖設計) ================= -->
   <div id="pane_tab04" class="pane">
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;" id="startupCardsGrid"></div>
+    <!-- 上方 4 大支柱卡片 -->
+    <div class="startup-pillars" id="startupPillarsContainer"></div>
+
+    <!-- 中間 Token / Equity 試算 Dashboard -->
+    <div class="calc-dash-title" id="lbl_token_calc_title">Token / Equity 試算 Dashboard</div>
+    <div class="calc-dash-sub" id="lbl_token_calc_sub">依職能、職級與市場梯隊試算 Cash + Token 組合包，即時檢視月薪與 Vesting 排程。</div>
+
+    <div class="startup-calc-grid">
+      <!-- 左側輸入卡片 -->
+      <div class="startup-left-card">
+        <!-- 6大職能切換 -->
+        <div>
+          <div class="calc-field-label" id="lbl_field_fn">職能 FUNCTION</div>
+          <select id="sim_fn_select" class="startup-select" onchange="onSimFnChange()"></select>
+        </div>
+
+        <!-- 職級下拉 -->
+        <div>
+          <div class="calc-field-label" id="lbl_field_level">職級 LEVEL</div>
+          <select id="sim_role_select" class="startup-select" onchange="runStartupSim()"></select>
+        </div>
+
+        <!-- 梯隊按鈕組 -->
+        <div>
+          <div class="calc-field-label" id="lbl_field_tier">梯隊 TIER</div>
+          <div class="tier-btn-group">
+            <button class="tier-pill-btn" id="tierBtn_T1" onclick="selectSimTier('T1')">T1</button>
+            <button class="tier-pill-btn" id="tierBtn_T2" onclick="selectSimTier('T2')">T2</button>
+            <button class="tier-pill-btn active" id="tierBtn_T3" onclick="selectSimTier('T3')">T3</button>
+          </div>
+        </div>
+
+        <!-- Cash 比例滑桿 -->
+        <div>
+          <div class="calc-field-label" id="lbl_field_ratio">CASH 比例 CASH RATIO</div>
+          <input type="range" min="10" max="90" step="5" value="40" id="sim_ratio_slider" class="ratio-slider" oninput="runStartupSim()">
+          <div class="ratio-labels">
+            <span id="disp_cash_ratio" style="color:var(--cyan);">40% Cash</span>
+            <span id="disp_token_ratio" style="color:var(--pink);">60% Token</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右側輸出大卡片 -->
+      <div class="startup-right-card">
+        <div>
+          <div class="target-pkg-label" id="lbl_target_pkg_tag">目標年薪包 TARGET TOTAL PACKAGE</div>
+          <div class="target-pkg-val" id="disp_sim_total">$142,500</div>
+          <div class="target-pkg-sub" id="disp_sim_sub">L5 • Senior Engineer × T3 梯隊</div>
+
+          <div class="split-kpi-row">
+            <div class="split-box">
+              <div class="split-lbl" id="lbl_split_cash">月薪 MONTHLY BASE</div>
+              <div class="split-val" id="disp_sim_month_base" style="color:var(--cyan);">$4,750</div>
+            </div>
+            <div class="split-box">
+              <div class="split-lbl" id="lbl_split_token">年度 TOKEN/EQUITY</div>
+              <div class="split-val" id="disp_sim_token_val" style="color:var(--pink);">$85,500</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="vesting-pills-row">
+          <div class="vesting-pill" id="pill_vesting_term">4 年 Vesting</div>
+          <div class="vesting-pill" id="pill_cliff_term">1 年 Cliff</div>
+          <div class="vesting-pill" id="disp_sim_monthly_unlock" style="color:var(--series-1); border-color:rgba(56,189,248,0.25);">Cliff 後月均解鎖 $7,125</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 下方 Pitch 話術橫幅 -->
+    <div class="pitch-banner">
+      <div class="pitch-quote" id="pitch_quote_text">“用未來的高倍數 Upside 與核心決策權，換取現在的即時現金折扣。”</div>
+      <div class="pitch-author" id="pitch_author_text">創辦人 / HRBP 招募 PITCH 話術</div>
+    </div>
   </div>
 
 </div>
@@ -257,6 +373,7 @@ let currentTab = 'tab01';
 let currentRegionCode = 'SG';
 let currentFnCode = 'eng';
 let currentLadderFn = 'eng';
+let currentSimTier = 'T3';
 
 const COMP_REGIONS = [
   { code: 'US', labelZh: '美國', labelEn: 'United States', flag: '🇺🇸', factor: 1.10 },
@@ -277,7 +394,6 @@ const BASE_RATES = {
   L8_M3: 500000
 };
 
-// 預設 15 人配置
 const MATRIX_CONFIG = {
   L7_M2: { key: 'L7_M2', code: 'L7 / M2', titleZh: '部門總監 / 總經理', titleEn: 'Dept Head / Director', US: 0, SG: 1, UAE: 0, EU: 0, TW: 0, MY: 0, IN: 0 },
   L6_M1: { key: 'L6_M1', code: 'L6 / M1', titleZh: '組長 / 主任架構師', titleEn: 'Team Lead / Staff', US: 0, SG: 1, UAE: 0, EU: 0, TW: 1, MY: 0, IN: 0 },
@@ -290,67 +406,67 @@ const COMP_FUNCTIONS = {
   eng: {
     nameZh: "研發工程 (Engineering)", nameEn: "Engineering",
     roles: [
-      { lvl: "L3", titleZh: "Junior Engineer", titleEn: "Junior Engineer", scopeZh: "基礎模組與 UI 元件維護、單元測試、SOP 功能開發", scopeEn: "Base module & UI maintenance, unit testing, standard feature delivery" },
-      { lvl: "L4", titleZh: "Mid-Level Engineer", titleEn: "Mid-Level Engineer", scopeZh: "獨立負責核心業務模組、模組設計與除錯上線", scopeEn: "End-to-end ownership of core modules, architectural design & bug fixing" },
-      { lvl: "L5", titleZh: "Senior Engineer", titleEn: "Senior Engineer", scopeZh: "核心系統高併發架構設計、重大線上故障排查、技術重構", scopeEn: "High-concurrency systems design, major incident mitigation & refactoring" },
-      { lvl: "L6 / M1", titleZh: "Staff Eng / Team Lead", titleEn: "Staff Eng / Team Lead", scopeZh: "技術軌：全域架構決策 (RFC) ｜ 管理軌：帶領 3–6 人工程小組", scopeEn: "Tech: Global RFC decisions | Mgmt: Lead 3-6 engineers agile delivery" },
-      { lvl: "L7 / M2", titleZh: "Principal / Dept Head", titleEn: "Principal / Dept Head", scopeZh: "技術軌：跨部門重大技術決策 ｜ 管理軌：統籌主要研發部門", scopeEn: "Tech: Cross-org technical strategy | Mgmt: Lead major engineering pillar" },
-      { lvl: "L8 / M3", titleZh: "VP of Eng / CTO", titleEn: "VP of Eng / CTO", scopeZh: "全面掌管跨國研發與技術基建、技術與管理雙軌匯流統帥", scopeEn: "Unified leadership over global technology organization & infrastructure" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Junior Engineer", titleEn: "Junior Engineer", scopeZh: "基礎模組與 UI 元件維護、單元測試、SOP 功能開發", scopeEn: "Base module & UI maintenance, unit testing, standard feature delivery" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Mid-Level Engineer", titleEn: "Mid-Level Engineer", scopeZh: "獨立負責核心業務模組、模組設計與除錯上線", scopeEn: "End-to-end ownership of core modules, architectural design & bug fixing" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior Engineer", titleEn: "Senior Engineer", scopeZh: "核心系統高併發架構設計、重大線上故障排查、技術重構", scopeEn: "High-concurrency systems design, major incident mitigation & refactoring" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Staff Eng / Team Lead", titleEn: "Staff Eng / Team Lead", scopeZh: "技術軌：全域架構決策 (RFC) ｜ 管理軌：帶領 3–6 人工程小組", scopeEn: "Tech: Global RFC decisions | Mgmt: Lead 3-6 engineers agile delivery" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Principal / Dept Head", titleEn: "Principal / Dept Head", scopeZh: "技術軌：跨部門重大技術決策 ｜ 管理軌：統籌主要研發部門", scopeEn: "Tech: Cross-org technical strategy | Mgmt: Lead major engineering pillar" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "VP of Eng / CTO", titleEn: "VP of Eng / CTO", scopeZh: "全面掌管跨國研發與技術基建、技術與管理雙軌匯流統帥", scopeEn: "Unified leadership over global technology organization & infrastructure" }
     ]
   },
   prod: {
     nameZh: "產品管理 (Product)", nameEn: "Product Management",
     roles: [
-      { lvl: "L3", titleZh: "Associate Product Manager", titleEn: "Associate PM", scopeZh: "功能需求細化、PRD 編寫、競品日常追蹤與敏捷驗收", scopeEn: "Feature detailing, PRD drafting, competitor tracking & sprint acceptance" },
-      { lvl: "L4", titleZh: "Product Manager (PM)", titleEn: "Product Manager", scopeZh: "獨立閉環單一產品線、用戶旅程設計、指標轉化率把控", scopeEn: "End-to-end ownership of product line, user journeys & conversion metrics" },
-      { lvl: "L5", titleZh: "Senior Product Manager", titleEn: "Senior PM", scopeZh: "主導複雜交易/支付業務架構、跨端流程標準化、ROI 達成", scopeEn: "Complex payment/trading systems, multi-platform UX standardization & ROI" },
-      { lvl: "L6 / M1", titleZh: "Principal PM / Product Lead", titleEn: "Principal PM / Product Lead", scopeZh: "專家軌：產品頂層協議設計 ｜ 管理軌：帶領 3–6 人產品小組", scopeEn: "IC: Top-level protocol design | Mgmt: Lead 3-6 product managers" },
-      { lvl: "L7 / M2", titleZh: "Head of Product", titleEn: "Head of Product", scopeZh: "掌管核心業務線產品矩陣、跨國本地化產品體驗與戰略排期", scopeEn: "Lead full product portfolio, internationalization & roadmap strategy" },
-      { lvl: "L8 / M3", titleZh: "Chief Product Officer (CPO)", titleEn: "Chief Product Officer", scopeZh: "全面負責公司全球產品戰略藍圖、新商業模式破局", scopeEn: "Overall product vision, global expansion strategy & business innovations" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Associate Product Manager", titleEn: "Associate PM", scopeZh: "功能需求細化、PRD 編寫、競品日常追蹤與敏捷驗收", scopeEn: "Feature detailing, PRD drafting, competitor tracking & sprint acceptance" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Product Manager (PM)", titleEn: "Product Manager", scopeZh: "獨立閉環單一產品線、用戶旅程設計、指標轉化率把控", scopeEn: "End-to-end ownership of product line, user journeys & conversion metrics" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior Product Manager", titleEn: "Senior PM", scopeZh: "主導複雜交易/支付業務架構、跨端流程標準化、ROI 達成", scopeEn: "Complex payment/trading systems, multi-platform UX standardization & ROI" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Principal PM / Product Lead", titleEn: "Principal PM / Product Lead", scopeZh: "專家軌：產品頂層協議設計 ｜ 管理軌：帶領 3–6 人產品小組", scopeEn: "IC: Top-level protocol design | Mgmt: Lead 3-6 product managers" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Head of Product", titleEn: "Head of Product", scopeZh: "掌管核心業務線產品矩陣、跨國本地化產品體驗與戰略排期", scopeEn: "Lead full product portfolio, internationalization & roadmap strategy" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "Chief Product Officer (CPO)", titleEn: "Chief Product Officer", scopeZh: "全面負責公司全球產品戰略藍圖、新商業模式破局", scopeEn: "Overall product vision, global expansion strategy & business innovations" }
     ]
   },
   ops: {
     nameZh: "營運管理 (Operations)", nameEn: "Operations",
     roles: [
-      { lvl: "L3", titleZh: "Junior Operations Specialist", titleEn: "Junior Ops Specialist", scopeZh: "SOP 流程執行、日常工單對帳、用戶反饋流轉", scopeEn: "SOP task execution, ticket reconciliation & client issue dispatch" },
-      { lvl: "L4", titleZh: "Operations Specialist", titleEn: "Operations Specialist", scopeZh: "獨立負責端到端業務流轉、通道維護與日常突發異常排除", scopeEn: "End-to-end workflow management, channel maintenance & incident handling" },
-      { lvl: "L5", titleZh: "Senior Operations Specialist", titleEn: "Senior Ops Specialist", scopeZh: "主導自動化降本流程、跨國複雜清算規則制定、重大客訴閉環", scopeEn: "Workflow automation, cross-border settlement logic & critical escalation" },
-      { lvl: "L6 / M1", titleZh: "Staff Specialist / Ops Lead", titleEn: "Staff Specialist / Ops Lead", scopeZh: "專家軌：跨域營運架構治理 ｜ 管理軌：帶領 3–6 人運營小隊", scopeEn: "IC: Cross-domain ops architecture | Mgmt: Lead 3-6 ops specialists" },
-      { lvl: "L7 / M2", titleZh: "Operations Director", titleEn: "Operations Director", scopeZh: "掌管大區運營中心、單位營運成本（Unit Cost）控制", scopeEn: "Direct regional operations centers, unit cost reduction & SLA defense" },
-      { lvl: "L8 / M3", titleZh: "VP of Operations / COO", titleEn: "VP of Operations / COO", scopeZh: "統籌全球跨國營運交付體系、跨部門經營損益閉環責任", scopeEn: "Global operating model governance, compliance defense & P&L ownership" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Junior Operations Specialist", titleEn: "Junior Ops Specialist", scopeZh: "SOP 流程執行、日常工單對帳、用戶反饋流轉", scopeEn: "SOP task execution, ticket reconciliation & client issue dispatch" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Operations Specialist", titleEn: "Operations Specialist", scopeZh: "獨立負責端到端業務流轉、通道維護與日常突發異常排除", scopeEn: "End-to-end workflow management, channel maintenance & incident handling" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior Operations Specialist", titleEn: "Senior Ops Specialist", scopeZh: "主導自動化降本流程、跨國複雜清算規則制定、重大客訴閉環", scopeEn: "Workflow automation, cross-border settlement logic & critical escalation" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Staff Specialist / Ops Lead", titleEn: "Staff Specialist / Ops Lead", scopeZh: "專家軌：跨域營運架構治理 ｜ 管理軌：帶領 3–6 人運營小隊", scopeEn: "IC: Cross-domain ops architecture | Mgmt: Lead 3-6 ops specialists" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Operations Director", titleEn: "Operations Director", scopeZh: "掌管大區運營中心、單位營運成本（Unit Cost）控制", scopeEn: "Direct regional operations centers, unit cost reduction & SLA defense" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "VP of Operations / COO", titleEn: "VP of Operations / COO", scopeZh: "統籌全球跨國營運交付體系、跨部門經營損益閉環責任", scopeEn: "Global operating model governance, compliance defense & P&L ownership" }
     ]
   },
   bd: {
     nameZh: "商務與銷售 (BD & Sales)", nameEn: "BD & Sales",
     roles: [
-      { lvl: "L3", titleZh: "Junior BD Associate", titleEn: "Junior BD Associate", scopeZh: "陌生線索挖掘、潛在客戶觸達、商務會議排程與 CRM 紀錄", scopeEn: "Cold outreach, lead qualification, CRM logging & pipeline prep" },
-      { lvl: "L4", titleZh: "Account Executive (AE)", titleEn: "Account Executive", scopeZh: "獨立負責商機端到端轉化、商業談判、合約簽署與上線", scopeEn: "Full deal lifecycle, negotiation, contract execution & client onboarding" },
-      { lvl: "L5", titleZh: "Senior AE / Strategic BD", titleEn: "Senior AE / Strategic BD", scopeZh: "區域 Top 機構客戶攻堅、高難度商業模式創新與定制方案", scopeEn: "Top-tier institutional accounts, high-stakes custom pricing & structuring" },
-      { lvl: "L6 / M1", titleZh: "Principal Deal Maker / Sales Lead", titleEn: "Principal Deal Maker / Lead", scopeZh: "專家軌：跨國戰略大單成交 ｜ 管理軌：帶領小組扛季度 Quota", scopeEn: "IC: Multi-million cross-border deals | Mgmt: Quota ownership & team lead" },
-      { lvl: "L7 / M2", titleZh: "Regional Sales Head", titleEn: "Regional Sales Head", scopeZh: "負責單一戰區營收盈虧（P&L）、在地化團隊梯隊建設", scopeEn: "Regional P&L accountability, territory expansion & sales leadership" },
-      { lvl: "L8 / M3", titleZh: "Chief Revenue Officer / VP Sales", titleEn: "Chief Revenue Officer", scopeZh: "全面掌控全球商業版圖、獲客成本（CAC）與全球總營收", scopeEn: "Global go-to-market execution, client acquisition cost optimization & revenue" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Junior BD Associate", titleEn: "Junior BD Associate", scopeZh: "陌生線索挖掘、潛在客戶觸達、商務會議排程與 CRM 紀錄", scopeEn: "Cold outreach, lead qualification, CRM logging & pipeline prep" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Account Executive (AE)", titleEn: "Account Executive", scopeZh: "獨立負責商機端到端轉化、商業談判、合約簽署與上線", scopeEn: "Full deal lifecycle, negotiation, contract execution & client onboarding" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior AE / Strategic BD", titleEn: "Senior AE / Strategic BD", scopeZh: "區域 Top 機構客戶攻堅、高難度商業模式創新與定制方案", scopeEn: "Top-tier institutional accounts, high-stakes custom pricing & structuring" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Principal Deal Maker / Sales Lead", titleEn: "Principal Deal Maker / Lead", scopeZh: "專家軌：跨國戰略大單成交 ｜ 管理軌：帶領小組扛季度 Quota", scopeEn: "IC: Multi-million cross-border deals | Mgmt: Quota ownership & team lead" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Regional Sales Head", titleEn: "Regional Sales Head", scopeZh: "負責單一戰區營收盈虧（P&L）、在地化團隊梯隊建設", scopeEn: "Regional P&L accountability, territory expansion & sales leadership" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "Chief Revenue Officer / VP Sales", titleEn: "Chief Revenue Officer", scopeZh: "全面掌控全球商業版圖、獲客成本（CAC）與全球總營收", scopeEn: "Global go-to-market execution, client acquisition cost optimization & revenue" }
     ]
   },
   legal: {
     nameZh: "法務與合規 (Legal & Compliance)", nameEn: "Legal & Compliance",
     roles: [
-      { lvl: "L3", titleZh: "Legal / Compliance Specialist", titleEn: "Legal/Compliance Specialist", scopeZh: "標準合約審閱、日常 AML 警報初篩、公文查詢函初審", scopeEn: "NDA/vendor contract review, initial AML triage & regulatory intake" },
-      { lvl: "L4", titleZh: "Legal Counsel / AML Officer", titleEn: "Legal Counsel / AML Officer", scopeZh: "獨立承接跨國商務協議談判、牌照申請對接、爭議處置協商", scopeEn: "Cross-border negotiation, regulatory licensing filings & dispute settlement" },
-      { lvl: "L5", titleZh: "Senior Legal Counsel", titleEn: "Senior Legal Counsel", scopeZh: "跨國子公司設立架構、海外併購協議、各國監管審計現場應對", scopeEn: "Entity structuring, M&A due diligence, onsite regulatory audits & exams" },
-      { lvl: "L6 / M1", titleZh: "Staff Regulatory Architect / Lead", titleEn: "Staff Counsel / Lead", scopeZh: "專家軌：全球牌照藍圖設計 ｜ 管理軌：管理 3–6 人合規審查組", scopeEn: "IC: Global license strategy | Mgmt: Lead 3-6 AML/legal team members" },
-      { lvl: "L7 / M2", titleZh: "Legal Director", titleEn: "Legal Director", scopeZh: "掌管跨國重大涉訴防禦、行業立法倡導、調配外聘律師預算", scopeEn: "Complex litigation defense, public policy advocacy & outside counsel mgmt" },
-      { lvl: "L8 / M3", titleZh: "General Counsel / CCO", titleEn: "General Counsel / CCO", scopeZh: "董事會最高法規顧問、全球法律風險與執法免責最高防線", scopeEn: "Board advisor, enterprise legal risk mitigation & regulatory defense" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Legal / Compliance Specialist", titleEn: "Legal/Compliance Specialist", scopeZh: "標準合約審閱、日常 AML 警報初篩、公文查詢函初審", scopeEn: "NDA/vendor contract review, initial AML triage & regulatory intake" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Legal Counsel / AML Officer", titleEn: "Legal Counsel / AML Officer", scopeZh: "獨立承接跨國商務協議談判、牌照申請對接、爭議處置協商", scopeEn: "Cross-border negotiation, regulatory licensing filings & dispute settlement" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior Legal Counsel", titleEn: "Senior Legal Counsel", scopeZh: "跨國子公司設立架構、海外併購協議、各國監管審計現場應對", scopeEn: "Entity structuring, M&A due diligence, onsite regulatory audits & exams" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Staff Regulatory Architect / Lead", titleEn: "Staff Counsel / Lead", scopeZh: "專家軌：全球牌照藍圖設計 ｜ 管理軌：管理 3–6 人合規審查組", scopeEn: "IC: Global license strategy | Mgmt: Lead 3-6 AML/legal team members" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Legal Director", titleEn: "Legal Director", scopeZh: "掌管跨國重大涉訴防禦、行業立法倡導、調配外聘律師預算", scopeEn: "Complex litigation defense, public policy advocacy & outside counsel mgmt" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "General Counsel / CCO", titleEn: "General Counsel / CCO", scopeZh: "董事會最高法規顧問、全球法律風險與執法免責最高防線", scopeEn: "Board advisor, enterprise legal risk mitigation & regulatory defense" }
     ]
   },
   fin_hr: {
     nameZh: "財務與人資 (Finance & HR)", nameEn: "Finance & HR",
     roles: [
-      { lvl: "L3", titleZh: "Junior Analyst / HR Specialist", titleEn: "Junior Analyst / Specialist", scopeZh: "日常會計憑證核算、報銷初審、入轉調離手續與考勤審查", scopeEn: "Voucher booking, expense audit, onboarding ops & attendance tracking" },
-      { lvl: "L4", titleZh: "Senior Accountant / HRBP", titleEn: "Senior Accountant / HRBP", scopeZh: "獨立主導月結關帳、預算追蹤 ｜ 事業群招聘閉環與常規員工關係", scopeEn: "Month-end close, FP&A variance | Business unit recruiting & employee relations" },
-      { lvl: "L5", titleZh: "Senior Finance / HR Specialist", titleEn: "Senior Finance / HR Specialist", scopeZh: "跨國稅收籌劃與多主體合併 ｜ 9-Box 人才盤點與爭議離職談判", scopeEn: "International tax planning, consolidation | 9-Box calibration & separation" },
-      { lvl: "L6 / M1", titleZh: "Principal Architect / People Lead", titleEn: "Principal Architect / Lead", scopeZh: "專家軌：全球資金池或薪酬架構 ｜ 管理軌：領導會計/HR小組", scopeEn: "IC: Global treasury/comp model | Mgmt: Lead accounting/people pods" },
-      { lvl: "L7 / M2", titleZh: "Financial Controller / HR Director", titleEn: "Controller / HR Director", scopeZh: "四大審計無保留通過 ｜ 大區人力成本上限控制與文化治理", scopeEn: "Big 4 clean audit sign-off | Headcount budget governance & culture" },
-      { lvl: "L8 / M3", titleZh: "CFO / CHRO", titleEn: "CFO / CHRO", scopeZh: "全面掌控全球資本水庫、海外上市進程 ｜ 全球高管繼任佈局", scopeEn: "Capital treasury & overseas IPO readiness | Global executive succession" }
+      { lvlKey: "L3", lvl: "L3", titleZh: "Junior Analyst / HR Specialist", titleEn: "Junior Analyst / Specialist", scopeZh: "日常會計憑證核算、報銷初審、入轉調離手續與考勤審查", scopeEn: "Voucher booking, expense audit, onboarding ops & attendance tracking" },
+      { lvlKey: "L4", lvl: "L4", titleZh: "Senior Accountant / HRBP", titleEn: "Senior Accountant / HRBP", scopeZh: "獨立主導月結關帳、預算追蹤 ｜ 事業群招聘閉環與常規員工關係", scopeEn: "Month-end close, FP&A variance | Business unit recruiting & employee relations" },
+      { lvlKey: "L5", lvl: "L5", titleZh: "Senior Finance / HR Specialist", titleEn: "Senior Finance / HR Specialist", scopeZh: "跨國稅收籌劃與多主體合併 ｜ 9-Box 人才盤點與爭議離職談判", scopeEn: "International tax planning, consolidation | 9-Box calibration & separation" },
+      { lvlKey: "L6_M1", lvl: "L6 / M1", titleZh: "Principal Architect / People Lead", titleEn: "Principal Architect / Lead", scopeZh: "專家軌：全球資金池或薪酬架構 ｜ 管理軌：領導會計/HR小組", scopeEn: "IC: Global treasury/comp model | Mgmt: Lead accounting/people pods" },
+      { lvlKey: "L7_M2", lvl: "L7 / M2", titleZh: "Financial Controller / HR Director", titleEn: "Controller / HR Director", scopeZh: "四大審計無保留通過 ｜ 大區人力成本上限控制與文化治理", scopeEn: "Big 4 clean audit sign-off | Headcount budget governance & culture" },
+      { lvlKey: "L8_M3", lvl: "L8 / M3", titleZh: "CFO / CHRO", titleEn: "CFO / CHRO", scopeZh: "全面掌控全球資本水庫、海外上市進程 ｜ 全球高管繼任佈局", scopeEn: "Capital treasury & overseas IPO readiness | Global executive succession" }
     ]
   }
 };
@@ -368,9 +484,10 @@ function switchTab(tabId) {
   if(tabId === 'tab01') renderCompTab();
   else if(tabId === 'tab02') renderLadderTab();
   else if(tabId === 'tab03') { renderMatrixTable(); runBudgetCalc(); }
-  else if(tabId === 'tab04') renderStartupTab();
+  else if(tabId === 'tab04') { initStartupTab(); }
 }
 
+// 01 薪酬對標渲染
 function renderCompTab() {
   const regBar = document.getElementById('regBar');
   regBar.innerHTML = COMP_REGIONS.map(r => `
@@ -389,57 +506,15 @@ function renderCompTab() {
   const tierGrid = document.getElementById('tierCardsGrid');
   if (currentLang === 'zh') {
     tierGrid.innerHTML = `
-      <div class="tier-card t1">
-        <div class="tier-badge">×1.40</div>
-        <div class="tier-title">T1 頂尖梯隊 (Top-Tier)</div>
-        <div class="tier-desc">大型交易所 / 已上市或近上市級巨頭</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Binance</span><span class="tag-pill">Coinbase</span><span class="tag-pill">OKX</span><span class="tag-pill">Circle</span><span class="tag-pill">Tether</span>
-        </div>
-      </div>
-      <div class="tier-card t2">
-        <div class="tier-badge">×1.00</div>
-        <div class="tier-title">T2 全球基準 (Global Benchmark)</div>
-        <div class="tier-desc">已規模化營運的中大型成熟跨國企業</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Kraken</span><span class="tag-pill">Bybit</span><span class="tag-pill">Crypto.com</span><span class="tag-pill">Gemini</span><span class="tag-pill">Polygon Labs</span>
-        </div>
-      </div>
-      <div class="tier-card t3">
-        <div class="tier-badge">×0.75</div>
-        <div class="tier-title">T3 初創梯隊 (Startup)</div>
-        <div class="tier-desc">種子輪至 A 輪階段新創 / DAO / 早期協議</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO 治理</span><span class="tag-pill">早期協議團隊</span><span class="tag-pill">Token-heavy</span>
-        </div>
-      </div>
+      <div class="tier-card t1"><div class="tier-badge">×1.40</div><div class="tier-title">T1 頂尖梯隊 (Top-Tier)</div><div class="tier-desc">大型交易所 / 已上市或近上市級巨頭</div><div class="tag-pills"><span class="tag-pill">Binance</span><span class="tag-pill">Coinbase</span><span class="tag-pill">OKX</span><span class="tag-pill">Circle</span><span class="tag-pill">Tether</span></div></div>
+      <div class="tier-card t2"><div class="tier-badge">×1.00</div><div class="tier-title">T2 全球基準 (Global Benchmark)</div><div class="tier-desc">已規模化營運的中大型成熟跨國企業</div><div class="tag-pills"><span class="tag-pill">Kraken</span><span class="tag-pill">Bybit</span><span class="tag-pill">Crypto.com</span><span class="tag-pill">Gemini</span><span class="tag-pill">Polygon Labs</span></div></div>
+      <div class="tier-card t3"><div class="tier-badge">×0.75</div><div class="tier-title">T3 初創梯隊 (Startup)</div><div class="tier-desc">種子輪至 A 輪階段新創 / DAO / 早期協議</div><div class="tag-pills"><span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO 治理</span><span class="tag-pill">早期協議團隊</span><span class="tag-pill">Token-heavy</span></div></div>
     `;
   } else {
     tierGrid.innerHTML = `
-      <div class="tier-card t1">
-        <div class="tier-badge">×1.40</div>
-        <div class="tier-title">T1 Industry Leaders (Top-Tier)</div>
-        <div class="tier-desc">Mega exchanges / Public & late-stage tech titans</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Binance</span><span class="tag-pill">Coinbase</span><span class="tag-pill">OKX</span><span class="tag-pill">Circle</span><span class="tag-pill">Tether</span>
-        </div>
-      </div>
-      <div class="tier-card t2">
-        <div class="tier-badge">×1.00</div>
-        <div class="tier-title">T2 Global Benchmark</div>
-        <div class="tier-desc">Scaled mid-to-large mature global enterprises</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Kraken</span><span class="tag-pill">Bybit</span><span class="tag-pill">Crypto.com</span><span class="tag-pill">Gemini</span><span class="tag-pill">Polygon Labs</span>
-        </div>
-      </div>
-      <div class="tier-card t3">
-        <div class="tier-badge">×0.75</div>
-        <div class="tier-title">T3 Early Startups</div>
-        <div class="tier-desc">Seed to Series A stage / DAOs / Early protocols</div>
-        <div class="tag-pills">
-          <span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO Governance</span><span class="tag-pill">Early Protocols</span><span class="tag-pill">Token-heavy</span>
-        </div>
-      </div>
+      <div class="tier-card t1"><div class="tier-badge">×1.40</div><div class="tier-title">T1 Industry Leaders (Top-Tier)</div><div class="tier-desc">Mega exchanges / Public & late-stage tech titans</div><div class="tag-pills"><span class="tag-pill">Binance</span><span class="tag-pill">Coinbase</span><span class="tag-pill">OKX</span><span class="tag-pill">Circle</span><span class="tag-pill">Tether</span></div></div>
+      <div class="tier-card t2"><div class="tier-badge">×1.00</div><div class="tier-title">T2 Global Benchmark</div><div class="tier-desc">Scaled mid-to-large mature global enterprises</div><div class="tag-pills"><span class="tag-pill">Kraken</span><span class="tag-pill">Bybit</span><span class="tag-pill">Crypto.com</span><span class="tag-pill">Gemini</span><span class="tag-pill">Polygon Labs</span></div></div>
+      <div class="tier-card t3"><div class="tier-badge">×0.75</div><div class="tier-title">T3 Early Startups</div><div class="tier-desc">Seed to Series A stage / DAOs / Early protocols</div><div class="tag-pills"><span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO Governance</span><span class="tag-pill">Early Protocols</span><span class="tag-pill">Token-heavy</span></div></div>
     `;
   }
 
@@ -633,7 +708,7 @@ function updateMatrixVal(levelKey, regCode, val) {
   runBudgetCalc();
 }
 
-// 03 跨國多地區精確動態運算 (包含該職階動態 % 與連動頂部 Dashboard)
+// 03 預算與組織圖動態運算
 function runBudgetCalc() {
   const deptInput = document.getElementById('dept_name_input');
   let deptName = deptInput ? deptInput.value.trim() : '';
@@ -645,9 +720,8 @@ function runBudgetCalc() {
   let totalBudget = 0;
 
   const levels = ['L7_M2', 'L6_M1', 'L5', 'L4', 'L3'];
-
-  // 先計算總人數與總成本
   const rowStats = {};
+
   levels.forEach(k => {
     const item = MATRIX_CONFIG[k];
     const base = BASE_RATES[k];
@@ -665,7 +739,6 @@ function runBudgetCalc() {
     totalBudget += rowCost;
   });
 
-  // 更新各職階小計與動態 %
   levels.forEach(k => {
     const stat = rowStats[k];
     const pct = totalHc > 0 ? ((stat.hc / totalHc) * 100).toFixed(1) : "0.0";
@@ -681,13 +754,11 @@ function runBudgetCalc() {
     }
   });
 
-  // 取得梯隊文字
   let tierText = "T2";
   if (tierSelect && tierSelect.selectedIndex >= 0) {
     tierText = tierSelect.options[tierSelect.selectedIndex].text.split(' ')[0];
   }
 
-  // 1. 更新頂部 DASHBOARD 數值
   const dispHc = document.getElementById('disp_total_hc');
   const dispBudget = document.getElementById('disp_total_budget');
   const titleBudget = document.getElementById('budget_card_title');
@@ -704,7 +775,6 @@ function runBudgetCalc() {
     ? `• 資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。`
     : `• Runway Benchmark: Blended based on <b>${tierText}</b> with regional multipliers & statutory reserve (~12%).`;
 
-  // 2. 更新組織圖標題並繪製
   const titleOrg = document.getElementById('org_chart_title');
   if(titleOrg) titleOrg.innerText = currentLang === 'zh' 
     ? `${deptName} 動態組織架構圖 (Live Org Chart)` 
@@ -713,7 +783,6 @@ function runBudgetCalc() {
   renderLiveOrgChart(deptName);
 }
 
-// 繪製連動組織樹
 function renderLiveOrgChart(deptName) {
   const container = document.getElementById('orgTreeContainer');
   if(!container) return;
@@ -762,71 +831,184 @@ function renderLiveOrgChart(deptName) {
   });
 }
 
-// 04 初創方案渲染
-function renderStartupTab() {
-  const container = document.getElementById('startupCardsGrid');
-  if(!container) return;
+// ================= 04 初創團隊破局方案 (完全比照截圖設計) =================
+function initStartupTab() {
+  renderStartupPillars();
+  initSimSelectors();
+  runStartupSim();
+}
+
+function renderStartupPillars() {
+  const container = document.getElementById('startupPillarsContainer');
+  if (!container) return;
+
   if (currentLang === 'zh') {
     container.innerHTML = `
-      <div class="tier-card t3">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--cyan);">01. 現金 + Token 混合激勵</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          針對早期種子輪至 A 輪資金受限團隊，採行 <b>70% 現金 base + 30% 代幣權益 (Token Grant)</b> 模式，降低現金流跑道消耗，同時綁定核心成員 4 年歸屬（1 年 Cliff）。
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">4-Year Vesting</span><span class="tag-pill">1-Year Cliff</span><span class="tag-pill">FDV 折扣定錨</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(6,182,212,0.15); color:var(--cyan);">◆</div>
+        <div class="pillar-title">Token / Equity 代幣期權組合包</div>
+        <div class="pillar-desc">
+          調整現金與期權比例至 <b>30%–50% Cash + 50%–70% Token/Equity</b>
+          <ul>
+            <li>設立 4 年 Vesting（1 年 Cliff）</li>
+            <li>搭配里程碑解鎖機制，將解鎖與產品進度綁定</li>
+          </ul>
         </div>
       </div>
-      <div class="tier-card t2">
-        <h3 style="font-size:16px; margin-bottom:8px; color:#34d399;">02. 地區套利 (Geo-Arbitrage)</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          關鍵架構師（L6/L7）與商務決策者配置於 Singapore (0.95) 或 UAE (0.90) 對接資本與牌照；工程實現與運營骨幹配置於 Taiwan (0.65) 或 Malaysia (0.45)，人效提升 40% 以上。
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">SG/UAE Headquarter</span><span class="tag-pill">TW/MY Delivery Hub</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(168,85,247,0.15); color:var(--purple);">◇</div>
+        <div class="pillar-title">靈活僱傭與顧問模式</div>
+        <div class="pillar-desc">
+          高階 L7/M2 人才：<b>$3,000–$5,000/月 + Advisor Token</b>
+          <ul>
+            <li>採兼職顧問聘用，降低固定人事成本</li>
+            <li>核心難題以 Milestone-based Contract 包案處理</li>
+          </ul>
         </div>
       </div>
-      <div class="tier-card t1">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--warning);">03. 核心戰力反向鎖定</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          對 Star 頂尖人才實施動態雙軌提成：管理軌綁定團隊營收利潤（P&L），專家軌綁定底層通訊協議零宕機獎金與代幣解鎖里程碑，避免優秀工程人才被巨頭溢價挖角。
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">Milestone Unlocks</span><span class="tag-pill">P&L Profit-Sharing</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(16,185,129,0.15); color:var(--green);">◆</div>
+        <div class="pillar-title">地理套利 Geo-Arbitrage</div>
+        <div class="pillar-desc">
+          核心架構師留在 <b>SG / US</b>
+          <ul>
+            <li>執行層遷移至 TW (0.65x)、MY (0.45x) 或 IN (0.40x) 離岸研發中心</li>
+            <li>同等預算下可擴充 1.5–2.5 倍人力</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(251,191,36,0.15); color:var(--warning);">◉</div>
+        <div class="pillar-title">非財務槓桿</div>
+        <div class="pillar-desc">
+          用職權與自由度換取薪酬折扣：
+          <ul>
+            <li>職級躍升（Title Inflation）</li>
+            <li>100% 全遠端自由度</li>
+            <li>完全的技術主導權</li>
+          </ul>
         </div>
       </div>
     `;
   } else {
     container.innerHTML = `
-      <div class="tier-card t3">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--cyan);">01. Cash + Token Hybrid Packages</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          For runway-constrained Seed to Series A stages: implement <b>70% Cash Base + 30% Token Grant</b> structure to preserve cash while locking core talent under 4-year vesting (1-year cliff).
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">4-Year Vesting</span><span class="tag-pill">1-Year Cliff</span><span class="tag-pill">FDV Discount Baseline</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(6,182,212,0.15); color:var(--cyan);">◆</div>
+        <div class="pillar-title">Token / Equity Hybrid Package</div>
+        <div class="pillar-desc">
+          Adjust ratio to <b>30%–50% Cash + 50%–70% Token/Equity</b>
+          <ul>
+            <li>Standard 4-year vesting schedule with 1-year cliff</li>
+            <li>Milestone-based vesting tied to mainnet & product KPIs</li>
+          </ul>
         </div>
       </div>
-      <div class="tier-card t2">
-        <h3 style="font-size:16px; margin-bottom:8px; color:#34d399;">02. Strategic Geo-Arbitrage</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          Position leadership (L6/L7) in Singapore (0.95) or UAE (0.90) for investor & licensing interface; base core development & ops in Taiwan (0.65) or Malaysia (0.45) for +40% capital efficiency.
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">SG/UAE Headquarters</span><span class="tag-pill">TW/MY Delivery Hubs</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(168,85,247,0.15); color:var(--purple);">◇</div>
+        <div class="pillar-title">Fractional & Advisor Model</div>
+        <div class="pillar-desc">
+          Top-tier L7/M2 talent: <b>$3,000–$5,000/mo + Advisor Token</b>
+          <ul>
+            <li>Part-time fractional retainers to slash fixed burn</li>
+            <li>Core architectural bottlenecks solved via Milestone contracts</li>
+          </ul>
         </div>
       </div>
-      <div class="tier-card t1">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--warning);">03. High-Leverage Talent Retention</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          Dual-track retention: Management tied to business line P&L profitability; technical specialists tied to 99.99% uptime bonuses and protocol token milestone releases against poaching.
-        </p>
-        <div class="tag-pills">
-          <span class="tag-pill">Milestone Unlocks</span><span class="tag-pill">P&L Profit-Sharing</span>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(16,185,129,0.15); color:var(--green);">◆</div>
+        <div class="pillar-title">Geo-Arbitrage Optimization</div>
+        <div class="pillar-desc">
+          Anchor core leadership in <b>SG / US</b>
+          <ul>
+            <li>Shift delivery pods to TW (0.65x), MY (0.45x) or IN (0.40x) hubs</li>
+            <li>Expand runway headcount by 1.5x–2.5x under same budget</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-icon" style="background:rgba(251,191,36,0.15); color:var(--warning);">◉</div>
+        <div class="pillar-title">Non-Financial Levers</div>
+        <div class="pillar-desc">
+          Trade autonomy & authority for cash discounts:
+          <ul>
+            <li>Title Inflation & direct ownership</li>
+            <li>100% Remote flexibility</li>
+            <li>Absolute technical & product mandate</li>
+          </ul>
         </div>
       </div>
     `;
   }
+}
+
+function initSimSelectors() {
+  const fnSel = document.getElementById('sim_fn_select');
+  if(!fnSel) return;
+  const prevFn = fnSel.value || 'eng';
+  fnSel.innerHTML = Object.keys(COMP_FUNCTIONS).map(k => `
+    <option value="${k}" ${k===prevFn?'selected':''}>${currentLang==='zh'?COMP_FUNCTIONS[k].nameZh:COMP_FUNCTIONS[k].nameEn}</option>
+  `).join('');
+
+  onSimFnChange();
+}
+
+function onSimFnChange() {
+  const fnKey = document.getElementById('sim_fn_select').value || 'eng';
+  const roleSel = document.getElementById('sim_role_select');
+  const fn = COMP_FUNCTIONS[fnKey] || COMP_FUNCTIONS.eng;
+  const prevRole = roleSel.value || 'L5';
+
+  roleSel.innerHTML = fn.roles.map(r => `
+    <option value="${r.lvlKey}" ${r.lvlKey===prevRole?'selected':''}>
+      ${r.lvl} — ${currentLang==='zh'?r.titleZh:r.titleEn}
+    </option>
+  `).join('');
+
+  runStartupSim();
+}
+
+function selectSimTier(tier) {
+  currentSimTier = tier;
+  ['T1', 'T2', 'T3'].forEach(t => {
+    const btn = document.getElementById('tierBtn_' + t);
+    if(btn) btn.className = `tier-pill-btn ${t===tier?'active':''}`;
+  });
+  runStartupSim();
+}
+
+function runStartupSim() {
+  const fnKey = document.getElementById('sim_fn_select').value || 'eng';
+  const roleKey = document.getElementById('sim_role_select').value || 'L5';
+  const slider = document.getElementById('sim_ratio_slider');
+  const cashPct = parseInt(slider.value) || 40;
+  const tokenPct = 100 - cashPct;
+
+  document.getElementById('disp_cash_ratio').innerText = `${cashPct}% Cash`;
+  document.getElementById('disp_token_ratio').innerText = `${tokenPct}% Token`;
+
+  const tierMultipliers = { T1: 1.40, T2: 1.00, T3: 0.75 };
+  const tierMultiplier = tierMultipliers[currentSimTier] || 0.75;
+  const baseComp = BASE_RATES[roleKey] || 190000;
+
+  // 計算目標年薪包
+  const targetTotal = Math.round(baseComp * tierMultiplier);
+  const annualCash = targetTotal * (cashPct / 100);
+  const monthCash = Math.round(annualCash / 12);
+  const annualToken = Math.round(targetTotal * (tokenPct / 100));
+  const cliffMonthlyUnlock = Math.round(annualToken / 12);
+
+  // 取得角色名
+  const fn = COMP_FUNCTIONS[fnKey] || COMP_FUNCTIONS.eng;
+  const roleObj = fn.roles.find(r => r.lvlKey === roleKey) || fn.roles[2];
+  const roleTitle = currentLang === 'zh' ? roleObj.titleZh : roleObj.titleEn;
+
+  document.getElementById('disp_sim_total').innerText = '$' + targetTotal.toLocaleString();
+  document.getElementById('disp_sim_sub').innerText = `${roleObj.lvl} • ${roleTitle} × ${currentSimTier} ${currentLang==='zh'?'梯隊':'Tier'}`;
+  document.getElementById('disp_sim_month_base').innerText = '$' + monthCash.toLocaleString();
+  document.getElementById('disp_sim_token_val').innerText = '$' + annualToken.toLocaleString();
+  document.getElementById('disp_sim_monthly_unlock').innerText = currentLang === 'zh'
+    ? `Cliff 後月均解鎖 $${cliffMonthlyUnlock.toLocaleString()}`
+    : `Monthly unlock post-cliff $${cliffMonthlyUnlock.toLocaleString()}`;
 }
 
 // 語系切換
@@ -848,6 +1030,21 @@ function setLanguage(lang) {
     document.getElementById('lbl_dept_name').innerText = "部門名稱：";
     document.getElementById('lbl_tier_select').innerText = "企業市場梯隊：";
     document.getElementById('span_hc_structure').innerHTML = "• 職級比例結構：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈。";
+
+    // 04 區塊雙語
+    document.getElementById('lbl_token_calc_title').innerText = "Token / Equity 試算 Dashboard";
+    document.getElementById('lbl_token_calc_sub').innerText = "依職能、職級與市場梯隊試算 Cash + Token 組合包，即時檢視月薪與 Vesting 排程。";
+    document.getElementById('lbl_field_fn').innerText = "職能 FUNCTION";
+    document.getElementById('lbl_field_level').innerText = "職級 LEVEL";
+    document.getElementById('lbl_field_tier').innerText = "梯隊 TIER";
+    document.getElementById('lbl_field_ratio').innerText = "CASH 比例 CASH RATIO";
+    document.getElementById('lbl_target_pkg_tag').innerText = "目標年薪包 TARGET TOTAL PACKAGE";
+    document.getElementById('lbl_split_cash').innerText = "月薪 MONTHLY BASE";
+    document.getElementById('lbl_split_token').innerText = "年度 TOKEN/EQUITY";
+    document.getElementById('pill_vesting_term').innerText = "4 年 Vesting";
+    document.getElementById('pill_cliff_term').innerText = "1 年 Cliff";
+    document.getElementById('pitch_quote_text').innerText = "“用未來的高倍數 Upside 與核心決策權，換取現在的即時現金折扣。”";
+    document.getElementById('pitch_author_text').innerText = "創辦人 / HRBP 招募 PITCH 話術";
     
     const deptInp = document.getElementById('dept_name_input');
     if (deptInp && deptInp.value === 'Engineering Dept') {
@@ -865,26 +1062,40 @@ function setLanguage(lang) {
     document.getElementById('lbl_tier_select').innerText = "Market Tier:";
     document.getElementById('span_hc_structure').innerHTML = "• Staffing Structure: Aligned with 40% Mid (L4) + 25% Junior (L3) + 25% Senior (L5) + 10% Leadership pyramid.";
 
+    // 04 區塊雙語
+    document.getElementById('lbl_token_calc_title').innerText = "Token / Equity Compensation Dashboard";
+    document.getElementById('lbl_token_calc_sub').innerText = "Simulate Cash + Token hybrid packages by function, level & tier; view monthly base & vesting cadence.";
+    document.getElementById('lbl_field_fn').innerText = "FUNCTION";
+    document.getElementById('lbl_field_level').innerText = "LEVEL";
+    document.getElementById('lbl_field_tier').innerText = "TIER";
+    document.getElementById('lbl_field_ratio').innerText = "CASH RATIO";
+    document.getElementById('lbl_target_pkg_tag').innerText = "TARGET TOTAL PACKAGE";
+    document.getElementById('lbl_split_cash').innerText = "MONTHLY BASE";
+    document.getElementById('lbl_split_token').innerText = "ANNUAL TOKEN/EQUITY";
+    document.getElementById('pill_vesting_term').innerText = "4-Year Vesting";
+    document.getElementById('pill_cliff_term').innerText = "1-Year Cliff";
+    document.getElementById('pitch_quote_text').innerText = "“Trading immediate cash discounts for high-multiple future upside and core architectural mandate.”";
+    document.getElementById('pitch_author_text').innerText = "FOUNDER / HRBP TALENT PITCH SCRIPT";
+
     const deptInp = document.getElementById('dept_name_input');
     if (deptInp && deptInp.value === '研發部門') {
       deptInp.value = 'Engineering Dept';
     }
   }
 
-  // 刷新梯隊選單文字
   const tierSel = document.getElementById('calc_tier');
   if (tierSel) {
     const prevTierVal = tierSel.value || "1.00";
     if (currentLang === 'zh') {
       tierSel.innerHTML = `
         <option value="1.40">T1 頂尖梯隊 (Top-Tier) ×1.40</option>
-        <option value="1.00">T2 全球基準 (Global Benchmark) ×1.00</option>
+        <option value="1.00" selected>T2 全球基準 (Global Benchmark) ×1.00</option>
         <option value="0.75">T3 初創梯隊 (Startup) ×0.75</option>
       `;
     } else {
       tierSel.innerHTML = `
         <option value="1.40">T1 Top-Tier Leaders ×1.40</option>
-        <option value="1.00">T2 Global Benchmark ×1.00</option>
+        <option value="1.00" selected>T2 Global Benchmark ×1.00</option>
         <option value="0.75">T3 Early Startups ×0.75</option>
       `;
     }
@@ -895,7 +1106,7 @@ function setLanguage(lang) {
   renderLadderTab();
   renderMatrixTable();
   runBudgetCalc();
-  renderStartupTab();
+  initStartupTab();
 }
 
 window.onload = () => {
