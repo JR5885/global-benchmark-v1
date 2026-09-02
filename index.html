@@ -17,7 +17,6 @@
   body{background:var(--page-plane); color:var(--text-primary); font-family: system-ui,-apple-system,"Segoe UI",sans-serif; font-size:14px; line-height:1.5; padding:24px 24px 80px;}
   .wrap{max-width:1380px; margin:0 auto;}
 
-  /* 頂部主模組導航 (依截圖規格) */
   .main-nav{display:flex; gap:28px; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:24px; font-size:13px; font-weight:600; overflow-x:auto;}
   .main-nav-item{color:var(--text-muted); cursor:pointer; transition:all .2s; white-space:nowrap; padding-bottom:12px; margin-bottom:-14px; border-bottom:2px solid transparent;}
   .main-nav-item:hover{color:var(--text-primary);}
@@ -26,7 +25,6 @@
   header.top{margin-bottom:24px; display:flex; justify-content:space-between; align-items:center;}
   header.top h1{font-size:26px; font-weight:800; letter-spacing:-0.02em;}
 
-  /* 語系切換器 */
   .lang-switcher{display:inline-flex; background:var(--card-bg); border:1px solid var(--border); border-radius:8px; padding:3px; gap:2px;}
   .lang-btn{background:none; border:none; color:var(--text-muted); padding:4px 12px; font-size:12px; font-weight:600; cursor:pointer; border-radius:6px; transition:all .15s;}
   .lang-btn.active{background:var(--text-primary); color:var(--page-plane);}
@@ -34,7 +32,6 @@
   .pane{display:none;}
   .pane.active{display:block;}
 
-  /* 共通按鈕與選單 */
   .comp-region-selector{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
   .comp-reg-btn{background:var(--card-bg); border:1px solid var(--border); color:var(--text-muted); padding:8px 16px; border-radius:8px; cursor:pointer; font-size:12.5px; font-weight:600; transition:all .2s;}
   .comp-reg-btn.active{background:color-mix(in srgb, var(--cyan) 15%, var(--card-bg)); border-color:var(--cyan); color:var(--cyan);}
@@ -43,7 +40,6 @@
   .comp-fn-btn{background:none; border:none; color:var(--text-muted); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600; transition:all .2s; white-space:nowrap;}
   .comp-fn-btn.active{background:var(--border); color:var(--text-primary);}
 
-  /* 三大梯隊卡片 */
   .tier-cards-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px;}
   .tier-card{background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:18px; position:relative;}
   .tier-card.t1{border-top:3px solid var(--warning);}
@@ -58,7 +54,6 @@
   .tag-pills{display:flex; flex-wrap:wrap; gap:6px;}
   .tag-pill{background:#090d16; border:1px solid var(--border); border-radius:20px; font-size:11px; padding:3px 10px; color:var(--text-secondary);}
 
-  /* 表格樣式 */
   table{width:100%; border-collapse:collapse; font-size:12.5px; background:var(--card-bg); border-radius:10px; overflow:hidden; border:1px solid var(--border); margin-bottom:32px;}
   thead th{text-align:left; padding:10px 12px; background:#090d16; color:var(--text-muted); font-weight:600; font-size:11px; text-transform:uppercase; border-bottom:1px solid var(--border); white-space:nowrap;}
   tbody td{padding:10px 12px; border-bottom:1px solid var(--gridline); vertical-align:middle;}
@@ -66,14 +61,26 @@
   .num-green{color:#34d399; font-weight:700; font-size:14px;}
   .num-sub{font-size:11px; color:var(--text-muted);}
 
-  /* 03 預算試算樣式 */
-  .calc-grid{display:grid; grid-template-columns:360px 1fr; gap:24px;}
+  /* 03 預算與組織圖專屬樣式 */
+  .calc-grid{display:grid; grid-template-columns:380px 1fr; gap:24px; margin-bottom:32px;}
   .calc-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px;}
   .input-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
   .input-row label{font-size:12.5px; color:var(--text-secondary);}
-  .input-row input{width:90px; background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:6px 10px; border-radius:6px; text-align:right;}
+  .input-row input{width:110px; background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:6px 10px; border-radius:6px; text-align:right; font-size:13px;}
+  .input-row input.text-left{text-align:left;}
 
-  /* 05 晉升管道雙軌佈局 (Ladder Layout) */
+  /* 組織樹視覺樣式 */
+  .org-chart-wrapper{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:24px; overflow-x:auto;}
+  .org-tree{display:flex; flex-direction:column; align-items:center; gap:24px; min-width:800px;}
+  .org-level-row{display:flex; justify-content:center; gap:16px; position:relative; width:100%;}
+  .org-node{background:#090d16; border:1px solid var(--border); border-radius:8px; padding:10px 14px; min-width:130px; text-align:center; transition:all .2s; box-shadow:0 4px 12px rgba(0,0,0,0.3);}
+  .org-node:hover{border-color:var(--cyan); transform:translateY(-2px);}
+  .org-node .lvl{font-size:10px; font-weight:700; color:var(--cyan); text-transform:uppercase; letter-spacing:.05em;}
+  .org-node .role{font-size:12.5px; font-weight:700; color:var(--text-primary); margin:2px 0;}
+  .org-node .cnt{font-size:11px; color:var(--text-secondary); background:var(--card-bg); padding:1px 6px; border-radius:4px; display:inline-block;}
+  .org-line{position:absolute; background:var(--baseline); z-index:0;}
+
+  /* 05 階梯雙軌佈局 */
   .layout-grid { display: grid; grid-template-columns: 460px 1fr; gap: 28px; align-items: start; }
   .ladder-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; position: sticky; top: 24px; }
   .ladder-row { display: flex; align-items: center; margin-bottom: 16px; position: relative; gap: 14px; }
@@ -109,10 +116,9 @@
 <body>
 <div class="wrap">
 
-  <!-- 頂部主模組切換 (依第二張截圖嚴格保留 02, 03, 04, 05) -->
   <div class="main-nav">
-    <div class="main-nav-item active" onclick="switchTab('tab02')">02 全球雙軌薪酬對標</div>
-    <div class="main-nav-item" onclick="switchTab('tab03')">03 部門加權與預算試算</div>
+    <div class="main-nav-item" onclick="switchTab('tab02')">02 全球雙軌薪酬對標</div>
+    <div class="main-nav-item active" onclick="switchTab('tab03')">03 部門加權與預算試算</div>
     <div class="main-nav-item" onclick="switchTab('tab04')">04 初創團隊破局方案</div>
     <div class="main-nav-item" onclick="switchTab('tab05')">05 晉升管道以及薪酬矩陣</div>
   </div>
@@ -128,7 +134,7 @@
   </header>
 
   <!-- ================= 02 全球雙軌薪酬對標 ================= -->
-  <div id="pane_tab02" class="pane active">
+  <div id="pane_tab02" class="pane">
     <div class="comp-region-selector" id="regBar"></div>
     <div class="comp-function-selector" id="fnBar"></div>
 
@@ -175,17 +181,35 @@
     </table>
   </div>
 
-  <!-- ================= 03 部門加權與預算試算 ================= -->
-  <div id="pane_tab03" class="pane">
+  <!-- ================= 03 部門加權與預算試算 (完整修改區塊) ================= -->
+  <div id="pane_tab03" class="pane active">
     <div class="calc-grid">
       <div class="calc-card">
         <h3 style="font-size:15px; margin-bottom:14px;">團隊規模與編制試算</h3>
-        <div class="input-row"><label>L3 初階人數：</label><input type="number" id="hc_l3" value="4" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L4 中階骨幹：</label><input type="number" id="hc_l4" value="6" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L5 資深專家：</label><input type="number" id="hc_l5" value="4" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L6 / M1 負責人：</label><input type="number" id="hc_l6" value="2" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L7 / M2 部門總監：</label><input type="number" id="hc_l7" value="1" oninput="runBudgetCalc()"></div>
-        <div style="margin-top:16px; border-top:1px solid var(--border); pt:14px;">
+        
+        <!-- 可自訂部門名稱 -->
+        <div class="input-row">
+          <label style="font-weight:700; color:var(--cyan);">部門名稱：</label>
+          <input type="text" id="dept_name_input" class="text-left" value="研發部門" placeholder="請輸入部門名稱" oninput="runBudgetCalc()">
+        </div>
+
+        <div class="input-row"><label>L3 初階人數：</label><input type="number" id="hc_l3" value="6" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label>L4 中階骨幹：</label><input type="number" id="hc_l4" value="5" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label>L5 資深專家：</label><input type="number" id="hc_l5" value="1" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label>L6 / M1 負責人：</label><input type="number" id="hc_l6" value="2" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label>L7 / M2 部門總監：</label><input type="number" id="hc_l7" value="1" min="0" oninput="runBudgetCalc()"></div>
+
+        <!-- 市場梯隊切換 (T1 / T2 / T3) -->
+        <div style="margin-top:14px; border-top:1px solid var(--border); padding-top:12px;">
+          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;">選擇企業市場梯隊：</label>
+          <select id="calc_tier" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px; margin-bottom:12px;">
+            <option value="1.40">T1 頂尖梯隊 (Top-Tier) ×1.40</option>
+            <option value="1.00" selected>T2 全球基準 (Global Benchmark) ×1.00</option>
+            <option value="0.75">T3 初創梯隊 (Startup) ×0.75</option>
+          </select>
+        </div>
+
+        <div>
           <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;">選擇主要營運地區：</label>
           <select id="calc_region" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px;">
             <option value="1.10">美國 (US) ×1.10</option>
@@ -201,19 +225,19 @@
 
       <div class="calc-card" style="display:flex; flex-direction:column; justify-content:space-between;">
         <div>
-          <h3 style="font-size:15px; margin-bottom:14px;">年度人事成本與預算預測</h3>
+          <h3 id="budget_card_title" style="font-size:15px; margin-bottom:14px;">年度人事成本與預算預測</h3>
           <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
             <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
               <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">總編制總人數</div>
-              <div id="total_hc_display" style="font-size:28px; font-weight:800; color:var(--cyan); margin-top:4px;">17 人</div>
+              <div id="total_hc_display" style="font-size:28px; font-weight:800; color:var(--cyan); margin-top:4px;">15 人</div>
             </div>
             <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
               <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">年度總薪酬預算 (USD)</div>
-              <div id="total_budget_display" style="font-size:28px; font-weight:800; color:#34d399; margin-top:4px;">$2,456,700</div>
+              <div id="total_budget_display" style="font-size:28px; font-weight:800; color:#34d399; margin-top:4px;">$2,156,500</div>
             </div>
           </div>
-          <div style="font-size:12.5px; color:var(--text-secondary); line-height:1.6;">
-            • <b>資本跑道 (Runway)</b>：依據 T2 全球基準結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。<br>
+          <div style="font-size:12.5px; color:var(--text-secondary); line-height:1.65;">
+            • <b id="runway_desc_line">資本跑道 (Runway)：依據 T2 全球基準結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。</b><br>
             • <b>職級比例結構</b>：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康人字型研發與業務組織分佈。
           </div>
         </div>
@@ -221,6 +245,12 @@
           建議每季依據 Global Benchmark 實施動態水位檢視，確保在核心市場具備前 25%（P75）的獵才吸引力。
         </div>
       </div>
+    </div>
+
+    <!-- 動態連動組織架構圖 -->
+    <div class="org-chart-wrapper">
+      <h3 id="org_chart_title" style="font-size:15px; margin-bottom:18px; color:var(--cyan);">研發部門 動態組織架構圖 (Live Org Chart)</h3>
+      <div class="org-tree" id="orgTreeContainer"></div>
     </div>
   </div>
 
@@ -260,11 +290,8 @@
   <!-- ================= 05 晉升管道以及薪酬矩陣 ================= -->
   <div id="pane_tab05" class="pane">
     <div class="comp-function-selector" id="ladderFnBar"></div>
-
     <div class="layout-grid">
-      <!-- 左側階梯圖 -->
       <div class="ladder-box" id="ladderTree"></div>
-      <!-- 右側行為錨定卡片 -->
       <div id="ladderCards"></div>
     </div>
   </div>
@@ -273,7 +300,7 @@
 
 <script>
 let currentLang = 'zh';
-let currentTab = 'tab02';
+let currentTab = 'tab03';
 let currentRegionCode = 'SG';
 let currentFnCode = 'eng';
 let currentLadderFn = 'eng';
@@ -379,6 +406,7 @@ function switchTab(tabId) {
   else if(tabId === 'tab05') renderLadderTab();
 }
 
+// 02 全球雙軌薪酬對標
 function renderCompTab() {
   const regBar = document.getElementById('regBar');
   regBar.innerHTML = COMP_REGIONS.map(r => `
@@ -434,21 +462,125 @@ function renderCompTab() {
 function selectReg(code) { currentRegionCode = code; renderCompTab(); }
 function selectFn(code) { currentFnCode = code; renderCompTab(); }
 
-// 03 預算計算器
+// 03 部門動態預算與組織圖運算
 function runBudgetCalc() {
+  const deptName = document.getElementById('dept_name_input').value.trim() || (currentLang==='zh'?'指定部門':'Target Dept');
   const l3 = parseInt(document.getElementById('hc_l3').value) || 0;
   const l4 = parseInt(document.getElementById('hc_l4').value) || 0;
   const l5 = parseInt(document.getElementById('hc_l5').value) || 0;
   const l6 = parseInt(document.getElementById('hc_l6').value) || 0;
   const l7 = parseInt(document.getElementById('hc_l7').value) || 0;
-  const factor = parseFloat(document.getElementById('calc_region').value) || 1.0;
+
+  const tierMultiplier = parseFloat(document.getElementById('calc_tier').value) || 1.0;
+  const regionMultiplier = parseFloat(document.getElementById('calc_region').value) || 1.0;
 
   const totalHc = l3 + l4 + l5 + l6 + l7;
   const baseCost = (l3 * BASE_RATES.L3) + (l4 * BASE_RATES.L4) + (l5 * BASE_RATES.L5) + (l6 * BASE_RATES.L6_M1) + (l7 * BASE_RATES.L7_M2);
-  const totalCost = baseCost * factor;
+  const totalCost = baseCost * tierMultiplier * regionMultiplier;
 
-  document.getElementById('total_hc_display').innerText = totalHc + " 人";
+  // 取得選取梯隊名稱文字
+  const tierSelect = document.getElementById('calc_tier');
+  const tierText = tierSelect.options[tierSelect.selectedIndex].text.split(' ')[0];
+
+  // 更新顯示
+  document.getElementById('budget_card_title').innerText = `${deptName} 人事成本與預算預測`;
+  document.getElementById('org_chart_title').innerText = `${deptName} 動態組織架構圖 (Live Org Chart)`;
+  document.getElementById('total_hc_display').innerText = totalHc + (currentLang==='zh'?' 人':' HC');
   document.getElementById('total_budget_display').innerText = "$" + Math.round(totalCost).toLocaleString();
+
+  // 更新跑道說明文字（支援 T1 / T2 / T3 與自訂部門）
+  document.getElementById('runway_desc_line').innerHTML = currentLang==='zh'
+    ? `資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。`
+    : `Runway Benchmark: Calculated based on <b>${tierText}</b> blended with regional multiplier and statutory reserves (~12%).`;
+
+  // 重新繪製組織圖
+  renderLiveOrgChart(deptName, l7, l6, l5, l4, l3);
+}
+
+// 繪製連動組織樹
+function renderLiveOrgChart(deptName, l7, l6, l5, l4, l3) {
+  const container = document.getElementById('orgTreeContainer');
+  container.innerHTML = '';
+
+  // 頂層 L7 / M2 (部門總監)
+  const l7Row = document.createElement('div');
+  l7Row.className = 'org-level-row';
+  for(let i=0; i < Math.max(l7, 1); i++) {
+    l7Row.innerHTML += `
+      <div class="org-node" style="border-top:3px solid var(--pink);">
+        <div class="lvl">L7 / M2</div>
+        <div class="role">${deptName} 總監</div>
+        <div class="cnt">${l7} 位編制</div>
+      </div>
+    `;
+  }
+  container.appendChild(l7Row);
+
+  // 第二層 L6 / M1 (團隊負責人 / 組長)
+  if(l6 > 0) {
+    const l6Row = document.createElement('div');
+    l6Row.className = 'org-level-row';
+    for(let i=0; i < l6; i++) {
+      l6Row.innerHTML += `
+        <div class="org-node" style="border-top:3px solid var(--purple);">
+          <div class="lvl">L6 / M1</div>
+          <div class="role">組長 / 主任架構師 #${i+1}</div>
+          <div class="cnt">管理幹部</div>
+        </div>
+      `;
+    }
+    container.appendChild(l6Row);
+  }
+
+  // 第三層 L5 (資深專家)
+  if(l5 > 0) {
+    const l5Row = document.createElement('div');
+    l5Row.className = 'org-level-row';
+    for(let i=0; i < Math.min(l5, 4); i++) {
+      l5Row.innerHTML += `
+        <div class="org-node" style="border-top:3px solid var(--cyan);">
+          <div class="lvl">L5</div>
+          <div class="role">資深專家 ${l5>4 ? `(共${l5}位)`:'' }</div>
+          <div class="cnt">核心攻堅</div>
+        </div>
+      `;
+    }
+    container.appendChild(l5Row);
+  }
+
+  // 第四層 L4 (中階骨幹)
+  if(l4 > 0) {
+    const l4Row = document.createElement('div');
+    l4Row.className = 'org-level-row';
+    const displayL4 = Math.min(l4, 5);
+    for(let i=0; i < displayL4; i++) {
+      l4Row.innerHTML += `
+        <div class="org-node">
+          <div class="lvl" style="color:var(--text-muted);">L4</div>
+          <div class="role">中階骨幹 ${i===displayL4-1 && l4>5 ? `(+${l4-displayL4})`:'' }</div>
+          <div class="cnt">端到端交付</div>
+        </div>
+      `;
+    }
+    container.appendChild(l4Row);
+  }
+
+  // 第五層 L3 (初階專員)
+  if(l3 > 0) {
+    const l3Row = document.createElement('div');
+    l3Row.className = 'org-level-row';
+    const displayL3 = Math.min(l3, 6);
+    for(let i=0; i < displayL3; i++) {
+      l3Row.innerHTML += `
+        <div class="org-node" style="background:rgba(255,255,255,0.02);">
+          <div class="lvl" style="color:var(--text-dim);">L3</div>
+          <div class="role">初階專員 ${i===displayL3-1 && l3>6 ? `(+${l3-displayL3})`:'' }</div>
+          <div class="cnt">日常執行</div>
+        </div>
+      `;
+    }
+    container.appendChild(l3Row);
+  }
 }
 
 // 05 階梯與行為錨定渲染
@@ -462,7 +594,6 @@ function renderLadderTab() {
 
   const fn = COMP_FUNCTIONS[currentLadderFn] || COMP_FUNCTIONS.eng;
 
-  // 渲染左側 Ladder 樹
   const treeRows = [
     { lvl: "L3", icTitle: fn.roles[0].title, icDesc: "標準執行與基礎交付", mgmt: false },
     { lvl: "L4", icTitle: fn.roles[1].title, icDesc: "獨立負責核心業務模組", mgmt: false },
@@ -516,7 +647,6 @@ function renderLadderTab() {
 
   document.getElementById('ladderTree').innerHTML = treeHtml;
 
-  // 渲染右側行為卡片
   document.getElementById('ladderCards').innerHTML = fn.roles.map((r, i) => {
     let cls = "card";
     if (i === 3) cls += " m-track";
@@ -545,12 +675,15 @@ function setLanguage(lang) {
   currentLang = lang;
   document.getElementById('btnZh').className = `lang-btn ${lang==='zh'?'active':''}`;
   document.getElementById('btnEn').className = `lang-btn ${lang==='en'?'active':''}`;
+  document.getElementById('headerTitle').innerText = "Global Benchmark";
+
   if(currentTab === 'tab02') renderCompTab();
+  else if(currentTab === 'tab03') runBudgetCalc();
   else if(currentTab === 'tab05') renderLadderTab();
 }
 
 window.onload = () => {
-  renderCompTab();
+  runBudgetCalc();
 };
 </script>
 </body>
