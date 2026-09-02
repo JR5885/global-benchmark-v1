@@ -56,7 +56,7 @@
     border: 1px solid rgba(6, 182, 212, 0.2);
   }
 
-  .main-nav{display:flex; gap:24px; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:24px; font-size:13px; font-weight:600; overflow-x:auto;}
+  .main-nav{display:flex; gap:22px; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:24px; font-size:13px; font-weight:600; overflow-x:auto;}
   .main-nav-item{color:var(--text-muted); cursor:pointer; transition:all .2s; white-space:nowrap; padding-bottom:12px; margin-bottom:-14px; border-bottom:2px solid transparent;}
   .main-nav-item:hover{color:var(--text-primary);}
   .main-nav-item.active{color:var(--cyan); border-bottom-color:var(--cyan);}
@@ -547,11 +547,11 @@
   <div id="pane_tab05" class="pane">
     <div class="er-matrix-wrap">
       <div class="er-tabs" id="erTabsContainer">
-        <button class="er-tab active" onclick="switchErCountry('cn')">🇨🇳 中國大陸</button>
-        <button class="er-tab" onclick="switchErCountry('us')">🇺🇸 美國</button>
-        <button class="er-tab" onclick="switchErCountry('tw')">🇹🇼 台灣</button>
-        <button class="er-tab" onclick="switchErCountry('my')">🇲🇾 馬來西亞</button>
-        <button class="er-tab" onclick="switchErCountry('in')">🇮🇳 印度</button>
+        <button class="er-tab active" onclick="switchErCountry('cn')">🇨🇳 中國大陸[cite: 1]</button>
+        <button class="er-tab" onclick="switchErCountry('us')">🇺🇸 美國[cite: 1]</button>
+        <button class="er-tab" onclick="switchErCountry('tw')">🇹🇼 台灣[cite: 1]</button>
+        <button class="er-tab" onclick="switchErCountry('my')">🇲🇾 馬來西亞[cite: 1]</button>
+        <button class="er-tab" onclick="switchErCountry('in')">🇮🇳 印度[cite: 1]</button>
       </div>
 
       <div id="erCountryContent">
@@ -652,7 +652,7 @@ let STRATEGIC_OKRS = [
   }
 ];
 
-/* ================= 05 矩陣資料對照 (源自您的 ER Compliance Matrix) ================= */
+/* 05 ER 實務矩陣資料對照 (源自您的 Global ER Matrix 檔)[cite: 1, 2] */
 const ER_DATA = {
   cn: {
     flag: '🇨🇳', name: '中國大陸', arch: '境外主體 + 獨立承包商 / 境内技術諮詢殼公司',
@@ -709,7 +709,7 @@ const ER_DATA = {
     }
   },
   tw: {
-    flag: '🇹🇼', name: '台灣', arch: '境外主体 + EoR（名義雇主）/ 本地 VASP 登記實體',
+    flag: '🇹🇼', name: '台灣', arch: '境外主體 + EoR（名義雇主）/ 本地 VASP 登記實體',
     stats: [['NT$29,500','2026 基本工資（月薪）'],['0.5N 制度','勞退新制每滿1年0.5月'],['上限 6 個月','新制資遣費上限'],['§11 + 最後手段','非違紀解僱門檻']],
     scenarios: {
       onboard: {
@@ -737,7 +737,7 @@ const ER_DATA = {
   },
   my: {
     flag: '🇲🇾', name: '馬來西亞', arch: '境外主體 + EoR（如 Deel）/ Labuan 實體',
-    stats: [['10–20 天/年','法定資遣費（依年資）'],['4–8 週','法定預告期'],['Just Cause','解雇核心法理門檻'],['Industrial Court','不當解僱救濟管道']],
+    stats: [['10–20 天/年','法定資遣費（依年資）'],['4–8 週','法定預告期'],['Just Cause','解僱核心法理門檻'],['Industrial Court','不當解僱救濟管道']],
     scenarios: {
       onboard: {
         head: '入職 ONBOARDING — 架構合規 + 資產前置',
@@ -1175,6 +1175,7 @@ function runBudgetCalc() {
     : `${deptName} Live Org Chart`;
 
   renderLiveOrgChart(deptName);
+  updateOkrDashboardTop(totalBudget, totalHc);
 }
 
 function renderLiveOrgChart(deptName) {
@@ -1567,7 +1568,7 @@ function renderErMatrix() {
 
   container.innerHTML = `
     <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:18px; flex-wrap:wrap; gap:12px;">
-      <h3 style="font-family:var(--serif); font-size:22px; margin:0; display:flex; align-items:center; gap:8px;">
+      <h3 style="font-size:20px; font-weight:700; margin:0; display:flex; align-items:center; gap:8px;">
         ${data.flag} ${data.name} <span style="font-size:12px; font-family:monospace; color:var(--text-muted); font-weight:normal;">(${data.arch})</span>
       </h3>
     </div>
