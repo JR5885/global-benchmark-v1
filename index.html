@@ -17,6 +17,7 @@
   body{background:var(--page-plane); color:var(--text-primary); font-family: system-ui,-apple-system,"Segoe UI",sans-serif; font-size:14px; line-height:1.5; padding:24px 24px 80px;}
   .wrap{max-width:1380px; margin:0 auto;}
 
+  /* 頂部主模組導航 (嚴格 01, 02, 03, 04 排序) */
   .main-nav{display:flex; gap:28px; border-bottom:1px solid var(--border); padding-bottom:14px; margin-bottom:24px; font-size:13px; font-weight:600; overflow-x:auto;}
   .main-nav-item{color:var(--text-muted); cursor:pointer; transition:all .2s; white-space:nowrap; padding-bottom:12px; margin-bottom:-14px; border-bottom:2px solid transparent;}
   .main-nav-item:hover{color:var(--text-primary);}
@@ -32,6 +33,7 @@
   .pane{display:none;}
   .pane.active{display:block;}
 
+  /* 選擇按鈕列 */
   .comp-region-selector{display:flex; gap:8px; margin-bottom:18px; flex-wrap:wrap;}
   .comp-reg-btn{background:var(--card-bg); border:1px solid var(--border); color:var(--text-muted); padding:8px 16px; border-radius:8px; cursor:pointer; font-size:12.5px; font-weight:600; transition:all .2s;}
   .comp-reg-btn.active{background:color-mix(in srgb, var(--cyan) 15%, var(--card-bg)); border-color:var(--cyan); color:var(--cyan);}
@@ -40,6 +42,7 @@
   .comp-fn-btn{background:none; border:none; color:var(--text-muted); padding:6px 14px; border-radius:6px; cursor:pointer; font-size:13px; font-weight:600; transition:all .2s; white-space:nowrap;}
   .comp-fn-btn.active{background:var(--border); color:var(--text-primary);}
 
+  /* 三大梯隊卡片 */
   .tier-cards-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-bottom:28px;}
   .tier-card{background:var(--card-bg); border:1px solid var(--border); border-radius:10px; padding:18px; position:relative;}
   .tier-card.t1{border-top:3px solid var(--warning);}
@@ -66,7 +69,7 @@
   .calc-card{background:var(--card-bg); border:1px solid var(--border); border-radius:12px; padding:20px;}
   .input-row{display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;}
   .input-row label{font-size:12.5px; color:var(--text-secondary);}
-  .input-row input{width:110px; background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:6px 10px; border-radius:6px; text-align:right; font-size:13px;}
+  .input-row input{width:120px; background:#090d16; border:1px solid var(--border); color:var(--text-primary); padding:6px 10px; border-radius:6px; text-align:right; font-size:13px;}
   .input-row input.text-left{text-align:left;}
 
   /* 組織樹視覺樣式 */
@@ -78,9 +81,8 @@
   .org-node .lvl{font-size:10px; font-weight:700; color:var(--cyan); text-transform:uppercase; letter-spacing:.05em;}
   .org-node .role{font-size:12.5px; font-weight:700; color:var(--text-primary); margin:2px 0;}
   .org-node .cnt{font-size:11px; color:var(--text-secondary); background:var(--card-bg); padding:1px 6px; border-radius:4px; display:inline-block;}
-  .org-line{position:absolute; background:var(--baseline); z-index:0;}
 
-  /* 05 階梯雙軌佈局 */
+  /* 02 雙軌階梯視覺樹 (Ladder Layout) */
   .layout-grid { display: grid; grid-template-columns: 460px 1fr; gap: 28px; align-items: start; }
   .ladder-box { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 24px 20px; position: sticky; top: 24px; }
   .ladder-row { display: flex; align-items: center; margin-bottom: 16px; position: relative; gap: 14px; }
@@ -116,11 +118,12 @@
 <body>
 <div class="wrap">
 
+  <!-- 頂部主導航：完全符合順序 01 02 03 04 -->
   <div class="main-nav">
-    <div class="main-nav-item" onclick="switchTab('tab02')">02 全球雙軌薪酬對標</div>
-    <div class="main-nav-item active" onclick="switchTab('tab03')">03 部門加權與預算試算</div>
-    <div class="main-nav-item" onclick="switchTab('tab04')">04 初創團隊破局方案</div>
-    <div class="main-nav-item" onclick="switchTab('tab05')">05 晉升管道以及薪酬矩陣</div>
+    <div class="main-nav-item active" id="nav_01" onclick="switchTab('tab01')">01 全球雙軌薪酬對標</div>
+    <div class="main-nav-item" id="nav_02" onclick="switchTab('tab02')">02 雙軌晉升示意圖</div>
+    <div class="main-nav-item" id="nav_03" onclick="switchTab('tab03')">03 LIVE O-CHART 對照 年度預算預測</div>
+    <div class="main-nav-item" id="nav_04" onclick="switchTab('tab04')">04 初創團隊破局方案</div>
   </div>
 
   <header class="top">
@@ -133,12 +136,239 @@
     </div>
   </header>
 
-  <!-- ================= 02 全球雙軌薪酬對標 ================= -->
-  <div id="pane_tab02" class="pane">
+  <!-- ================= 01 全球雙軌薪酬對標 ================= -->
+  <div id="pane_tab01" class="pane active">
     <div class="comp-region-selector" id="regBar"></div>
     <div class="comp-function-selector" id="fnBar"></div>
 
-    <div class="tier-cards-grid">
+    <div class="tier-cards-grid" id="tierCardsGrid"></div>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:90px;" id="th_lvl">職級代碼</th>
+          <th id="th_title_scope">代表職稱 / 職責範疇</th>
+          <th id="th_t3">T3 初創梯隊 (年薪)</th>
+          <th id="th_t2">T2 全球基準 (Global Benchmark)</th>
+          <th id="th_t1">T1 頂尖梯隊 (年薪)</th>
+          <th id="th_region_ann">地區調整後年薪 (T2)</th>
+          <th id="th_region_mon">地區調整後月薪 (T2)</th>
+        </tr>
+      </thead>
+      <tbody id="compTableBody"></tbody>
+    </table>
+  </div>
+
+  <!-- ================= 02 雙軌晉升示意圖 ================= -->
+  <div id="pane_tab02" class="pane">
+    <div class="comp-function-selector" id="ladderFnBar"></div>
+    <div class="layout-grid">
+      <div class="ladder-box" id="ladderTree"></div>
+      <div id="ladderCards"></div>
+    </div>
+  </div>
+
+  <!-- ================= 03 LIVE O-CHART 對照 年度預算預測 ================= -->
+  <div id="pane_tab03" class="pane">
+    <div class="calc-grid">
+      <div class="calc-card">
+        <h3 style="font-size:15px; margin-bottom:14px;" id="lbl_scale_title">團隊規模與編制試算</h3>
+        
+        <div class="input-row">
+          <label style="font-weight:700; color:var(--cyan);" id="lbl_dept_name">部門名稱：</label>
+          <input type="text" id="dept_name_input" class="text-left" value="研發部門" placeholder="請輸入部門名稱" oninput="runBudgetCalc()">
+        </div>
+
+        <div class="input-row"><label id="lbl_hc_l3">L3 初階人數：</label><input type="number" id="hc_l3" value="6" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label id="lbl_hc_l4">L4 中階骨幹：</label><input type="number" id="hc_l4" value="5" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label id="lbl_hc_l5">L5 資深專家：</label><input type="number" id="hc_l5" value="1" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label id="lbl_hc_l6">L6 / M1 負責人：</label><input type="number" id="hc_l6" value="2" min="0" oninput="runBudgetCalc()"></div>
+        <div class="input-row"><label id="lbl_hc_l7">L7 / M2 部門總監：</label><input type="number" id="hc_l7" value="1" min="0" oninput="runBudgetCalc()"></div>
+
+        <div style="margin-top:14px; border-top:1px solid var(--border); padding-top:12px;">
+          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;" id="lbl_tier_select">選擇企業市場梯隊：</label>
+          <select id="calc_tier" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px; margin-bottom:12px;"></select>
+        </div>
+
+        <div>
+          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;" id="lbl_region_select">選擇主要營運地區：</label>
+          <select id="calc_region" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px;"></select>
+        </div>
+      </div>
+
+      <div class="calc-card" style="display:flex; flex-direction:column; justify-content:space-between;">
+        <div>
+          <h3 id="budget_card_title" style="font-size:15px; margin-bottom:14px;">年度人事成本與預算預測</h3>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+            <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
+              <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;" id="lbl_total_hc">總編制總人數</div>
+              <div id="total_hc_display" style="font-size:28px; font-weight:800; color:var(--cyan); margin-top:4px;">15 人</div>
+            </div>
+            <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
+              <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;" id="lbl_total_budget">年度總薪酬預算 (USD)</div>
+              <div id="total_budget_display" style="font-size:28px; font-weight:800; color:#34d399; margin-top:4px;">$2,156,500</div>
+            </div>
+          </div>
+          <div style="font-size:12.5px; color:var(--text-secondary); line-height:1.65;" id="budget_notes">
+            • <b id="runway_desc_line">資本跑道 (Runway)：依據 T2 全球基準結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。</b><br>
+            • <span id="span_hc_structure"><b>職級比例結構</b>：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康人字型分佈。</span>
+          </div>
+        </div>
+        <div style="margin-top:20px; padding:12px; background:rgba(6,182,212,0.08); border-left:3px solid var(--cyan); font-size:12px; border-radius:0 6px 6px 0;" id="box_quarterly_advise">
+          建議每季依據 Global Benchmark 實施動態水位檢視，確保在核心市場具備前 25%（P75）的獵才吸引力。
+        </div>
+      </div>
+    </div>
+
+    <!-- 動態組織圖 (Live Org Chart) -->
+    <div class="org-chart-wrapper">
+      <h3 id="org_chart_title" style="font-size:15px; margin-bottom:18px; color:var(--cyan);">研發部門 動態組織架構圖 (Live Org Chart)</h3>
+      <div class="org-tree" id="orgTreeContainer"></div>
+    </div>
+  </div>
+
+  <!-- ================= 04 初創團隊破局方案 ================= -->
+  <div id="pane_tab04" class="pane">
+    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;" id="startupCardsGrid"></div>
+  </div>
+
+</div>
+
+<script>
+let currentLang = 'zh';
+let currentTab = 'tab01';
+let currentRegionCode = 'SG';
+let currentFnCode = 'eng';
+let currentLadderFn = 'eng';
+
+// 7 大指定法域
+const COMP_REGIONS = [
+  { code: 'US', labelZh: '美國', labelEn: 'United States', factor: 1.10 },
+  { code: 'SG', labelZh: '新加坡', labelEn: 'Singapore', factor: 0.95 },
+  { code: 'UAE', labelZh: '阿聯酋 (杜拜)', labelEn: 'UAE (Dubai)', factor: 0.90 },
+  { code: 'EU', labelZh: '歐洲', labelEn: 'Europe', factor: 0.80 },
+  { code: 'TW', labelZh: '台灣', labelEn: 'Taiwan', factor: 0.65 },
+  { code: 'MY', labelZh: '馬來西亞', labelEn: 'Malaysia', factor: 0.45 },
+  { code: 'IN', labelZh: '印度', labelEn: 'India', factor: 0.40 }
+];
+
+// T2 全球基準年薪 (USD)
+const BASE_RATES = {
+  L3: 95000,
+  L4: 140000,
+  L5: 190000,
+  L6_M1: 240000,
+  L7_M2: 330000,
+  L8_M3: 500000
+};
+
+// 完整雙語 6 大職能雙軌階梯資料庫
+const COMP_FUNCTIONS = {
+  eng: {
+    nameZh: "研發工程 (Engineering)", nameEn: "Engineering",
+    roles: [
+      { lvl: "L3", titleZh: "Junior Engineer", titleEn: "Junior Engineer", scopeZh: "基礎模組與 UI 元件維護、單元測試、SOP 功能開發", scopeEn: "Base module & UI maintenance, unit testing, standard feature delivery" },
+      { lvl: "L4", titleZh: "Mid-Level Engineer", titleEn: "Mid-Level Engineer", scopeZh: "獨立負責核心業務模組、模組設計與除錯上線", scopeEn: "End-to-end ownership of core modules, architectural design & bug fixing" },
+      { lvl: "L5", titleZh: "Senior Engineer", titleEn: "Senior Engineer", scopeZh: "核心系統高併發架構設計、重大線上故障排查、技術重構", scopeEn: "High-concurrency systems design, major incident mitigation & refactoring" },
+      { lvl: "L6 / M1", titleZh: "Staff Eng / Team Lead", titleEn: "Staff Eng / Team Lead", scopeZh: "技術軌：全域架構決策 (RFC) ｜ 管理軌：帶領 3–6 人工程小組", scopeEn: "Tech: Global RFC decisions | Mgmt: Lead 3-6 engineers agile delivery" },
+      { lvl: "L7 / M2", titleZh: "Principal / Dept Head", titleEn: "Principal / Dept Head", scopeZh: "技術軌：跨部門重大技術決策 ｜ 管理軌：統籌主要研發部門", scopeEn: "Tech: Cross-org technical strategy | Mgmt: Lead major engineering pillar" },
+      { lvl: "L8 / M3", titleZh: "VP of Eng / CTO", titleEn: "VP of Eng / CTO", scopeZh: "全面掌管跨國研發與技術基建、技術與管理雙軌匯流統帥", scopeEn: "Unified leadership over global technology organization & infrastructure" }
+    ]
+  },
+  prod: {
+    nameZh: "產品管理 (Product)", nameEn: "Product Management",
+    roles: [
+      { lvl: "L3", titleZh: "Associate Product Manager", titleEn: "Associate PM", scopeZh: "功能需求細化、PRD 編寫、競品日常追蹤與敏捷驗收", scopeEn: "Feature detailing, PRD drafting, competitor tracking & sprint acceptance" },
+      { lvl: "L4", titleZh: "Product Manager (PM)", titleEn: "Product Manager", scopeZh: "獨立閉環單一產品線、用戶旅程設計、指標轉化率把控", scopeEn: "End-to-end ownership of product line, user journeys & conversion metrics" },
+      { lvl: "L5", titleZh: "Senior Product Manager", titleEn: "Senior PM", scopeZh: "主導複雜交易/支付業務架構、跨端流程標準化、ROI 達成", scopeEn: "Complex payment/trading systems, multi-platform UX standardization & ROI" },
+      { lvl: "L6 / M1", titleZh: "Principal PM / Product Lead", titleEn: "Principal PM / Product Lead", scopeZh: "專家軌：產品頂層協議設計 ｜ 管理軌：帶領 3–6 人產品小組", scopeEn: "IC: Top-level protocol design | Mgmt: Lead 3-6 product managers" },
+      { lvl: "L7 / M2", titleZh: "Head of Product", titleEn: "Head of Product", scopeZh: "掌管核心業務線產品矩陣、跨國本地化產品體驗與戰略排期", scopeEn: "Lead full product portfolio, internationalization & roadmap strategy" },
+      { lvl: "L8 / M3", titleZh: "Chief Product Officer (CPO)", titleEn: "Chief Product Officer", scopeZh: "全面負責公司全球產品戰略藍圖、新商業模式破局", scopeEn: "Overall product vision, global expansion strategy & business innovations" }
+    ]
+  },
+  ops: {
+    nameZh: "營運管理 (Operations)", nameEn: "Operations",
+    roles: [
+      { lvl: "L3", titleZh: "Junior Operations Specialist", titleEn: "Junior Ops Specialist", scopeZh: "SOP 流程執行、日常工單對帳、用戶反饋流轉", scopeEn: "SOP task execution, ticket reconciliation & client issue dispatch" },
+      { lvl: "L4", titleZh: "Operations Specialist", titleEn: "Operations Specialist", scopeZh: "獨立負責端到端業務流轉、通道維護與日常突發異常排除", scopeEn: "End-to-end workflow management, channel maintenance & incident handling" },
+      { lvl: "L5", titleZh: "Senior Operations Specialist", titleEn: "Senior Ops Specialist", scopeZh: "主導自動化降本流程、跨國複雜清算規則制定、重大客訴閉環", scopeEn: "Workflow automation, cross-border settlement logic & critical escalation" },
+      { lvl: "L6 / M1", titleZh: "Staff Specialist / Ops Lead", titleEn: "Staff Specialist / Ops Lead", scopeZh: "專家軌：跨域營運架構治理 ｜ 管理軌：帶領 3–6 人運營小隊", scopeEn: "IC: Cross-domain ops architecture | Mgmt: Lead 3-6 ops specialists" },
+      { lvl: "L7 / M2", titleZh: "Operations Director", titleEn: "Operations Director", scopeZh: "掌管大區運營中心、單位營運成本（Unit Cost）控制", scopeEn: "Direct regional operations centers, unit cost reduction & SLA defense" },
+      { lvl: "L8 / M3", titleZh: "VP of Operations / COO", titleEn: "VP of Operations / COO", scopeZh: "統籌全球跨國營運交付體系、跨部門經營損益閉環責任", scopeEn: "Global operating model governance, compliance defense & P&L ownership" }
+    ]
+  },
+  bd: {
+    nameZh: "商務與銷售 (BD & Sales)", nameEn: "BD & Sales",
+    roles: [
+      { lvl: "L3", titleZh: "Junior BD Associate", titleEn: "Junior BD Associate", scopeZh: "陌生線索挖掘、潛在客戶觸達、商務會議排程與 CRM 紀錄", scopeEn: "Cold outreach, lead qualification, CRM logging & pipeline prep" },
+      { lvl: "L4", titleZh: "Account Executive (AE)", titleEn: "Account Executive", scopeZh: "獨立負責商機端到端轉化、商業談判、合約簽署與上線", scopeEn: "Full deal lifecycle, negotiation, contract execution & client onboarding" },
+      { lvl: "L5", titleZh: "Senior AE / Strategic BD", titleEn: "Senior AE / Strategic BD", scopeZh: "區域 Top 機構客戶攻堅、高難度商業模式創新與定制方案", scopeEn: "Top-tier institutional accounts, high-stakes custom pricing & structuring" },
+      { lvl: "L6 / M1", titleZh: "Principal Deal Maker / Sales Lead", titleEn: "Principal Deal Maker / Lead", scopeZh: "專家軌：跨國戰略大單成交 ｜ 管理軌：帶領小組扛季度 Quota", scopeEn: "IC: Multi-million cross-border deals | Mgmt: Quota ownership & team lead" },
+      { lvl: "L7 / M2", titleZh: "Regional Sales Head", titleEn: "Regional Sales Head", scopeZh: "負責單一戰區營收盈虧（P&L）、在地化團隊梯隊建設", scopeEn: "Regional P&L accountability, territory expansion & sales leadership" },
+      { lvl: "L8 / M3", titleZh: "Chief Revenue Officer / VP Sales", titleEn: "Chief Revenue Officer", scopeZh: "全面掌控全球商業版圖、獲客成本（CAC）與全球總營收", scopeEn: "Global go-to-market execution, client acquisition cost optimization & revenue" }
+    ]
+  },
+  legal: {
+    nameZh: "法務與合規 (Legal & Compliance)", nameEn: "Legal & Compliance",
+    roles: [
+      { lvl: "L3", titleZh: "Legal / Compliance Specialist", titleEn: "Legal/Compliance Specialist", scopeZh: "標準合約審閱、日常 AML 警報初篩、公文查詢函初審", scopeEn: "NDA/vendor contract review, initial AML triage & regulatory intake" },
+      { lvl: "L4", titleZh: "Legal Counsel / AML Officer", titleEn: "Legal Counsel / AML Officer", scopeZh: "獨立承接跨國商務協議談判、牌照申請對接、爭議處置協商", scopeEn: "Cross-border negotiation, regulatory licensing filings & dispute settlement" },
+      { lvl: "L5", titleZh: "Senior Legal Counsel", titleEn: "Senior Legal Counsel", scopeZh: "跨國子公司設立架構、海外併購協議、各國監管審計現場應對", scopeEn: "Entity structuring, M&A due diligence, onsite regulatory audits & exams" },
+      { lvl: "L6 / M1", titleZh: "Staff Regulatory Architect / Lead", titleEn: "Staff Counsel / Lead", scopeZh: "專家軌：全球牌照藍圖設計 ｜ 管理軌：管理 3–6 人合規審查組", scopeEn: "IC: Global license strategy | Mgmt: Lead 3-6 AML/legal team members" },
+      { lvl: "L7 / M2", titleZh: "Legal Director", titleEn: "Legal Director", scopeZh: "掌管跨國重大涉訴防禦、行業立法倡導、調配外聘律師預算", scopeEn: "Complex litigation defense, public policy advocacy & outside counsel mgmt" },
+      { lvl: "L8 / M3", titleZh: "General Counsel / CCO", titleEn: "General Counsel / CCO", scopeZh: "董事會最高法規顧問、全球法律風險與執法免責最高防線", scopeEn: "Board advisor, enterprise legal risk mitigation & regulatory defense" }
+    ]
+  },
+  fin_hr: {
+    nameZh: "財務與人資 (Finance & HR)", nameEn: "Finance & HR",
+    roles: [
+      { lvl: "L3", titleZh: "Junior Analyst / HR Specialist", titleEn: "Junior Analyst / Specialist", scopeZh: "日常會計憑證核算、報銷初審、入轉調離手續與考勤審查", scopeEn: "Voucher booking, expense audit, onboarding ops & attendance tracking" },
+      { lvl: "L4", titleZh: "Senior Accountant / HRBP", titleEn: "Senior Accountant / HRBP", scopeZh: "獨立主導月結關帳、預算追蹤 ｜ 事業群招聘閉環與常規員工關係", scopeEn: "Month-end close, FP&A variance | Business unit recruiting & employee relations" },
+      { lvl: "L5", titleZh: "Senior Finance / HR Specialist", titleEn: "Senior Finance / HR Specialist", scopeZh: "跨國稅收籌劃與多主體合併 ｜ 9-Box 人才盤點與爭議離職談判", scopeEn: "International tax planning, consolidation | 9-Box calibration & separation" },
+      { lvl: "L6 / M1", titleZh: "Principal Architect / People Lead", titleEn: "Principal Architect / Lead", scopeZh: "專家軌：全球資金池或薪酬架構 ｜ 管理軌：領導會計/HR小組", scopeEn: "IC: Global treasury/comp model | Mgmt: Lead accounting/people pods" },
+      { lvl: "L7 / M2", titleZh: "Financial Controller / HR Director", titleEn: "Controller / HR Director", scopeZh: "四大審計無保留通過 ｜ 大區人力成本上限控制與文化治理", scopeEn: "Big 4 clean audit sign-off | Headcount budget governance & culture" },
+      { lvl: "L8 / M3", titleZh: "CFO / CHRO", titleEn: "CFO / CHRO", scopeZh: "全面掌控全球資本水庫、海外上市進程 ｜ 全球高管繼任佈局", scopeEn: "Capital treasury & overseas IPO readiness | Global executive succession" }
+    ]
+  }
+};
+
+// 切換 Tab
+function switchTab(tabId) {
+  currentTab = tabId;
+  const navTabs = ['tab01', 'tab02', 'tab03', 'tab04'];
+  navTabs.forEach(id => {
+    const navEl = document.getElementById('nav_' + id.replace('tab', ''));
+    if(navEl) navEl.classList.toggle('active', id === tabId);
+  });
+  document.querySelectorAll('.pane').forEach(el => el.classList.remove('active'));
+  document.getElementById('pane_' + tabId).classList.add('active');
+
+  if(tabId === 'tab01') renderCompTab();
+  else if(tabId === 'tab02') renderLadderTab();
+  else if(tabId === 'tab03') runBudgetCalc();
+  else if(tabId === 'tab04') renderStartupTab();
+}
+
+// 01 薪酬對標渲染
+function renderCompTab() {
+  const regBar = document.getElementById('regBar');
+  regBar.innerHTML = COMP_REGIONS.map(r => `
+    <button class="comp-reg-btn ${r.code === currentRegionCode ? 'active' : ''}" onclick="selectReg('${r.code}')">
+      ${currentLang === 'zh' ? r.labelZh : r.labelEn} ×${r.factor.toFixed(2)}
+    </button>
+  `).join('');
+
+  const fnBar = document.getElementById('fnBar');
+  fnBar.innerHTML = Object.keys(COMP_FUNCTIONS).map(k => `
+    <button class="comp-fn-btn ${k === currentFnCode ? 'active' : ''}" onclick="selectFn('${k}')">
+      ${currentLang === 'zh' ? COMP_FUNCTIONS[k].nameZh : COMP_FUNCTIONS[k].nameEn}
+    </button>
+  `).join('');
+
+  // 渲染三大梯隊卡片
+  const tierGrid = document.getElementById('tierCardsGrid');
+  if (currentLang === 'zh') {
+    tierGrid.innerHTML = `
       <div class="tier-card t1">
         <div class="tier-badge">×1.40</div>
         <div class="tier-title">T1 頂尖梯隊 (Top-Tier)</div>
@@ -163,270 +393,46 @@
           <span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO 治理</span><span class="tag-pill">早期協議團隊</span><span class="tag-pill">Token-heavy</span>
         </div>
       </div>
-    </div>
-
-    <table>
-      <thead>
-        <tr>
-          <th style="width:90px;">職級代碼</th>
-          <th>代表職稱 / 職責範疇</th>
-          <th>T3 初創梯隊 (年薪)</th>
-          <th>T2 全球基準 (Global Benchmark)</th>
-          <th>T1 頂尖梯隊 (年薪)</th>
-          <th id="th_region_ann">地區調整後年薪 (T2)</th>
-          <th id="th_region_mon">地區調整後月薪 (T2)</th>
-        </tr>
-      </thead>
-      <tbody id="compTableBody"></tbody>
-    </table>
-  </div>
-
-  <!-- ================= 03 部門加權與預算試算 (完整修改區塊) ================= -->
-  <div id="pane_tab03" class="pane active">
-    <div class="calc-grid">
-      <div class="calc-card">
-        <h3 style="font-size:15px; margin-bottom:14px;">團隊規模與編制試算</h3>
-        
-        <!-- 可自訂部門名稱 -->
-        <div class="input-row">
-          <label style="font-weight:700; color:var(--cyan);">部門名稱：</label>
-          <input type="text" id="dept_name_input" class="text-left" value="研發部門" placeholder="請輸入部門名稱" oninput="runBudgetCalc()">
-        </div>
-
-        <div class="input-row"><label>L3 初階人數：</label><input type="number" id="hc_l3" value="6" min="0" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L4 中階骨幹：</label><input type="number" id="hc_l4" value="5" min="0" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L5 資深專家：</label><input type="number" id="hc_l5" value="1" min="0" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L6 / M1 負責人：</label><input type="number" id="hc_l6" value="2" min="0" oninput="runBudgetCalc()"></div>
-        <div class="input-row"><label>L7 / M2 部門總監：</label><input type="number" id="hc_l7" value="1" min="0" oninput="runBudgetCalc()"></div>
-
-        <!-- 市場梯隊切換 (T1 / T2 / T3) -->
-        <div style="margin-top:14px; border-top:1px solid var(--border); padding-top:12px;">
-          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;">選擇企業市場梯隊：</label>
-          <select id="calc_tier" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px; margin-bottom:12px;">
-            <option value="1.40">T1 頂尖梯隊 (Top-Tier) ×1.40</option>
-            <option value="1.00" selected>T2 全球基準 (Global Benchmark) ×1.00</option>
-            <option value="0.75">T3 初創梯隊 (Startup) ×0.75</option>
-          </select>
-        </div>
-
-        <div>
-          <label style="font-size:12px; color:var(--text-muted); display:block; margin-bottom:6px;">選擇主要營運地區：</label>
-          <select id="calc_region" onchange="runBudgetCalc()" style="width:100%; padding:8px; background:#090d16; border:1px solid var(--border); color:#fff; border-radius:6px; font-size:13px;">
-            <option value="1.10">美國 (US) ×1.10</option>
-            <option value="0.95" selected>新加坡 (SG) ×0.95</option>
-            <option value="0.90">阿聯酋 (UAE) ×0.90</option>
-            <option value="0.80">歐洲 (EU) ×0.80</option>
-            <option value="0.65">台灣 (TW) ×0.65</option>
-            <option value="0.45">馬來西亞 (MY) ×0.45</option>
-            <option value="0.40">印度 (IN) ×0.40</option>
-          </select>
-        </div>
-      </div>
-
-      <div class="calc-card" style="display:flex; flex-direction:column; justify-content:space-between;">
-        <div>
-          <h3 id="budget_card_title" style="font-size:15px; margin-bottom:14px;">年度人事成本與預算預測</h3>
-          <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
-            <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
-              <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">總編制總人數</div>
-              <div id="total_hc_display" style="font-size:28px; font-weight:800; color:var(--cyan); margin-top:4px;">15 人</div>
-            </div>
-            <div style="background:#090d16; padding:16px; border-radius:8px; border:1px solid var(--border);">
-              <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase;">年度總薪酬預算 (USD)</div>
-              <div id="total_budget_display" style="font-size:28px; font-weight:800; color:#34d399; margin-top:4px;">$2,156,500</div>
-            </div>
-          </div>
-          <div style="font-size:12.5px; color:var(--text-secondary); line-height:1.65;">
-            • <b id="runway_desc_line">資本跑道 (Runway)：依據 T2 全球基準結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。</b><br>
-            • <b>職級比例結構</b>：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康人字型研發與業務組織分佈。
-          </div>
-        </div>
-        <div style="margin-top:20px; padding:12px; background:rgba(6,182,212,0.08); border-left:3px solid var(--cyan); font-size:12px; border-radius:0 6px 6px 0;">
-          建議每季依據 Global Benchmark 實施動態水位檢視，確保在核心市場具備前 25%（P75）的獵才吸引力。
-        </div>
-      </div>
-    </div>
-
-    <!-- 動態連動組織架構圖 -->
-    <div class="org-chart-wrapper">
-      <h3 id="org_chart_title" style="font-size:15px; margin-bottom:18px; color:var(--cyan);">研發部門 動態組織架構圖 (Live Org Chart)</h3>
-      <div class="org-tree" id="orgTreeContainer"></div>
-    </div>
-  </div>
-
-  <!-- ================= 04 初創團隊破局方案 ================= -->
-  <div id="pane_tab04" class="pane">
-    <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:18px;">
-      <div class="tier-card t3">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--cyan);">01. 現金 + Token 混合激勵</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          針對早期種子輪至 A 輪資金受限團隊，採行 <b>70% 現金 base + 30% 代幣權益 (Token Grant)</b> 模式，降低現金流跑道消耗，同時綁定核心成員 4 年歸屬（1 年 Cliff）。
-        </p>
+    `;
+  } else {
+    tierGrid.innerHTML = `
+      <div class="tier-card t1">
+        <div class="tier-badge">×1.40</div>
+        <div class="tier-title">T1 Industry Leaders (Top-Tier)</div>
+        <div class="tier-desc">Mega exchanges / Public & late-stage tech titans</div>
         <div class="tag-pills">
-          <span class="tag-pill">4-Year Vesting</span><span class="tag-pill">1-Year Cliff</span><span class="tag-pill">FDV 折扣定錨</span>
+          <span class="tag-pill">Binance</span><span class="tag-pill">Coinbase</span><span class="tag-pill">OKX</span><span class="tag-pill">Circle</span><span class="tag-pill">Tether</span>
         </div>
       </div>
       <div class="tier-card t2">
-        <h3 style="font-size:16px; margin-bottom:8px; color:#34d399;">02. 地區套利 (Geo-Arbitrage)</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          關鍵架構師（L6/L7）與商務決策者配置於 Singapore (0.95) 或 UAE (0.90) 對接資本與牌照；工程實現與運營骨幹配置於 Taiwan (0.65) 或 Malaysia (0.45)，人效提升 40% 以上。
-        </p>
+        <div class="tier-badge">×1.00</div>
+        <div class="tier-title">T2 Global Benchmark</div>
+        <div class="tier-desc">Scaled mid-to-large mature global enterprises</div>
         <div class="tag-pills">
-          <span class="tag-pill">SG/UAE Headquarter</span><span class="tag-pill">TW/MY Delivery Hub</span>
+          <span class="tag-pill">Kraken</span><span class="tag-pill">Bybit</span><span class="tag-pill">Crypto.com</span><span class="tag-pill">Gemini</span><span class="tag-pill">Polygon Labs</span>
         </div>
       </div>
-      <div class="tier-card t1">
-        <h3 style="font-size:16px; margin-bottom:8px; color:var(--warning);">03. 核心戰力反向鎖定</h3>
-        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
-          對 Star 頂尖人才實施動態雙軌提成：管理軌綁定團隊營收利潤（P&L），專家軌綁定底層通訊協議零宕機獎金與代幣解鎖里程碑，避免優秀工程人才被巨頭溢價挖角。
-        </p>
+      <div class="tier-card t3">
+        <div class="tier-badge">×0.75</div>
+        <div class="tier-title">T3 Early Startups</div>
+        <div class="tier-desc">Seed to Series A stage / DAOs / Early protocols</div>
         <div class="tag-pills">
-          <span class="tag-pill">Milestone Unlocks</span><span class="tag-pill">P&L Profit-Sharing</span>
+          <span class="tag-pill">Seed-Series A</span><span class="tag-pill">DAO Governance</span><span class="tag-pill">Early Protocols</span><span class="tag-pill">Token-heavy</span>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- ================= 05 晉升管道以及薪酬矩陣 ================= -->
-  <div id="pane_tab05" class="pane">
-    <div class="comp-function-selector" id="ladderFnBar"></div>
-    <div class="layout-grid">
-      <div class="ladder-box" id="ladderTree"></div>
-      <div id="ladderCards"></div>
-    </div>
-  </div>
-
-</div>
-
-<script>
-let currentLang = 'zh';
-let currentTab = 'tab03';
-let currentRegionCode = 'SG';
-let currentFnCode = 'eng';
-let currentLadderFn = 'eng';
-
-const COMP_REGIONS = [
-  { code: 'US', labelZh: '美國', labelEn: 'United States', factor: 1.10 },
-  { code: 'SG', labelZh: '新加坡', labelEn: 'Singapore', factor: 0.95 },
-  { code: 'UAE', labelZh: '阿聯酋 (杜拜)', labelEn: 'UAE (Dubai)', factor: 0.90 },
-  { code: 'EU', labelZh: '歐洲', labelEn: 'Europe', factor: 0.80 },
-  { code: 'TW', labelZh: '台灣', labelEn: 'Taiwan', factor: 0.65 },
-  { code: 'MY', labelZh: '馬來西亞', labelEn: 'Malaysia', factor: 0.45 },
-  { code: 'IN', labelZh: '印度', labelEn: 'India', factor: 0.40 }
-];
-
-const BASE_RATES = {
-  L3: 95000,
-  L4: 140000,
-  L5: 190000,
-  L6_M1: 240000,
-  L7_M2: 330000,
-  L8_M3: 500000
-};
-
-const COMP_FUNCTIONS = {
-  eng: {
-    nameZh: "研發工程 (Engineering)", nameEn: "Engineering",
-    roles: [
-      { lvl: "L3", title: "Junior Engineer", scope: "基礎模組與 UI 元件維護、單元測試、SOP 功能開發" },
-      { lvl: "L4", title: "Mid-Level Engineer", scope: "獨立負責核心業務模組、模組設計與除錯上線" },
-      { lvl: "L5", title: "Senior Engineer", scope: "核心系統高併發架構設計、重大線上故障排查、技術重構" },
-      { lvl: "L6 / M1", title: "Staff Eng / Team Lead", scope: "技術軌：全域架構決策 (RFC) ｜ 管理軌：帶領 3–6 人工程小組" },
-      { lvl: "L7 / M2", title: "Principal / Dept Head", scope: "技術軌：跨部門重大技術決策 ｜ 管理軌：統籌 7 個大部門之一" },
-      { lvl: "L8 / M3", title: "VP of Eng / CTO", scope: "全面掌管跨國研發與技術基建、技術與管理雙軌匯流統帥" }
-    ]
-  },
-  prod: {
-    nameZh: "產品管理 (Product)", nameEn: "Product Management",
-    roles: [
-      { lvl: "L3", title: "Associate Product Manager", scope: "功能需求細化、PRD 編寫、競品日常追蹤與敏捷驗收" },
-      { lvl: "L4", title: "Product Manager (PM)", scope: "獨立閉環單一產品線、用戶旅程設計、指標轉化率把控" },
-      { lvl: "L5", title: "Senior Product Manager", scope: "主導複雜交易/支付業務架構、跨端流程標準化、ROI 達成" },
-      { lvl: "L6 / M1", title: "Principal PM / Product Lead", scope: "專家軌：產品頂層協議設計 ｜ 管理軌：帶領 3–6 人產品小組" },
-      { lvl: "L7 / M2", title: "Head of Product", scope: "掌管核心業務線產品矩陣、跨國本地化產品體驗與戰略排期" },
-      { lvl: "L8 / M3", title: "Chief Product Officer (CPO)", scope: "全面負責公司全球產品戰略藍圖、新商業模式破局" }
-    ]
-  },
-  ops: {
-    nameZh: "營運管理 (Operations)", nameEn: "Operations",
-    roles: [
-      { lvl: "L3", title: "Junior Operations Specialist", scope: "SOP 流程執行、日常工單對帳、用戶反饋流轉" },
-      { lvl: "L4", title: "Operations Specialist", scope: "獨立負責端到端業務流轉、通道維護與日常突發異常排除" },
-      { lvl: "L5", title: "Senior Operations Specialist", scope: "主導自動化降本流程、跨國複雜清算規則制定、重大客訴閉環" },
-      { lvl: "L6 / M1", title: "Staff Specialist / Ops Lead", scope: "專家軌：跨域營運架構治理 ｜ 管理軌：帶領 3–6 人運營小隊" },
-      { lvl: "L7 / M2", title: "Operations Director", scope: "掌管大區運營中心、單位營運成本（Unit Cost）控制" },
-      { lvl: "L8 / M3", title: "VP of Operations / COO", scope: "統籌全球跨國營運交付體系、跨部門經營損益閉環責任" }
-    ]
-  },
-  bd: {
-    nameZh: "商務與銷售 (BD & Sales)", nameEn: "BD & Sales",
-    roles: [
-      { lvl: "L3", title: "Junior BD Associate", scope: "陌生線索挖掘、潛在客戶觸達、商務會議排程與 CRM 紀錄" },
-      { lvl: "L4", title: "Account Executive (AE)", scope: "獨立負責商機端到端轉化、商業談判、合約簽署與上線" },
-      { lvl: "L5", title: "Senior AE / Strategic BD", scope: "區域 Top 機構客戶攻堅、高難度商業模式創新與定制方案" },
-      { lvl: "L6 / M1", title: "Principal Deal Maker / Sales Lead", scope: "專家軌：跨國戰略大單成交 ｜ 管理軌：帶領小組扛季度 Quota" },
-      { lvl: "L7 / M2", title: "Regional Sales Head", scope: "負責單一戰區營收盈虧（P&L）、在地化團隊梯隊建設" },
-      { lvl: "L8 / M3", title: "Chief Revenue Officer / VP Sales", scope: "全面掌控全球商業版圖、獲客成本（CAC）與全球總營收" }
-    ]
-  },
-  legal: {
-    nameZh: "法務與合規 (Legal & Compliance)", nameEn: "Legal & Compliance",
-    roles: [
-      { lvl: "L3", title: "Legal / Compliance Specialist", scope: "標準合約審閱、日常 AML 警報初篩、公文查詢函初審" },
-      { lvl: "L4", title: "Legal Counsel / AML Officer", scope: "獨立承接跨國商務協議談判、牌照申請對接、爭議處置協商" },
-      { lvl: "L5", title: "Senior Legal Counsel", scope: "跨國子公司設立架構、海外併購協議、各國監管審計現場應對" },
-      { lvl: "L6 / M1", title: "Staff Regulatory Architect / Lead", scope: "專家軌：全球牌照藍圖設計 ｜ 管理軌：管理 3–6 人合規審查組" },
-      { lvl: "L7 / M2", title: "Legal Director", scope: "掌管跨國重大涉訴防禦、行業立法倡導、調配外聘律師預算" },
-      { lvl: "L8 / M3", title: "General Counsel / CCO", scope: "董事會最高法規顧問、全球法律風險與執法免責最高防線" }
-    ]
-  },
-  fin_hr: {
-    nameZh: "財務與人資 (Finance & HR)", nameEn: "Finance & HR",
-    roles: [
-      { lvl: "L3", title: "Junior Analyst / HR Specialist", scope: "日常會計憑證核算、報銷初審、入轉調離手續與考勤審查" },
-      { lvl: "L4", title: "Senior Accountant / HRBP", scope: "獨立主導月結關帳、預算追蹤 ｜ 事業群招聘閉環與常規員工關係" },
-      { lvl: "L5", title: "Senior Finance / HR Specialist", scope: "跨國稅收籌劃與多主體合併 ｜ 9-Box 人才盤點與爭議離職談判" },
-      { lvl: "L6 / M1", title: "Principal Architect / People Lead", scope: "專家軌：全球資金池或薪酬架構 ｜ 管理軌：領導會計/HR小組" },
-      { lvl: "L7 / M2", title: "Financial Controller / HR Director", scope: "四大審計無保留通過 ｜ 大區人力成本上限控制與文化治理" },
-      { lvl: "L8 / M3", title: "CFO / CHRO", scope: "全面掌控全球資本水庫、海外上市進程 ｜ 全球高管繼任佈局" }
-    ]
+    `;
   }
-};
-
-function switchTab(tabId) {
-  currentTab = tabId;
-  document.querySelectorAll('.main-nav-item').forEach((el, i) => {
-    el.classList.toggle('active', ['tab02','tab03','tab04','tab05'][i] === tabId);
-  });
-  document.querySelectorAll('.pane').forEach(el => el.classList.remove('active'));
-  document.getElementById('pane_' + tabId).classList.add('active');
-
-  if(tabId === 'tab02') renderCompTab();
-  else if(tabId === 'tab03') runBudgetCalc();
-  else if(tabId === 'tab05') renderLadderTab();
-}
-
-// 02 全球雙軌薪酬對標
-function renderCompTab() {
-  const regBar = document.getElementById('regBar');
-  regBar.innerHTML = COMP_REGIONS.map(r => `
-    <button class="comp-reg-btn ${r.code === currentRegionCode ? 'active' : ''}" onclick="selectReg('${r.code}')">
-      ${currentLang === 'zh' ? r.labelZh : r.labelEn} ×${r.factor.toFixed(2)}
-    </button>
-  `).join('');
-
-  const fnBar = document.getElementById('fnBar');
-  fnBar.innerHTML = Object.keys(COMP_FUNCTIONS).map(k => `
-    <button class="comp-fn-btn ${k === currentFnCode ? 'active' : ''}" onclick="selectFn('${k}')">
-      ${currentLang === 'zh' ? COMP_FUNCTIONS[k].nameZh : COMP_FUNCTIONS[k].nameEn}
-    </button>
-  `).join('');
 
   const reg = COMP_REGIONS.find(r => r.code === currentRegionCode) || COMP_REGIONS[1];
   const fn = COMP_FUNCTIONS[currentFnCode] || COMP_FUNCTIONS.eng;
 
-  document.getElementById('th_region_ann').innerText = `${currentLang==='zh'?'地區調整後年薪 (Global Benchmark)':'Adj Annual Base'} (${reg.code} ×${reg.factor.toFixed(2)})`;
-  document.getElementById('th_region_mon').innerText = `${currentLang==='zh'?'地區調整後月薪':'Adj Monthly Base'} (${reg.code})`;
+  document.getElementById('th_lvl').innerText = currentLang === 'zh' ? '職級代碼' : 'Level';
+  document.getElementById('th_title_scope').innerText = currentLang === 'zh' ? '代表職稱 / 職責範疇' : 'Representative Title & Scope';
+  document.getElementById('th_t3').innerText = currentLang === 'zh' ? 'T3 初創梯隊 (年薪)' : 'T3 Startup (Annual)';
+  document.getElementById('th_t2').innerText = currentLang === 'zh' ? 'T2 全球基準 (Global Benchmark)' : 'T2 Global Benchmark (Annual)';
+  document.getElementById('th_t1').innerText = currentLang === 'zh' ? 'T1 頂尖梯隊 (年薪)' : 'T1 Top-Tier (Annual)';
+  document.getElementById('th_region_ann').innerText = `${currentLang==='zh'?'地區調整後年薪 (T2)':'Adj Annual Base (T2)'} (${reg.code} ×${reg.factor.toFixed(2)})`;
+  document.getElementById('th_region_mon').innerText = `${currentLang==='zh'?'地區調整後月薪 (T2)':'Adj Monthly Base (T2)'} (${reg.code})`;
 
   const ratesKeys = ['L3', 'L4', 'L5', 'L6_M1', 'L7_M2', 'L8_M3'];
   document.getElementById('compTableBody').innerHTML = fn.roles.map((r, idx) => {
@@ -435,13 +441,15 @@ function renderCompTab() {
     const t1 = base * 1.40;
     const adjAnn = base * reg.factor;
     const adjMon = adjAnn / 12;
+    const title = currentLang === 'zh' ? r.titleZh : r.titleEn;
+    const scope = currentLang === 'zh' ? r.scopeZh : r.scopeEn;
 
     return `
       <tr>
         <td><div class="comp-badge">${r.lvl}</div></td>
         <td>
-          <div style="font-weight:700; font-size:13.5px; color:var(--text-primary); margin-bottom:2px;">${r.title}</div>
-          <div style="font-size:12px; color:var(--text-muted);">${r.scope}</div>
+          <div style="font-weight:700; font-size:13.5px; color:var(--text-primary); margin-bottom:2px;">${title}</div>
+          <div style="font-size:12px; color:var(--text-muted);">${scope}</div>
         </td>
         <td style="font-family:monospace; color:var(--text-secondary);">$${t3.toLocaleString()}</td>
         <td style="font-family:monospace; font-weight:600;">$${base.toLocaleString()}</td>
@@ -462,128 +470,7 @@ function renderCompTab() {
 function selectReg(code) { currentRegionCode = code; renderCompTab(); }
 function selectFn(code) { currentFnCode = code; renderCompTab(); }
 
-// 03 部門動態預算與組織圖運算
-function runBudgetCalc() {
-  const deptName = document.getElementById('dept_name_input').value.trim() || (currentLang==='zh'?'指定部門':'Target Dept');
-  const l3 = parseInt(document.getElementById('hc_l3').value) || 0;
-  const l4 = parseInt(document.getElementById('hc_l4').value) || 0;
-  const l5 = parseInt(document.getElementById('hc_l5').value) || 0;
-  const l6 = parseInt(document.getElementById('hc_l6').value) || 0;
-  const l7 = parseInt(document.getElementById('hc_l7').value) || 0;
-
-  const tierMultiplier = parseFloat(document.getElementById('calc_tier').value) || 1.0;
-  const regionMultiplier = parseFloat(document.getElementById('calc_region').value) || 1.0;
-
-  const totalHc = l3 + l4 + l5 + l6 + l7;
-  const baseCost = (l3 * BASE_RATES.L3) + (l4 * BASE_RATES.L4) + (l5 * BASE_RATES.L5) + (l6 * BASE_RATES.L6_M1) + (l7 * BASE_RATES.L7_M2);
-  const totalCost = baseCost * tierMultiplier * regionMultiplier;
-
-  // 取得選取梯隊名稱文字
-  const tierSelect = document.getElementById('calc_tier');
-  const tierText = tierSelect.options[tierSelect.selectedIndex].text.split(' ')[0];
-
-  // 更新顯示
-  document.getElementById('budget_card_title').innerText = `${deptName} 人事成本與預算預測`;
-  document.getElementById('org_chart_title').innerText = `${deptName} 動態組織架構圖 (Live Org Chart)`;
-  document.getElementById('total_hc_display').innerText = totalHc + (currentLang==='zh'?' 人':' HC');
-  document.getElementById('total_budget_display').innerText = "$" + Math.round(totalCost).toLocaleString();
-
-  // 更新跑道說明文字（支援 T1 / T2 / T3 與自訂部門）
-  document.getElementById('runway_desc_line').innerHTML = currentLang==='zh'
-    ? `資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。`
-    : `Runway Benchmark: Calculated based on <b>${tierText}</b> blended with regional multiplier and statutory reserves (~12%).`;
-
-  // 重新繪製組織圖
-  renderLiveOrgChart(deptName, l7, l6, l5, l4, l3);
-}
-
-// 繪製連動組織樹
-function renderLiveOrgChart(deptName, l7, l6, l5, l4, l3) {
-  const container = document.getElementById('orgTreeContainer');
-  container.innerHTML = '';
-
-  // 頂層 L7 / M2 (部門總監)
-  const l7Row = document.createElement('div');
-  l7Row.className = 'org-level-row';
-  for(let i=0; i < Math.max(l7, 1); i++) {
-    l7Row.innerHTML += `
-      <div class="org-node" style="border-top:3px solid var(--pink);">
-        <div class="lvl">L7 / M2</div>
-        <div class="role">${deptName} 總監</div>
-        <div class="cnt">${l7} 位編制</div>
-      </div>
-    `;
-  }
-  container.appendChild(l7Row);
-
-  // 第二層 L6 / M1 (團隊負責人 / 組長)
-  if(l6 > 0) {
-    const l6Row = document.createElement('div');
-    l6Row.className = 'org-level-row';
-    for(let i=0; i < l6; i++) {
-      l6Row.innerHTML += `
-        <div class="org-node" style="border-top:3px solid var(--purple);">
-          <div class="lvl">L6 / M1</div>
-          <div class="role">組長 / 主任架構師 #${i+1}</div>
-          <div class="cnt">管理幹部</div>
-        </div>
-      `;
-    }
-    container.appendChild(l6Row);
-  }
-
-  // 第三層 L5 (資深專家)
-  if(l5 > 0) {
-    const l5Row = document.createElement('div');
-    l5Row.className = 'org-level-row';
-    for(let i=0; i < Math.min(l5, 4); i++) {
-      l5Row.innerHTML += `
-        <div class="org-node" style="border-top:3px solid var(--cyan);">
-          <div class="lvl">L5</div>
-          <div class="role">資深專家 ${l5>4 ? `(共${l5}位)`:'' }</div>
-          <div class="cnt">核心攻堅</div>
-        </div>
-      `;
-    }
-    container.appendChild(l5Row);
-  }
-
-  // 第四層 L4 (中階骨幹)
-  if(l4 > 0) {
-    const l4Row = document.createElement('div');
-    l4Row.className = 'org-level-row';
-    const displayL4 = Math.min(l4, 5);
-    for(let i=0; i < displayL4; i++) {
-      l4Row.innerHTML += `
-        <div class="org-node">
-          <div class="lvl" style="color:var(--text-muted);">L4</div>
-          <div class="role">中階骨幹 ${i===displayL4-1 && l4>5 ? `(+${l4-displayL4})`:'' }</div>
-          <div class="cnt">端到端交付</div>
-        </div>
-      `;
-    }
-    container.appendChild(l4Row);
-  }
-
-  // 第五層 L3 (初階專員)
-  if(l3 > 0) {
-    const l3Row = document.createElement('div');
-    l3Row.className = 'org-level-row';
-    const displayL3 = Math.min(l3, 6);
-    for(let i=0; i < displayL3; i++) {
-      l3Row.innerHTML += `
-        <div class="org-node" style="background:rgba(255,255,255,0.02);">
-          <div class="lvl" style="color:var(--text-dim);">L3</div>
-          <div class="role">初階專員 ${i===displayL3-1 && l3>6 ? `(+${l3-displayL3})`:'' }</div>
-          <div class="cnt">日常執行</div>
-        </div>
-      `;
-    }
-    container.appendChild(l3Row);
-  }
-}
-
-// 05 階梯與行為錨定渲染
+// 02 雙軌晉升圖渲染
 function renderLadderTab() {
   const fnBar = document.getElementById('ladderFnBar');
   fnBar.innerHTML = Object.keys(COMP_FUNCTIONS).map(k => `
@@ -595,12 +482,28 @@ function renderLadderTab() {
   const fn = COMP_FUNCTIONS[currentLadderFn] || COMP_FUNCTIONS.eng;
 
   const treeRows = [
-    { lvl: "L3", icTitle: fn.roles[0].title, icDesc: "標準執行與基礎交付", mgmt: false },
-    { lvl: "L4", icTitle: fn.roles[1].title, icDesc: "獨立負責核心業務模組", mgmt: false },
-    { lvl: "L5", icTitle: fn.roles[2].title, icDesc: "高併發架構與重大攻堅", mgmt: false },
-    { lvl: "L6 / M1", icTitle: fn.roles[3].title.split('/')[0]||"Staff", icDesc: "全域架構決策 (RFC)", mgmtTitle: "Team Lead", mgmtDesc: "帶領 3–6 人敏捷小組" },
-    { lvl: "L7 / M2", icTitle: fn.roles[4].title.split('/')[0]||"Principal", icDesc: "跨部門重大技術決策", mgmtTitle: "Dept Head", mgmtDesc: "統籌大部門業務" },
-    { lvl: "L8 / M3", fullTitle: fn.roles[5].title, fullDesc: "全面掌管跨國職能架構與管理匯流統帥" }
+    { lvl: "L3", icTitle: currentLang === 'zh' ? fn.roles[0].titleZh : fn.roles[0].titleEn, icDesc: currentLang === 'zh' ? "標準執行與基礎交付" : "Execution & standard delivery", mgmt: false },
+    { lvl: "L4", icTitle: currentLang === 'zh' ? fn.roles[1].titleZh : fn.roles[1].titleEn, icDesc: currentLang === 'zh' ? "獨立負責核心業務模組" : "Independent core module ownership", mgmt: false },
+    { lvl: "L5", icTitle: currentLang === 'zh' ? fn.roles[2].titleZh : fn.roles[2].titleEn, icDesc: currentLang === 'zh' ? "高併發架構與重大攻堅" : "Complex architecture & key problem solving", mgmt: false },
+    { 
+      lvl: "L6 / M1", 
+      icTitle: (currentLang === 'zh' ? fn.roles[3].titleZh : fn.roles[3].titleEn).split('/')[0]||"Staff", 
+      icDesc: currentLang === 'zh' ? "全域架構決策 (RFC)" : "Organization-wide architecture (RFC)", 
+      mgmtTitle: currentLang === 'zh' ? "Team Lead (組長)" : "Team Lead", 
+      mgmtDesc: currentLang === 'zh' ? "帶領 3–6 人敏捷小組" : "Lead 3-6 person pod" 
+    },
+    { 
+      lvl: "L7 / M2", 
+      icTitle: (currentLang === 'zh' ? fn.roles[4].titleZh : fn.roles[4].titleEn).split('/')[0]||"Principal", 
+      icDesc: currentLang === 'zh' ? "跨部門重大技術決策" : "Strategic cross-department impact", 
+      mgmtTitle: currentLang === 'zh' ? "Dept Head (部門總監)" : "Dept Head", 
+      mgmtDesc: currentLang === 'zh' ? "統籌大部門業務" : "Manage full departmental domain" 
+    },
+    { 
+      lvl: "L8 / M3", 
+      fullTitle: currentLang === 'zh' ? fn.roles[5].titleZh : fn.roles[5].titleEn, 
+      fullDesc: currentLang === 'zh' ? "全面掌管跨國職能架構與雙軌匯流統帥" : "Unified leadership over global domain strategy & organization" 
+    }
   ];
 
   let treeHtml = treeRows.map(row => {
@@ -652,17 +555,19 @@ function renderLadderTab() {
     if (i === 3) cls += " m-track";
     else if (i === 4) cls += " l7-track";
     else if (i === 5) cls += " l8-track";
+    const title = currentLang === 'zh' ? r.titleZh : r.titleEn;
+    const scope = currentLang === 'zh' ? r.scopeZh : r.scopeEn;
 
     return `
       <div class="${cls}">
         <div class="card-head">
-          <div class="card-title">${r.lvl}: ${r.title}</div>
-          <div class="card-sub">${currentLang==='zh'?'等級標準行為錨定':'Behavioral Competency'}</div>
+          <div class="card-title">${r.lvl}: ${title}</div>
+          <div class="card-sub">${currentLang==='zh'?'等級標準行為錨定':'Behavioral Competency Anchor'}</div>
         </div>
         <ul class="card-bullets">
-          <li><b>核心範疇</b>：${r.scope}</li>
-          <li><b>交付標準</b>：能主導該職級指定工作目標，並對上下游提供清晰界限與高可靠產出。</li>
-          <li><b>組織影響力</b>：在既有崗位沉澱標準化流程，並主動協助跨組排除潛在業務風險。</li>
+          <li><b>${currentLang==='zh'?'核心範疇':'Core Scope'}</b>：${scope}</li>
+          <li><b>${currentLang==='zh'?'交付標準':'Deliverable Standard'}</b>：${currentLang==='zh'?'能主導該職級指定工作目標，並對上下游提供清晰界限與高可靠產出。':'Autonomously drive level-aligned OKRs, clear interface boundaries & robust execution.'}</li>
+          <li><b>${currentLang==='zh'?'組織影響力':'Organizational Leverage'}</b>：${currentLang==='zh'?'在既有崗位沉澱標準化流程，並主動協助跨組排除潛在業務風險。':'Codify standard operational runbooks and proactively mitigate systemic risks.'}</li>
         </ul>
       </div>
     `;
@@ -671,19 +576,297 @@ function renderLadderTab() {
 
 function selectLadderFn(code) { currentLadderFn = code; renderLadderTab(); }
 
+// 03 預算與組織圖動態運算
+function runBudgetCalc() {
+  const deptInput = document.getElementById('dept_name_input');
+  let deptName = deptInput.value.trim();
+  if (!deptName) deptName = currentLang === 'zh' ? '研發部門' : 'Engineering Dept';
+
+  const l3 = parseInt(document.getElementById('hc_l3').value) || 0;
+  const l4 = parseInt(document.getElementById('hc_l4').value) || 0;
+  const l5 = parseInt(document.getElementById('hc_l5').value) || 0;
+  const l6 = parseInt(document.getElementById('hc_l6').value) || 0;
+  const l7 = parseInt(document.getElementById('hc_l7').value) || 0;
+
+  const tierMultiplier = parseFloat(document.getElementById('calc_tier').value) || 1.0;
+  const regionMultiplier = parseFloat(document.getElementById('calc_region').value) || 1.0;
+
+  const totalHc = l3 + l4 + l5 + l6 + l7;
+  const baseCost = (l3 * BASE_RATES.L3) + (l4 * BASE_RATES.L4) + (l5 * BASE_RATES.L5) + (l6 * BASE_RATES.L6_M1) + (l7 * BASE_RATES.L7_M2);
+  const totalCost = baseCost * tierMultiplier * regionMultiplier;
+
+  const tierSelect = document.getElementById('calc_tier');
+  const tierText = tierSelect.options[tierSelect.selectedIndex].text.split(' ')[0];
+
+  document.getElementById('budget_card_title').innerText = currentLang === 'zh' 
+    ? `${deptName} 人事成本與預算預測` 
+    : `${deptName} Personnel Budget Forecast`;
+  
+  document.getElementById('org_chart_title').innerText = currentLang === 'zh' 
+    ? `${deptName} 動態組織架構圖 (Live Org Chart)` 
+    : `${deptName} Live Org Chart`;
+
+  document.getElementById('total_hc_display').innerText = totalHc + (currentLang==='zh'?' 人':' HC');
+  document.getElementById('total_budget_display').innerText = "$" + Math.round(totalCost).toLocaleString();
+
+  document.getElementById('runway_desc_line').innerHTML = currentLang==='zh'
+    ? `資本跑道 (Runway)：依據 <b>${tierText}</b> 結合地區指數計算，已自動折算跨國雇主法定成本準備金 (約 12%)。`
+    : `Runway Benchmark: Calculated based on <b>${tierText}</b> blended with regional multiplier and statutory reserves (~12%).`;
+
+  renderLiveOrgChart(deptName, l7, l6, l5, l4, l3);
+}
+
+// 繪製連動組織樹
+function renderLiveOrgChart(deptName, l7, l6, l5, l4, l3) {
+  const container = document.getElementById('orgTreeContainer');
+  container.innerHTML = '';
+
+  // L7 / M2 (部門總監)
+  const l7Row = document.createElement('div');
+  l7Row.className = 'org-level-row';
+  for(let i=0; i < Math.max(l7, 1); i++) {
+    l7Row.innerHTML += `
+      <div class="org-node" style="border-top:3px solid var(--pink);">
+        <div class="lvl">L7 / M2</div>
+        <div class="role">${deptName} ${currentLang==='zh'?'總監':'Director'}</div>
+        <div class="cnt">${l7} ${currentLang==='zh'?'位編制':'Headcount'}</div>
+      </div>
+    `;
+  }
+  container.appendChild(l7Row);
+
+  // L6 / M1 (組長 / 主任架構師)
+  if(l6 > 0) {
+    const l6Row = document.createElement('div');
+    l6Row.className = 'org-level-row';
+    for(let i=0; i < l6; i++) {
+      l6Row.innerHTML += `
+        <div class="org-node" style="border-top:3px solid var(--purple);">
+          <div class="lvl">L6 / M1</div>
+          <div class="role">${currentLang==='zh'?'組長 / 主任架構師':'Team Lead / Staff'} #${i+1}</div>
+          <div class="cnt">${currentLang==='zh'?'管理幹部':'Mgmt Pod'}</div>
+        </div>
+      `;
+    }
+    container.appendChild(l6Row);
+  }
+
+  // L5 (資深專家)
+  if(l5 > 0) {
+    const l5Row = document.createElement('div');
+    l5Row.className = 'org-level-row';
+    const displayL5 = Math.min(l5, 4);
+    for(let i=0; i < displayL5; i++) {
+      l5Row.innerHTML += `
+        <div class="org-node" style="border-top:3px solid var(--cyan);">
+          <div class="lvl">L5</div>
+          <div class="role">${currentLang==='zh'?'資深專家':'Senior IC'} ${l5>4 ? `(共${l5}位)`:'' }</div>
+          <div class="cnt">${currentLang==='zh'?'核心攻堅':'Core Pillar'}</div>
+        </div>
+      `;
+    }
+    container.appendChild(l5Row);
+  }
+
+  // L4 (中階骨幹)
+  if(l4 > 0) {
+    const l4Row = document.createElement('div');
+    l4Row.className = 'org-level-row';
+    const displayL4 = Math.min(l4, 5);
+    for(let i=0; i < displayL4; i++) {
+      l4Row.innerHTML += `
+        <div class="org-node">
+          <div class="lvl" style="color:var(--text-muted);">L4</div>
+          <div class="role">${currentLang==='zh'?'中階骨幹':'Mid IC'} ${i===displayL4-1 && l4>5 ? `(+${l4-displayL4})`:'' }</div>
+          <div class="cnt">${currentLang==='zh'?'端到端交付':'End-to-End'}</div>
+        </div>
+      `;
+    }
+    container.appendChild(l4Row);
+  }
+
+  // L3 (初階專員)
+  if(l3 > 0) {
+    const l3Row = document.createElement('div');
+    l3Row.className = 'org-level-row';
+    const displayL3 = Math.min(l3, 6);
+    for(let i=0; i < displayL3; i++) {
+      l3Row.innerHTML += `
+        <div class="org-node" style="background:rgba(255,255,255,0.02);">
+          <div class="lvl" style="color:var(--text-dim);">L3</div>
+          <div class="role">${currentLang==='zh'?'初階專員':'Junior IC'} ${i===displayL3-1 && l3>6 ? `(+${l3-displayL3})`:'' }</div>
+          <div class="cnt">${currentLang==='zh'?'日常執行':'Base Delivery'}</div>
+        </div>
+      `;
+    }
+    container.appendChild(l3Row);
+  }
+}
+
+// 04 初創方案渲染
+function renderStartupTab() {
+  const container = document.getElementById('startupCardsGrid');
+  if (currentLang === 'zh') {
+    container.innerHTML = `
+      <div class="tier-card t3">
+        <h3 style="font-size:16px; margin-bottom:8px; color:var(--cyan);">01. 現金 + Token 混合激勵</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          針對早期種子輪至 A 輪資金受限團隊，採行 <b>70% 現金 base + 30% 代幣權益 (Token Grant)</b> 模式，降低現金流跑道消耗，同時綁定核心成員 4 年歸屬（1 年 Cliff）。
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">4-Year Vesting</span><span class="tag-pill">1-Year Cliff</span><span class="tag-pill">FDV 折扣定錨</span>
+        </div>
+      </div>
+      <div class="tier-card t2">
+        <h3 style="font-size:16px; margin-bottom:8px; color:#34d399;">02. 地區套利 (Geo-Arbitrage)</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          關鍵架構師（L6/L7）與商務決策者配置於 Singapore (0.95) 或 UAE (0.90) 對接資本與牌照；工程實現與運營骨幹配置於 Taiwan (0.65) 或 Malaysia (0.45)，人效提升 40% 以上。
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">SG/UAE Headquarter</span><span class="tag-pill">TW/MY Delivery Hub</span>
+        </div>
+      </div>
+      <div class="tier-card t1">
+        <h3 style="font-size:16px; margin-bottom:8px; color:var(--warning);">03. 核心戰力反向鎖定</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          對 Star 頂尖人才實施動態雙軌提成：管理軌綁定團隊營收利潤（P&L），專家軌綁定底層通訊協議零宕機獎金與代幣解鎖里程碑，避免優秀工程人才被巨頭溢價挖角。
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">Milestone Unlocks</span><span class="tag-pill">P&L Profit-Sharing</span>
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="tier-card t3">
+        <h3 style="font-size:16px; margin-bottom:8px; color:var(--cyan);">01. Cash + Token Hybrid Packages</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          For runway-constrained Seed to Series A stages: implement <b>70% Cash Base + 30% Token Grant</b> structure to preserve cash while locking core talent under 4-year vesting (1-year cliff).
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">4-Year Vesting</span><span class="tag-pill">1-Year Cliff</span><span class="tag-pill">FDV Discount Baseline</span>
+        </div>
+      </div>
+      <div class="tier-card t2">
+        <h3 style="font-size:16px; margin-bottom:8px; color:#34d399;">02. Strategic Geo-Arbitrage</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          Position leadership (L6/L7) in Singapore (0.95) or UAE (0.90) for investor & licensing interface; base core development & ops in Taiwan (0.65) or Malaysia (0.45) for +40% capital efficiency.
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">SG/UAE Headquarters</span><span class="tag-pill">TW/MY Delivery Hubs</span>
+        </div>
+      </div>
+      <div class="tier-card t1">
+        <h3 style="font-size:16px; margin-bottom:8px; color:var(--warning);">03. High-Leverage Talent Retention</h3>
+        <p style="font-size:12.5px; color:var(--text-secondary); line-height:1.6; margin-bottom:12px;">
+          Dual-track retention: Management tied to business line P&L profitability; technical specialists tied to 99.99% uptime bonuses and protocol token milestone releases against poaching.
+        </p>
+        <div class="tag-pills">
+          <span class="tag-pill">Milestone Unlocks</span><span class="tag-pill">P&L Profit-Sharing</span>
+        </div>
+      </div>
+    `;
+  }
+}
+
+// 切換繁中 / 英文
 function setLanguage(lang) {
   currentLang = lang;
+  localStorage.setItem('talent_dashboard_lang', lang);
   document.getElementById('btnZh').className = `lang-btn ${lang==='zh'?'active':''}`;
   document.getElementById('btnEn').className = `lang-btn ${lang==='en'?'active':''}`;
   document.getElementById('headerTitle').innerText = "Global Benchmark";
 
-  if(currentTab === 'tab02') renderCompTab();
+  // 更新導航項目雙語
+  if (lang === 'zh') {
+    document.getElementById('nav_01').innerText = "01 全球雙軌薪酬對標";
+    document.getElementById('nav_02').innerText = "02 雙軌晉升示意圖";
+    document.getElementById('nav_03').innerText = "03 LIVE O-CHART 對照 年度預算預測";
+    document.getElementById('nav_04').innerText = "04 初創團隊破局方案";
+
+    document.getElementById('lbl_scale_title').innerText = "團隊規模與編制試算";
+    document.getElementById('lbl_dept_name').innerText = "部門名稱：";
+    document.getElementById('lbl_hc_l3').innerText = "L3 初階人數：";
+    document.getElementById('lbl_hc_l4').innerText = "L4 中階骨幹：";
+    document.getElementById('lbl_hc_l5').innerText = "L5 資深專家：";
+    document.getElementById('lbl_hc_l6').innerText = "L6 / M1 負責人：";
+    document.getElementById('lbl_hc_l7').innerText = "L7 / M2 部門總監：";
+    document.getElementById('lbl_tier_select').innerText = "選擇企業市場梯隊：";
+    document.getElementById('lbl_region_select').innerText = "選擇主要營運地區：";
+    document.getElementById('lbl_total_hc').innerText = "總編制總人數";
+    document.getElementById('lbl_total_budget').innerText = "年度總薪酬預算 (USD)";
+    document.getElementById('span_hc_structure').innerHTML = "<b>職級比例結構</b>：符合 40% 骨幹 (L4) + 25% 初階 (L3) + 25% 資深 (L5) + 10% 領導層之健康分佈。";
+    document.getElementById('box_quarterly_advise').innerText = "建議每季依據 Global Benchmark 實施動態水位檢視，確保在核心市場具備前 25%（P75）的獵才吸引力。";
+    
+    if (document.getElementById('dept_name_input').value === 'Engineering Dept') {
+      document.getElementById('dept_name_input').value = '研發部門';
+    }
+  } else {
+    document.getElementById('nav_01').innerText = "01 Global Compensation Benchmark";
+    document.getElementById('nav_02').innerText = "02 Dual-Track Career Ladder";
+    document.getElementById('nav_03').innerText = "03 Live Org Chart & Annual Budget";
+    document.getElementById('nav_04').innerText = "04 Startup Compensation Strategy";
+
+    document.getElementById('lbl_scale_title').innerText = "Headcount & Scale Simulation";
+    document.getElementById('lbl_dept_name').innerText = "Department Name:";
+    document.getElementById('lbl_hc_l3').innerText = "L3 Junior Headcount:";
+    document.getElementById('lbl_hc_l4').innerText = "L4 Mid-Level Headcount:";
+    document.getElementById('lbl_hc_l5').innerText = "L5 Senior Headcount:";
+    document.getElementById('lbl_hc_l6').innerText = "L6 / M1 Lead Headcount:";
+    document.getElementById('lbl_hc_l7').innerText = "L7 / M2 Director Headcount:";
+    document.getElementById('lbl_tier_select').innerText = "Select Market Tier:";
+    document.getElementById('lbl_region_select').innerText = "Select Primary Operating Region:";
+    document.getElementById('lbl_total_hc').innerText = "Total Headcount";
+    document.getElementById('lbl_total_budget').innerText = "Annual Payroll Budget (USD)";
+    document.getElementById('span_hc_structure').innerHTML = "<b>Staffing Structure</b>: Aligned with 40% Mid (L4) + 25% Junior (L3) + 25% Senior (L5) + 10% Leadership pyramid.";
+    document.getElementById('box_quarterly_advise').innerText = "Quarterly benchmarking against Global Benchmark is recommended to sustain P75 top-quartile talent competitiveness.";
+
+    if (document.getElementById('dept_name_input').value === '研發部門') {
+      document.getElementById('dept_name_input').value = 'Engineering Dept';
+    }
+  }
+
+  // 刷新選單項目雙語
+  refreshSelectOptions();
+
+  // 刷新當前 Pane
+  if(currentTab === 'tab01') renderCompTab();
+  else if(currentTab === 'tab02') renderLadderTab();
   else if(currentTab === 'tab03') runBudgetCalc();
-  else if(currentTab === 'tab05') renderLadderTab();
+  else if(currentTab === 'tab04') renderStartupTab();
+}
+
+function refreshSelectOptions() {
+  const tierSel = document.getElementById('calc_tier');
+  const prevTierVal = tierSel.value || "1.00";
+  if (currentLang === 'zh') {
+    tierSel.innerHTML = `
+      <option value="1.40">T1 頂尖梯隊 (Top-Tier) ×1.40</option>
+      <option value="1.00">T2 全球基準 (Global Benchmark) ×1.00</option>
+      <option value="0.75">T3 初創梯隊 (Startup) ×0.75</option>
+    `;
+  } else {
+    tierSel.innerHTML = `
+      <option value="1.40">T1 Top-Tier Leaders ×1.40</option>
+      <option value="1.00">T2 Global Benchmark ×1.00</option>
+      <option value="0.75">T3 Early Startups ×0.75</option>
+    `;
+  }
+  tierSel.value = prevTierVal;
+
+  const regSel = document.getElementById('calc_region');
+  const prevRegVal = regSel.value || "0.95";
+  regSel.innerHTML = COMP_REGIONS.map(r => `
+    <option value="${r.factor.toFixed(2)}">
+      ${currentLang === 'zh' ? r.labelZh : r.labelEn} (${r.code}) ×${r.factor.toFixed(2)}
+    </option>
+  `).join('');
+  regSel.value = prevRegVal;
 }
 
 window.onload = () => {
-  runBudgetCalc();
+  setLanguage(currentLang);
+  switchTab('tab01');
 };
 </script>
 </body>
